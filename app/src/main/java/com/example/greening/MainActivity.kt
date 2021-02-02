@@ -1,6 +1,7 @@
 package com.example.greening
 
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -68,7 +69,14 @@ class MainActivity : AppCompatActivity() {
                 sqlDB.close()
 
                 if (editPassWord.text.toString().equals(strPassWord)) {
+                    //로그인 성공하면 홈 화면으로 넘어가기
+                        // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
+                    var intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("id", editID.text.toString())
+
+                    //화면 넘어가기 전 토스트 메시지 실행하고 나서 -> 다음 화면으로 넘어가기
                     Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
+                    startActivity(intent)
                 } else {
                     Toast.makeText(applicationContext, "아이디 또는 비밀번호가 잘못되었습니다.", Toast.LENGTH_LONG).show()
                 }
@@ -89,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     inner class myDBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         override fun onCreate(db: SQLiteDatabase?) {
             //Name을 primary Key로 설정 - 찾아낼때 쓰이는 key
-            db!!.execSQL("CREATE TABLE groupTBL (ID CHAR(20) PRIMARY KEY, PassWord CHAR(20));")
+            db!!.execSQL("CREATE TABLE groupTBL (ID CHAR(20) PRIMARY KEY, PassWord CHAR(20), Challenge CHAR(20), Level INT(3));")
         }
 
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

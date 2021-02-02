@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteOpenHelper
 
 //챌린지 객체
 class Challenge {
+
     //챌린지 이름
     var name : String = ""
     
