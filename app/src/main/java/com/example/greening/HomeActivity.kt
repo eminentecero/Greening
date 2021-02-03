@@ -1,11 +1,15 @@
 package com.example.greening
 
+import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.greening.MainActivity.myDBHelper
 
 class HomeActivity  : AppCompatActivity() {
     //사용할 변수
@@ -28,6 +32,10 @@ class HomeActivity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_home)
 
+       // var myHelper = myDBHelper(this)
+
+        //challenge_start(myHelper)
+
         //아이디로 각각 연결하기
         //사용자 레벨
         level = findViewById(R.id.level)
@@ -43,7 +51,6 @@ class HomeActivity  : AppCompatActivity() {
         join2Btn = findViewById(R.id.join2)
         join3Btn = findViewById(R.id.join3)
 
-        //챌린지 객체 생성!!!!!!!!!!!!!!!!해야함.
 
         //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
         var name = intent.getStringExtra("id")
@@ -71,3 +78,5 @@ class HomeActivity  : AppCompatActivity() {
         }
     }
 }
+
+

@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         //연결
         editID = findViewById(R.id.editID)
         editPassWord = findViewById(R.id.editPassWord)
@@ -40,6 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         //회원가입 -> 기본정보 쓰는 거,
 
+        //Person 객체 만들기
+        val person = Person(editID.text.toString(), editPassWord.text.toString())
+        //버튼 실행이 끝나면 빈칸으로 만들기
+        editID.setText("")
+        editPassWord.setText("")
+
         //객체 받아오기 - DB
         myHelper = myDBHelper(this)
 
@@ -50,13 +54,13 @@ class MainActivity : AppCompatActivity() {
             //입력값이 공백이면 기능이 실행되지 않도록 설정
 
             //ID와 비밀번호란이 공백으로 되어있지 않다면 조건
-            if (!(editID.text.toString().equals("") && editPassWord.text.toString().equals(""))) {
+            if (!(person.id.equals("") && person.password.equals(""))) {
                 //get, set 생략 가능 - 아이디와 비밀번호를 조회해서 비교하기 때문에 readable 사용
                 sqlDB = myHelper.readableDatabase
 
                 //SQL 조회
                 var cursor: Cursor
-                cursor = sqlDB.rawQuery("SELECT * FROM groupTBL WHERE ID = '" + editID.text + "';", null)
+                cursor = sqlDB.rawQuery("SELECT * FROM groupTBL WHERE ID = '" + person.id + "';", null)
 
                 //저장할 배열 설정
                 var strPassWord = ""
@@ -74,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                     //로그인 성공하면 홈 화면으로 넘어가기
                         // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
                     var intent = Intent(this, HomeActivity::class.java)
-                    intent.putExtra("id", editID.text.toString())
+                    intent.putExtra("id", person.id)
 
                     //화면 넘어가기 전 토스트 메시지 실행하고 나서 -> 다음 화면으로 넘어가기
                     Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
@@ -89,14 +93,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_LONG).show()
             }
 
-            //버튼 실행이 끝나면 빈칸으로 만들기
-            editID.setText("")
-            editPassWord.setText("")
+
         }
     }
 
     //DB 생성되도록 하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 완료
-    inner class myDBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
+    public class myDBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         override fun onCreate(db: SQLiteDatabase?) {
             //Name을 primary Key로 설정 - 찾아낼때 쓰이는 key
             db!!.execSQL("CREATE TABLE groupTBL (ID CHAR(20) PRIMARY KEY, PassWord CHAR(20), Challenge CHAR(20), Level INT(3));")
