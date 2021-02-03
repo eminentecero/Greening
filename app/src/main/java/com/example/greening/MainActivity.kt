@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         //연결
         editID = findViewById(R.id.editID)
         editPassWord = findViewById(R.id.editPassWord)
@@ -98,6 +100,9 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(db: SQLiteDatabase?) {
             //Name을 primary Key로 설정 - 찾아낼때 쓰이는 key
             db!!.execSQL("CREATE TABLE groupTBL (ID CHAR(20) PRIMARY KEY, PassWord CHAR(20), Challenge CHAR(20), Level INT(3));")
+
+            //챌린지 데이터 베이스 생성
+            db!!.execSQL("CREATE TABLE Challenge (Name CHAR(20) PRIMARY KEY, KeyWord CHAR(20), Date INT(20), Count INT(18), Score INT(18));")
         }
 
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

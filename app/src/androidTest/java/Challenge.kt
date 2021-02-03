@@ -1,13 +1,16 @@
+package com.example.greening
+
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Bundle
 
 //챌린지 객체
 class Challenge {
 
     //챌린지 이름
     var name : String = ""
-    
+
     //챌린지 실행 기간 - 며칠 동안 할 건지 표시
     var date : Int = 0
 
@@ -54,4 +57,26 @@ class Challenge {
         //리뷰를 입력하면 리뷰 배열해서 하나씩 출력 - 나중에 하기
         review.set(review.count(), msg)
     }
+
+
+        inner class myDBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
+        override fun onCreate(db: SQLiteDatabase?) {
+            //Name을 primary Key로 설정 - 찾아낼때 쓰이는 key
+            db!!.execSQL("CREATE TABLE Challenge (Name CHAR(20) PRIMARY KEY, KeyWord CHAR(20), Date INT(20), Count INT(18), Score INT(18));")
+        }
+
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+            //DB 삭제 후 다시 생성
+            db!!.execSQL("DROP TABLE IF EXISTS groupTBL")
+            onCreate(db)
+        }
+    }
+}
+
+fun main(){
+    var C1 : Challenge = Challenge("텀블러 사용하기", 30,"Plastic")
+    var C2 : Challenge = Challenge("스테인리스 빨대 사용하기", 20, "Plastic")
+
+
+
 }
