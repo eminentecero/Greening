@@ -11,24 +11,48 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.w3c.dom.Text
 
 class HomeActivity  : AppCompatActivity() {
     //사용할 변수
     lateinit var UserName:TextView
 
     //참여중인 챌린지에서 더보기 버튼
-    lateinit var more1Btn : Button
-    lateinit var more2Btn: Button
-    lateinit var more3Btn : Button
+    lateinit var ingChallenge1: FrameLayout
+    lateinit var ingChallenge2: FrameLayout
+    lateinit var ingChallenge3: FrameLayout
+
+    lateinit var ing1_TextView : TextView
+    lateinit var ing1_Button : Button
+    lateinit var ing1Count_TextView : TextView
+    lateinit var ing1Date_TextView : TextView
+    lateinit var ingmore1_Button : Button
+
+    lateinit var ing2_TextView : TextView
+    lateinit var ing2_Button : Button
+    lateinit var ing2Count_TextView : TextView
+    lateinit var ing2Date_TextView : TextView
+    lateinit var ingmore2_Button : Button
+
+    lateinit var ing3_TextView : TextView
+    lateinit var ing3_Button : Button
+    lateinit var ing3Count_TextView : TextView
+    lateinit var ing3Date_TextView : TextView
+    lateinit var ingmore3_Button : Button
+
+
+
+
+
 
     //추천하는 챌린지에서 참여하기 버튼
     lateinit var join1Btn : Button
     lateinit var join2Btn : Button
     lateinit var join3Btn : Button
+    lateinit var more1Btn : Button
+    lateinit var more2Btn : Button
+    lateinit var more3Btn : Button
 
-    lateinit var ingChallenge1: FrameLayout
-    lateinit var ingChallenge2: FrameLayout
-    lateinit var ingChallenge3: FrameLayout
 
     //레벨에 따라 다른 image 표시할 ImageView
     lateinit var level : ImageView
@@ -53,14 +77,33 @@ class HomeActivity  : AppCompatActivity() {
         ingChallenge2 = findViewById(R.id.ingChallenge2)
         ingChallenge3 = findViewById(R.id.ingChallenge3)
 
-        more1Btn = findViewById(R.id.more1)
-        more2Btn = findViewById(R.id.more2)
-        more3Btn = findViewById(R.id.more3)
+        ing1_TextView = findViewById(R.id.ing1_TextView)
+        ing1_Button = findViewById(R.id.ing1_Button)
+        ing1Count_TextView = findViewById(R.id.ing1Count_TextView)
+        ing1Date_TextView = findViewById(R.id.ing1Date_TextView)
+        ingmore1_Button = findViewById(R.id.ingmore1_Button)
+
+        ing2_TextView = findViewById(R.id.ing2_TextView)
+        ing2_Button = findViewById(R.id.ing2_Button)
+        ing2Count_TextView = findViewById(R.id.ing2Count_TextView)
+        ing2Date_TextView = findViewById(R.id.ing2Date_TextView)
+        ingmore2_Button = findViewById(R.id.ingmore2_Button)
+
+        ing3_TextView = findViewById(R.id.ing3_TextView)
+        ing3_Button = findViewById(R.id.ing3_Button)
+        ing3Count_TextView = findViewById(R.id.ing3Count_TextView)
+        ing3Date_TextView = findViewById(R.id.ing3Date_TextView)
+        ingmore3_Button = findViewById(R.id.ingmore3_Button)
 
         //추천하는 챌린지
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
         join3Btn = findViewById(R.id.join3)
+
+        more1Btn = findViewById(R.id.ingmore1_Button)
+        more2Btn = findViewById(R.id.ingmore2_Button)
+        more3Btn = findViewById(R.id.ingmore3_Button)
+
 
         //임시로 챌린지 생성 - 원래는 챌린지 목록에 있어야하는 부분
         var C1 : Challenge = Challenge("텀블러 사용하기", "Plastic",30)
@@ -90,10 +133,22 @@ class HomeActivity  : AppCompatActivity() {
             ingChallenge1.setVisibility(View.VISIBLE)
             ingChallenge2.setVisibility(View.VISIBLE)
             ingChallenge3.setVisibility(View.VISIBLE)
-            for(i in 1..3 step 1)
-            {
-                ingChallenge1.TextView.setText(C1.name)
-            }
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count} + 명 참여중")
+            ing1Date_TextView.setText("${C1.date} + 일 남음")
+
+            ing2_TextView.setText(C2.name)
+            ing2_Button.setText(C2.keyword)
+            ing2Count_TextView.setText("${C2.count} + 명 참여중")
+            ing2Date_TextView.setText("${C2.date} + 일 남음")
+
+            ing3_TextView.setText(C3.name)
+            ing3_Button.setText(C3.keyword)
+            ing3Count_TextView.setText("${C3.count} + 명 참여중")
+            ing3Date_TextView.setText("${C3.date} + 일 남음")
+
         }else if(count>1)
         {
             //챌린지 갯수가 2개일 때

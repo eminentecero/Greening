@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,9 +16,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var editID:EditText
     lateinit var editPassWord:EditText
     lateinit var btnLogin: Button
-
-    lateinit var myHelper:DBHelper
-    lateinit var sqlDB : SQLiteDatabase
 
     internal lateinit var db:DBHelper
 
@@ -42,33 +40,23 @@ class MainActivity : AppCompatActivity() {
         //회원가입 -> 기본정보 쓰는 거,
 
 
-
-
         //2. 로그인
         //입력한 아이디, 비밀번호 변수랑 TextView(반갑습니다를 띄울)
         btnLogin.setOnClickListener {
             //입력값이 공백이면 기능이 실행되지 않도록 설정
-
             //ID와 비밀번호란이 공백으로 되어있지 않다면 조건
             if (!(editID.text.toString().equals("") && editPassWord.text.toString().equals(""))) {
-
-                //Person 객체 만들기
-                val person = Person(editID.text.toString(), editPassWord.text.toString())
-                Toast.makeText(applicationContext, "Person 객체 만듦", Toast.LENGTH_LONG).show()
-                //버튼 실행이 끝나면 빈칸으로 만들기
-                editID.setText("")
-                editPassWord.setText("")
-
-                var strPassWord = db.checkPassWord(editID.text.toString())
+                var strPassWord : String
+                strPassWord = db.checkPassWord(editID.text.toString())
 
                 if (editPassWord.text.toString().equals(strPassWord)) {
                     //로그인 성공하면 홈 화면으로 넘어가기
-                        // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
+                    // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
                     var intent = Intent(this, HomeActivity::class.java)
-                    intent.putExtra("id", person.id)
+                    intent.putExtra("id", editID.text.toString())
 
                     //화면 넘어가기 전 토스트 메시지 실행하고 나서 -> 다음 화면으로 넘어가기
-                    Toast.makeText(applicationContext, "${person.id}님 반갑습니다!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
                     startActivity(intent)
                 } else {
                     Toast.makeText(applicationContext, "아이디 또는 비밀번호가 잘못되었습니다.", Toast.LENGTH_LONG).show()
@@ -80,7 +68,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_LONG).show()
             }
 
-
+            //버튼 실행이 끝나면 빈칸으로 만들기
+            editID.setText("")
+            editPassWord.setText("")
         }
     }
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <!-- 회원가입 텍스트 뷰 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:textSize="23dp"
+            android:textColor="@color/teal_700" />
+    </LinearLayout>
+
+
+    <!-- 아이디 입력 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="id    "
+            android:gravity="right"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
+
+        <EditText
+            android:id="@+id/idEdit"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:hint="아이디를 입력하세요." />
+
+
+    </LinearLayout>
+
+    <!-- 중복확인 버튼 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="      "
+            android:gravity="right"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
+
+        <Button
+            android:id="@+id/button_idCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복확인" />
+
+
+    </LinearLayout>
+
+    <!-- 비밀번호 입력 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="비밀번호    "
+            android:gravity="right"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호를 입력하세요." />
+    </LinearLayout>
+
+    <!-- 비밀번호 확인 입력 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="비밀번호 확인    "
+            android:gravity="right"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
+
+        <EditText
+            android:id="@+id/passwordOkEdit"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호를 한번 더 입력하세요." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_join_cancel"
+            android:layout_marginLeft="10dp"
+            android:text="취소"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button_join_ok"
+            android:layout_marginLeft="10dp"
+            android:text="회원가입"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

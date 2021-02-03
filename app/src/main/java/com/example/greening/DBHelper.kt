@@ -44,8 +44,23 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     }
 
     //중복확인하기
-    fun checkID (editID : String)
-    {
+    fun checkID (editID : String) :String{
+        var db = this.readableDatabase
+
+
+        var cursor: Cursor
+        cursor =db.rawQuery("SELECT * FROM Person WHERE ID = '" + editID + "';", null)
+
+        // 저장할 배열 설정
+        var strId = ""
+
+        while (cursor.moveToNext()) {
+            strId += cursor.getString(0)
+        }
+        // 디비 닫기
+        db.close()
+        return strId
+
 
     }
 
@@ -57,7 +72,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
         //SQL 조회
         var cursor: Cursor
-        cursor = db.rawQuery("SELECT * FROM groupTBL WHERE ID = '" + id + "';", null)
+        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = '" + id + "';", null)
 
         //저장할 배열 설정
         var strPassWord = ""
@@ -78,7 +93,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     {
         var db = this.readableDatabase
         var cursor: Cursor
-        cursor = db.rawQuery("SELECT * FROM groupTBL WHERE ID = '" + id + "';", null)
+        cursor = db.rawQuery("SELECT * FROM Challenge WHERE ID = '" + id + "';", null)
 
         var count = cursor.getString(5)
         return count.toInt()
