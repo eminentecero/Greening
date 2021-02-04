@@ -50,22 +50,6 @@ class MainActivity : AppCompatActivity() {
             //ID와 비밀번호란이 공백으로 되어있지 않다면 조건
             if (!(editID.text.toString().equals("") && editPassWord.text.toString().equals(""))) {
 
-
-                /*
-                                if (!(editPassWord.text.toString().equals(strPassWord))) {
-                    Toast.makeText(applicationContext, "아이디 또는 비밀번호가 잘못되었습니다.", Toast.LENGTH_LONG).show()
-                }else {
-                    Toast.makeText(applicationContext, "${editID.text.toString()}님 반갑습니다!", Toast.LENGTH_LONG).show()
-                    //로그인 성공하면 홈 화면으로 넘어가기
-                    // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
-                    var intent = Intent(this, HomeActivity::class.java)
-                    //intent.putExtra("id", editID.text.toString())
-
-                    //화면 넘어가기 전 토스트 메시지 실행하고 나서 -> 다음 화면으로 넘어가기
-                    //Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
-                    startActivity(intent)
-                }
-                 */
                 var strPassWord : String = db.checkPassWord(editID.text.toString())
                 if (!(editPassWord.text.toString().equals(strPassWord))) {
                     Toast.makeText(applicationContext, "아이디 또는 비밀번호가 잘못되었습니다.", Toast.LENGTH_LONG).show()
@@ -88,8 +72,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             //버튼 실행이 끝나면 빈칸으로 만들기
-            //editID.setText("")
-            //editPassWord.setText("")
+            editID.setText("")
+            editPassWord.setText("")
         }
 
         btnJoin.setOnClickListener {
