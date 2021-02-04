@@ -40,11 +40,6 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var ing3Date_TextView : TextView
     lateinit var ingmore3_Button : Button
 
-
-
-
-
-
     //추천하는 챌린지에서 참여하기 버튼
     lateinit var join1Btn : Button
     lateinit var join2Btn : Button
@@ -111,9 +106,9 @@ class HomeActivity  : AppCompatActivity() {
         var C3 : Challenge = Challenge("채식하기","Food", 20)
 
         //데이터 베이스에 챌린지 저장
-        db.addChallenge(C1)
-        db.addChallenge(C2)
-        db.addChallenge(C3)
+        //db.addChallenge(C1)
+        //db.addChallenge(C2)
+        //db.addChallenge(C3)
 
         //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
         var name = intent.getStringExtra("id")
@@ -124,10 +119,12 @@ class HomeActivity  : AppCompatActivity() {
         //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
         //기본은 setVisibility(View.GONE)으로 설정해두기
         //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
-        var count = db.ChallengeCount(name.toString())
+        //var count = db.ChallengeCount(name.toString())
+
+        var challenge_count = 3
 
         //count 갯수에 따라 프레임 레이아웃 보이도록 설정
-        if(count>2)
+        if(challenge_count>2)
         {
             //챌린지 갯수가 3개일 때
             ingChallenge1.setVisibility(View.VISIBLE)
@@ -136,20 +133,20 @@ class HomeActivity  : AppCompatActivity() {
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count} + 명 참여중")
-            ing1Date_TextView.setText("${C1.date} + 일 남음")
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
 
             ing2_TextView.setText(C2.name)
             ing2_Button.setText(C2.keyword)
-            ing2Count_TextView.setText("${C2.count} + 명 참여중")
-            ing2Date_TextView.setText("${C2.date} + 일 남음")
+            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Date_TextView.setText("${C2.date}일 남음")
 
             ing3_TextView.setText(C3.name)
             ing3_Button.setText(C3.keyword)
-            ing3Count_TextView.setText("${C3.count} + 명 참여중")
-            ing3Date_TextView.setText("${C3.date} + 일 남음")
+            ing3Count_TextView.setText("${C3.count}명 참여중")
+            ing3Date_TextView.setText("${C3.date}일 남음")
 
-        }else if(count>1)
+        }else if(challenge_count>1)
         {
             //챌린지 갯수가 2개일 때
             ingChallenge1.setVisibility(View.VISIBLE)
