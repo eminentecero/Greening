@@ -175,8 +175,8 @@ class HomeActivity  : AppCompatActivity() {
         }
 
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
-        join1Btn.setOnClickListener { 
-               
+        join1Btn.setOnClickListener {
+
         }
     }
 }

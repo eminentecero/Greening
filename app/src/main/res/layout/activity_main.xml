@@ -4,22 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     tools:context=".MainActivity">
 
+    <!-- 로그인 텍스트 뷰 -->
     <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:gravity="center" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="아이디"
-            android:textSize="20dp" />
+            android:text="로그인"
+            android:textSize="23dp"
+            android:textColor="@color/teal_700" />
+    </LinearLayout>
+
+
+    <!-- 아이디 에디트 텍스트 -->
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="id   "
+            android:gravity = "right"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
 
         <EditText
             android:id="@+id/editID"
+            android:hint="아이디를 입력하세요."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,19 +49,21 @@
     </LinearLayout>
 
     <LinearLayout
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:text="비밀번호  "
+            android:gravity="right"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="비밀번호"
-            android:textSize="20dp" />
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
 
         <EditText
             android:id="@+id/editPassWord"
+            android:hint="비밀번호를 입력하세요."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,21 +72,30 @@
 
     <LinearLayout
         android:id="@+id/TextView"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="회원가입" />
+
         <Button
             android:id="@+id/btnLogin"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="로그인" />
 
+
     </LinearLayout>
-
-    //layout_weight - 비율 주의, 남은 공간에 고려해서 비율 포함됨. 전체에서 1:1:1로 하면 각각 너비를 0으로 설정해야함.
-
 
 </LinearLayout>

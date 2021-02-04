@@ -65,8 +65,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     }
 
     //비밀번호 확인하기
-    fun checkPassWord(id : String) : String
-    {
+    fun checkPassWord(id : String) : String{
         //get, set 생략 가능 - 아이디와 비밀번호를 조회해서 비교하기 때문에 readable 사용
         var db = this.readableDatabase
 
@@ -88,6 +87,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
         return strPassWord
     }
+
 
     fun ChallengeCount(id : String):Int
     {
