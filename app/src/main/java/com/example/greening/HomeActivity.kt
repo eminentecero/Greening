@@ -62,6 +62,14 @@ class HomeActivity  : AppCompatActivity() {
         //DB 객체 연결
         db = DBHelper(this)
 
+        //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
+        var name = intent.getStringExtra("id")
+        UserName.setText(name + "님")
+
+        //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
+        var User : Person = Person()
+        User = db.DataIn(name.toString())
+
         //아이디로 각각 연결하기
         //사용자 레벨
         level = findViewById(R.id.level)
@@ -110,9 +118,7 @@ class HomeActivity  : AppCompatActivity() {
         //db.addChallenge(C2)
         //db.addChallenge(C3)
 
-        //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
-        var name = intent.getStringExtra("id")
-        UserName.setText(name + "님")
+
 
 
         //참여중인 챌린지

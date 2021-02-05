@@ -122,6 +122,24 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         return strPassWord
     }
 
+    //유저의 정보를 반환하는 함수
+    fun DataIn(UserID:String) : Person
+    {
+        //해당 회원의 ID를 전체 회원 테이블에 검색
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = "+UserID+";", null)
+
+        while(cursor.moveToNext()){
+            //해당 행의 row의 정보를 string으로 받아 저장
+            var
+        }
+        
+        var User:Person = person()
+    }
+
     //개별 유저가 참여한 챌린지 갯수
     //개별 유저 - 로우 갯수
     fun ChallengeCount(person: Person):Int
@@ -130,7 +148,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
             var cursor: Cursor
 
             //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-            cursor = db.rawQuery("SELECT * FROM "+person.id+";", 0)
+            cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
 
             var count = cursor.columnCount
             return count

@@ -11,11 +11,18 @@ class Person {
     {
         this.id = id
         this.password = password
-        challenge
         level
         challengeCount
     }
-    
+
+    constructor()
+    {
+        id
+        password
+        level
+        challengeCount
+    }
+
     fun levelUP()
     {
         level++
