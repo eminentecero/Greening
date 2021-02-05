@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.w3c.dom.Text
+import java.sql.ResultSet
 
 class HomeActivity  : AppCompatActivity() {
     //사용할 변수
@@ -62,6 +63,11 @@ class HomeActivity  : AppCompatActivity() {
         //DB 객체 연결
         db = DBHelper(this)
 
+        //아이디로 각각 연결하기
+        //사용자 레벨
+        level = findViewById(R.id.level)
+        UserName = findViewById(R.id.levelText)
+
         //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
         var name = intent.getStringExtra("id")
         UserName.setText(name + "님")
@@ -69,11 +75,6 @@ class HomeActivity  : AppCompatActivity() {
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         var User : Person = Person()
         User = db.DataIn(name.toString())
-
-        //아이디로 각각 연결하기
-        //사용자 레벨
-        level = findViewById(R.id.level)
-        UserName = findViewById(R.id.levelText)
 
         //참여중인 챌린지
         ingChallenge1 = findViewById(R.id.ingChallenge1)
@@ -107,19 +108,18 @@ class HomeActivity  : AppCompatActivity() {
         more2Btn = findViewById(R.id.ingmore2_Button)
         more3Btn = findViewById(R.id.ingmore3_Button)
 
+        //User가 가지고 참여하고 있는 챌린지 목록 불러오기
+        var array = Array<Challenge>(4,{Challenge()})
+        array = db.ChallengeIn(User)
 
         //임시로 챌린지 생성 - 원래는 챌린지 목록에 있어야하는 부분
-        var C1 : Challenge = Challenge("텀블러 사용하기", "Plastic",30)
-        var C2 : Challenge = Challenge("스테인리스 빨대 사용하기", "Plastic", 20)
-        var C3 : Challenge = Challenge("채식하기","Food", 20)
+        //var C1 : Challenge = Challenge("001", "텀블러 사용하기", "Plastic",30)
+        //var C2 : Challenge = Challenge("002","스테인리스 빨대 사용하기", "Plastic", 20)
+        //var C3 : Challenge = Challenge("003","채식하기","Food", 20)
 
-        //데이터 베이스에 챌린지 저장
-        //db.addChallenge(C1)
-        //db.addChallenge(C2)
-        //db.addChallenge(C3)
-
-
-
+        var C1 : Challenge = Challenge(array[0].id.toString(), array[0].name.toString(), array[0].keyword.toString(), array[0].count.toInt())
+        var C2 : Challenge = Challenge(array[1].id.toString(), array[1].name.toString(), array[1].keyword.toString(), array[1].count.toInt())
+        var C3 : Challenge = Challenge(array[2].id.toString(), array[2].name.toString(), array[2].keyword.toString(), array[2].count.toInt())
 
         //참여중인 챌린지
         //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
@@ -127,12 +127,15 @@ class HomeActivity  : AppCompatActivity() {
         //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
         //var count = db.ChallengeCount(name.toString())
 
-        var challenge_count = 1
+        var challenge_count = 3
 
         //count 갯수에 따라 프레임 레이아웃 보이도록 설정
         if(challenge_count>2)
         {
             //챌린지 갯수가 3개일 때
+            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.VISIBLE)
+            ingChallenge3.setVisibility(View.VISIBLE)
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
@@ -152,6 +155,8 @@ class HomeActivity  : AppCompatActivity() {
         }else if(challenge_count>1)
         {
             //챌린지 갯수가 2개일 때
+            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.VISIBLE)
             ingChallenge3.setVisibility(View.GONE)
 
             ing1_TextView.setText(C1.name)
@@ -165,6 +170,7 @@ class HomeActivity  : AppCompatActivity() {
             ing2Date_TextView.setText("${C2.date}일 남음")
         }else{
             //챌린지 갯수가 1개일 때
+            ingChallenge1.setVisibility(View.GONE)
             ingChallenge2.setVisibility(View.GONE)
             ingChallenge3.setVisibility(View.GONE)
 

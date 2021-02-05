@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build.ID
+import android.util.Log
+import java.sql.Types.NULL
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -125,19 +127,25 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     //유저의 정보를 반환하는 함수
     fun DataIn(UserID:String) : Person
     {
+
         //해당 회원의 ID를 전체 회원 테이블에 검색
         var db = this.readableDatabase
         var cursor: Cursor
-
+        var User : Person = Person()
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = "+UserID+";", null)
+        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = '"+UserID+"';", null)
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
-            var
+            var id = cursor.getString(0)
+            var passWord = cursor.getString(1)
+            var level = cursor.getString(2)
+
+            User.id = id
+            User.password = passWord
+            User.level = level.toInt()
         }
-        
-        var User:Person = person()
+        return User
     }
 
     //개별 유저가 참여한 챌린지 갯수
@@ -167,11 +175,37 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var db = this.writableDatabase
         //sql문 입력
         //전체 챌린지 목록에 해당 챌린지 정보들 입력
-        db.execSQL("INSERT INTO Challenge VALUES ('"challenge.id"','"+challenge.name+"','"
+        db.execSQL("INSERT INTO Challenge VALUES ('"+challenge.id+"','"+challenge.name+"','"
                 +challenge.keyword +"'," + challenge.date+","+ challenge.count + ","+ challenge.score +");")
         //추가하는 해당 챌린지에 대한 개별 Table 생성
         db!!.execSQL("CREATE TABLE "+challenge.id+"(UserID CHAR(20), Date CHAR(20), Count INT(18));")
         db.close()
+    }
+
+    //유저가 참여중인 챌린지 목록 불러오기
+    fun ChallengeIn(person: Person): Array<Challenge> {
+        var db = this.readableDatabase
+        var cursor: Cursor
+        var array = Array<Challenge>(4,{Challenge()})
+
+        //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+        cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
+
+
+
+        while (cursor.moveToNext()) {
+            //해당 행의 row의 정보를 string으로 받아 저장
+            var id = cursor.getString(0)
+            var name = cursor.getString(1)
+            var keyword = cursor.getString(2)
+            var count = cursor.getString(3)
+
+            //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
+            var ingchallenge : Challenge = Challenge(id, name, keyword, count.toInt())
+            //Log.d(d, ingchallenge.name)
+            array+=ingchallenge
+        }
+        return array
     }
 
     //챌린지 즐겨찾기

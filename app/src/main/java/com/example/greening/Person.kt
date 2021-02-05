@@ -15,6 +15,14 @@ class Person {
         challengeCount
     }
 
+    constructor(id: String, password: String, level: Int)
+    {
+        this.id = id
+        this.password = password
+        this.level = level
+        challengeCount
+    }
+
     constructor()
     {
         id
