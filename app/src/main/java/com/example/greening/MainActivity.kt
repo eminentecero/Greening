@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
+//로그인
 class MainActivity : AppCompatActivity() {
     //변수 선언
     lateinit var editID:EditText
@@ -34,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         //DB 객체 받아오기
         db = DBHelper(this)
-        Toast.makeText(applicationContext, "데베 받아옴.", Toast.LENGTH_LONG).show()
 
         //1. 회원가입
         //아이디, 비밀번호 입력 - 변수 선언, 연결 필요
@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
                     //로그인 성공하면 홈 화면으로 넘어가기
                     // 홈 화면에 보낼 정보 - ID(닉네임) intent에 저장
                     var intent = Intent(this, HomeActivity::class.java)
-                    //intent.putExtra("id", editID.text.toString())
+                    intent.putExtra("id", editID.text.toString())
 
                     //화면 넘어가기 전 토스트 메시지 실행하고 나서 -> 다음 화면으로 넘어가기
-                    //Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "${editID.text}님 반갑습니다!", Toast.LENGTH_LONG).show()
                     startActivity(intent)
                 }
 

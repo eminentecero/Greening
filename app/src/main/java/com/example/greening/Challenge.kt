@@ -4,6 +4,8 @@ package com.example.greening
 class Challenge {
     //public static Context mContext
 
+    var id : String = ""
+
     //챌린지 이름
     var name : String = ""
 
@@ -12,13 +14,7 @@ class Challenge {
 
     //DB 연결은 PRIMARY KEY
 
-    //챌린지 - 전체 챌린지 하나[챌린지 개인 고유 번호 - 001, 002, 003....이렇게]
-    //유저 - 전체 유저, 개별 유저(참여중인 챌린지 - 고유 번호를 저장)
-    //리뷰 - 리뷰 테이블(챌린지 번호, 리뷰 번호(정렬할 때), 유저 아이디, 리뷰 내용, 날짜)
-    //챌린지 캘린더 - 개별 유저 테이블(시작했던 날짜, 참여했던 날짜 따로따로 저장해서 이거 불러와서 표시....)
 
-    //참여한 사람들이 남긴 후기 - String 배열로 저장 - 나중에
-    //var review : Array<String> = arrayOf("")
 
     //분류하는 - 음식, 플라스틱, 운동, 자원, 기타
     var keyword : String = ""

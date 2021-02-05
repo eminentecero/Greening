@@ -121,15 +121,12 @@ class HomeActivity  : AppCompatActivity() {
         //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
         //var count = db.ChallengeCount(name.toString())
 
-        var challenge_count = 3
+        var challenge_count = 1
 
         //count 갯수에 따라 프레임 레이아웃 보이도록 설정
         if(challenge_count>2)
         {
             //챌린지 갯수가 3개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
-            ingChallenge2.setVisibility(View.VISIBLE)
-            ingChallenge3.setVisibility(View.VISIBLE)
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
@@ -149,10 +146,26 @@ class HomeActivity  : AppCompatActivity() {
         }else if(challenge_count>1)
         {
             //챌린지 갯수가 2개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge3.setVisibility(View.GONE)
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
+
+            ing2_TextView.setText(C2.name)
+            ing2_Button.setText(C2.keyword)
+            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Date_TextView.setText("${C2.date}일 남음")
         }else{
             //챌린지 갯수가 1개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.GONE)
+            ingChallenge3.setVisibility(View.GONE)
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
         }
 
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
