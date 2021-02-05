@@ -186,12 +186,11 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     fun ChallengeIn(person: Person): Array<Challenge> {
         var db = this.readableDatabase
         var cursor: Cursor
-        var array = Array<Challenge>(4,{Challenge()})
+
+        var anyArray = arrayOf<Challenge>()
 
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
         cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
-
-
 
         while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
@@ -203,9 +202,9 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
             //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
             var ingchallenge : Challenge = Challenge(id, name, keyword, count.toInt())
             //Log.d(d, ingchallenge.name)
-            array+=ingchallenge
+            anyArray+=ingchallenge
         }
-        return array
+        return anyArray
     }
 
     //챌린지 즐겨찾기

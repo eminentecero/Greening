@@ -117,9 +117,9 @@ class HomeActivity  : AppCompatActivity() {
         //var C2 : Challenge = Challenge("002","스테인리스 빨대 사용하기", "Plastic", 20)
         //var C3 : Challenge = Challenge("003","채식하기","Food", 20)
 
-        var C1 : Challenge = Challenge(array[0].id.toString(), array[0].name.toString(), array[0].keyword.toString(), array[0].count.toInt())
-        var C2 : Challenge = Challenge(array[1].id.toString(), array[1].name.toString(), array[1].keyword.toString(), array[1].count.toInt())
-        var C3 : Challenge = Challenge(array[2].id.toString(), array[2].name.toString(), array[2].keyword.toString(), array[2].count.toInt())
+        var C1 : Challenge = array[0]
+        var C2 : Challenge = array[1]
+        var C3 : Challenge = array[2]
 
         //참여중인 챌린지
         //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
@@ -127,7 +127,7 @@ class HomeActivity  : AppCompatActivity() {
         //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
         //var count = db.ChallengeCount(name.toString())
 
-        var challenge_count = 3
+        var challenge_count = 2
 
         //count 갯수에 따라 프레임 레이아웃 보이도록 설정
         if(challenge_count>2)

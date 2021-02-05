@@ -35,6 +35,7 @@ class SignupActivity : AppCompatActivity() {
         button_join_cancel = findViewById(R.id.button_join_cancel)
         button_join_ok = findViewById(R.id.button_join_ok)
 
+
         db = DBHelper(this)
 
         // 회원가입 버튼 실행
