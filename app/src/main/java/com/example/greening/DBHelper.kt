@@ -171,13 +171,32 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         return User
     }
 
+    //전체 챌린지 갯수 - 챌린지 추가할 때 사용
+    fun ChallengeCount():Int
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+        var count:Int = 0
+
+        //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+        cursor = db.rawQuery("SELECT * FROM Challenge;", null)
+
+        while (cursor.moveToNext())
+        {
+            count++
+        }
+
+        count
+        return count
+    }
+
     //개별 유저가 참여한 챌린지 갯수
     //개별 유저 - 로우 갯수
-    fun ChallengeCount(person: Person):Int
+    fun UserjoinCount(person: Person):Int
     {
             var db = this.readableDatabase
             var cursor: Cursor
-            var count:Int = -1
+            var count:Int = 0
 
             //개인 유저의 Table에서 챌린지 갯수 세어서 반환
             cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
@@ -187,7 +206,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
             count++
         }
 
-            count --
+            count
             return count
     }
 
@@ -207,7 +226,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         db.execSQL("INSERT INTO Challenge VALUES ('"+challenge.id+"','"+challenge.name+"','"
                 +challenge.keyword +"'," + challenge.date+","+ challenge.count + ","+ challenge.score +");")
         //추가하는 해당 챌린지에 대한 개별 Table 생성
-        db!!.execSQL("CREATE TABLE "+challenge.id+"(UserID CHAR(20), Date CHAR(20), Count INT(18));")
+        db!!.execSQL("CREATE TABLE CHALLENGE"+challenge.id+"(UserID CHAR(20), Date CHAR(20), Count INT(18));")
         db.close()
     }
 
@@ -229,10 +248,39 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
             var count = cursor.getString(3)
 
             //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
-            var ingchallenge : Challenge = Challenge(id, name, keyword, count.toInt())
+            var ingchallenge : Challenge = Challenge(id.toInt(), name, keyword, count.toInt())
             //Log.d(d, ingchallenge.name)
             anyArray+=ingchallenge
         }
+        return anyArray
+    }
+
+    //각 카테고리별 챌린지 가져오기
+    fun Challengecategory() : Array<Challenge>
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var KeyWord = arrayOf<String>("플라스틱", "자원", "운동", "음식", "기타")
+        var anyArray = arrayOf<Challenge>()
+
+        for (i in 0..4 step 1)
+        {
+            //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '"+{KeyWord[i]}+"';", null)
+
+                //해당 행의 row의 정보를 string으로 받아 저장
+                var id = cursor.getString(0)
+                var name = cursor.getString(1)
+                var keyword = cursor.getString(2)
+                var count = cursor.getString(3)
+
+                //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
+                var challenge : Challenge = Challenge(id.toInt(), name, keyword, count.toInt())
+                //Log.d(d, ingchallenge.name)
+                anyArray+=challenge
+        }
+
         return anyArray
     }
 

@@ -4,7 +4,7 @@ package com.example.greening
 class Challenge {
     //public static Context mContext
 
-    var id : String = ""
+    var id : Int = 0
 
     //챌린지 이름
     var name : String = ""
@@ -39,7 +39,7 @@ class Challenge {
         }
 
     //기본 생성자 - 이름, 기간, 분류하는 키워드 설정해서 생성 - 나중에 하기
-    constructor(id:String,name: String, keyword: String, date: Int){
+    constructor(id:Int,name: String, keyword: String, date: Int){
         this.id = id
         this.name = name
         this.date = date

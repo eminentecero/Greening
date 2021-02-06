@@ -337,7 +337,7 @@
                         android:textSize="15dp" />
 
                     <TextView
-                        android:id="@+id/date1"
+                        android:id="@+id/Date1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="115dp"
@@ -371,6 +371,7 @@
                         app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
 
                     <TextView
+                        android:id="@+id/name2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
@@ -381,31 +382,34 @@
                         android:textStyle="bold"></TextView>
 
                     <Button
+                        android:id="@+id/keyword2"
                         android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="50dp"
-                        android:textColor="@color/black"
+                        android:layout_marginLeft="10dp"
                         android:text="유형"
-                        app:backgroundTint="#CDCDCD"></Button>
+                        android:textColor="@color/black"
+                        app:backgroundTint="#CDCDCD" />
 
                     <TextView
+                        android:id="@+id/count2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="95dp"
                         android:layout_marginLeft="15dp"
                         android:text="1,000명 참가 중"
                         android:textColor="@color/black"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/Date2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="115dp"
                         android:layout_marginLeft="15dp"
                         android:text="10일 남음"
                         android:textColor="@color/black"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp" />
 
                     <Button
                         android:id="@+id/join2"
@@ -413,7 +417,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="145dp"
-                        android:text="참여하기  >"></Button>
+                        android:text="참여하기  >" />
                 </FrameLayout>
 
                 // 추천 챌린지 카드 (3)
@@ -432,6 +436,7 @@
                         app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
 
                     <TextView
+                        android:id="@+id/name3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
@@ -442,31 +447,34 @@
                         android:textStyle="bold"></TextView>
 
                     <Button
+                        android:id="@+id/keyword3"
                         android:layout_width="60dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="50dp"
-                        android:textColor="@color/black"
+                        android:layout_marginLeft="10dp"
                         android:text="유형"
-                        app:backgroundTint="#CDCDCD"></Button>
+                        android:textColor="@color/black"
+                        app:backgroundTint="#CDCDCD" />
 
                     <TextView
+                        android:id="@+id/count3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="95dp"
                         android:layout_marginLeft="15dp"
                         android:text="1,000명 참가 중"
                         android:textColor="@color/black"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/Date3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="115dp"
                         android:layout_marginLeft="15dp"
                         android:text="10일 남음"
                         android:textColor="@color/black"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp" />
 
                     <Button
                         android:id="@+id/join3"
@@ -474,8 +482,139 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="145dp"
-                        android:text="참여하기  >"></Button>
+                        android:text="참여하기  >" />
                 </FrameLayout>
+
+                // 추천 챌린지 카드 (4)
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/recom4"
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="10dp"
+                        app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                    <TextView
+                        android:id="@+id/name4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="챌린지 이름"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
+                    <Button
+                        android:id="@+id/keyword4"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="유형"
+                        android:textColor="@color/black"
+                        app:backgroundTint="#CDCDCD" />
+
+                    <TextView
+                        android:id="@+id/count4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="95dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="1,000명 참가 중"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/Date4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="115dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="10일 남음"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/join4"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="145dp"
+                        android:text="참여하기  >" />
+                </FrameLayout>
+
+                // 추천 챌린지 카드 (5)
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/recom5"
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="10dp"
+                        app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                    <TextView
+                        android:id="@+id/name5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="챌린지 이름"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
+                    <Button
+                        android:id="@+id/keyword5"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="유형"
+                        android:textColor="@color/black"
+                        app:backgroundTint="#CDCDCD" />
+
+                    <TextView
+                        android:id="@+id/count5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="95dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="1,000명 참가 중"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/Date5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="115dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="10일 남음"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/join5"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="145dp"
+                        android:text="참여하기  >" />
+                </FrameLayout>
+
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
