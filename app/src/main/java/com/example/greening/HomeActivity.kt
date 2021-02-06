@@ -3,6 +3,7 @@ package com.example.greening
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
@@ -94,7 +95,7 @@ class HomeActivity  : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_home)
+        setContentView(R.layout.activity_home)
 
         //DB 객체 연결
         db = DBHelper(this)
@@ -146,14 +147,16 @@ class HomeActivity  : AppCompatActivity() {
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
         join3Btn = findViewById(R.id.join3)
-        //join4Btn = findViewById(R.id.join4)
-        //join5Btn = findViewById(R.id.join5)
+        join4Btn = findViewById(R.id.join4)
+        join5Btn = findViewById(R.id.join5)
 
         recom1 = findViewById(R.id.recom1)
         recom2 = findViewById(R.id.recom2)
         recom3 = findViewById(R.id.recom3)
         recom4 = findViewById(R.id.recom4)
         recom5 = findViewById(R.id.recom5)
+
+
 
         ImageView1 = findViewById(R.id.ImageView1)
         ImageView2 = findViewById(R.id.ImageView2)
@@ -279,8 +282,9 @@ class HomeActivity  : AppCompatActivity() {
         }
 
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
-        var categoryArray = Array<Challenge>(5,{Challenge()})
+        var categoryArray: Array<Challenge>
         categoryArray = db.Challengecategory()
+        Log.d("태그", array.count().toString())
 
         if(categoryArray.count() == 5)
         {
@@ -291,30 +295,30 @@ class HomeActivity  : AppCompatActivity() {
             recom4.setVisibility(View.VISIBLE)
             recom5.setVisibility(View.VISIBLE)
 
-            name1.setText(array[0].name)
-            keyword1.setText(array[0].keyword)
-            count1.setText("${array[0].count}명 참여중")
-            date1.setText("${array[0].date}일 남음")
+            name1.setText(categoryArray[0].name)
+            keyword1.setText(categoryArray[0].keyword)
+            count1.setText("${categoryArray[0].count}명 참여중")
+            date1.setText("${categoryArray[0].date}일 남음")
 
-            name2.setText(array[1].name)
-            keyword2.setText(array[1].keyword)
-            count2.setText("${array[1].count}명 참여중")
-            date2.setText("${array[1].date}일 남음")
+            name2.setText(categoryArray[1].name)
+            keyword2.setText(categoryArray[1].keyword)
+            count2.setText("${categoryArray[1].count}명 참여중")
+            date2.setText("${categoryArray[1].date}일 남음")
 
-            name3.setText(array[2].name)
-            keyword3.setText(array[2].keyword)
-            count3.setText("${array[2].count}명 참여중")
-            date3.setText("${array[2].date}일 남음")
+            name3.setText(categoryArray[2].name)
+            keyword3.setText(categoryArray[2].keyword)
+            count3.setText("${categoryArray[2].count}명 참여중")
+            date3.setText("${categoryArray[2].date}일 남음")
 
-            name4.setText(array[3].name)
-            keyword4.setText(array[3].keyword)
-            count4.setText("${array[3].count}명 참여중")
-            date4.setText("${array[3].date}일 남음")
+            name4.setText(categoryArray[3].name)
+            keyword4.setText(categoryArray[3].keyword)
+            count4.setText("${categoryArray[3].count}명 참여중")
+            date4.setText("${categoryArray[3].date}일 남음")
 
-            name5.setText(array[4].name)
-            keyword5.setText(array[4].keyword)
-            count5.setText("${array[4].count}명 참여중")
-            date5.setText("${array[4].date}일 남음")
+            name5.setText(categoryArray[4].name)
+            keyword5.setText(categoryArray[4].keyword)
+            count5.setText("${categoryArray[4].count}명 참여중")
+            date5.setText("${categoryArray[4].date}일 남음")
         }else if(categoryArray.count() == 4){
             //챌린지 갯수가 4개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -323,25 +327,25 @@ class HomeActivity  : AppCompatActivity() {
             recom4.setVisibility(View.VISIBLE)
             recom5.setVisibility(View.GONE)
 
-            name1.setText(array[0].name)
-            keyword1.setText(array[0].keyword)
-            count1.setText("${array[0].count}명 참여중")
-            date1.setText("${array[0].date}일 남음")
+            name1.setText(categoryArray[0].name)
+            keyword1.setText(categoryArray[0].keyword)
+            count1.setText("${categoryArray[0].count}명 참여중")
+            date1.setText("${categoryArray[0].date}일 남음")
 
-            name2.setText(array[1].name)
-            keyword2.setText(array[1].keyword)
-            count2.setText("${array[1].count}명 참여중")
-            date2.setText("${array[1].date}일 남음")
+            name2.setText(categoryArray[1].name)
+            keyword2.setText(categoryArray[1].keyword)
+            count2.setText("${categoryArray[1].count}명 참여중")
+            date2.setText("${categoryArray[1].date}일 남음")
 
-            name3.setText(array[2].name)
-            keyword3.setText(array[2].keyword)
-            count3.setText("${array[2].count}명 참여중")
-            date3.setText("${array[2].date}일 남음")
+            name3.setText(categoryArray[2].name)
+            keyword3.setText(categoryArray[2].keyword)
+            count3.setText("${categoryArray[2].count}명 참여중")
+            date3.setText("${categoryArray[2].date}일 남음")
 
-            name4.setText(array[3].name)
-            keyword4.setText(array[3].keyword)
-            count4.setText("${array[3].count}명 참여중")
-            date4.setText("${array[3].date}일 남음")
+            name4.setText(categoryArray[3].name)
+            keyword4.setText(categoryArray[3].keyword)
+            count4.setText("${categoryArray[3].count}명 참여중")
+            date4.setText("${categoryArray[3].date}일 남음")
         }else if(categoryArray.count() == 3){
             //챌린지 갯수가 3개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -350,20 +354,20 @@ class HomeActivity  : AppCompatActivity() {
             recom4.setVisibility(View.GONE)
             recom5.setVisibility(View.GONE)
 
-            name1.setText(array[0].name)
-            keyword1.setText(array[0].keyword)
-            count1.setText("${array[0].count}명 참여중")
-            date1.setText("${array[0].date}일 남음")
+            name1.setText(categoryArray[0].name)
+            keyword1.setText(categoryArray[0].keyword)
+            count1.setText("${categoryArray[0].count}명 참여중")
+            date1.setText("${categoryArray[0].date}일 남음")
 
-            name2.setText(array[1].name)
-            keyword2.setText(array[1].keyword)
-            count2.setText("${array[1].count}명 참여중")
-            date2.setText("${array[1].date}일 남음")
+            name2.setText(categoryArray[1].name)
+            keyword2.setText(categoryArray[1].keyword)
+            count2.setText("${categoryArray[1].count}명 참여중")
+            date2.setText("${categoryArray[1].date}일 남음")
 
-            name3.setText(array[2].name)
-            keyword3.setText(array[2].keyword)
-            count3.setText("${array[2].count}명 참여중")
-            date3.setText("${array[2].date}일 남음")
+            name3.setText(categoryArray[2].name)
+            keyword3.setText(categoryArray[2].keyword)
+            count3.setText("${categoryArray[2].count}명 참여중")
+            date3.setText("${categoryArray[2].date}일 남음")
         }else if(categoryArray.count() == 2){
             //챌린지 갯수가 2개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -372,15 +376,15 @@ class HomeActivity  : AppCompatActivity() {
             recom4.setVisibility(View.GONE)
             recom5.setVisibility(View.GONE)
 
-            name1.setText(array[0].name)
-            keyword1.setText(array[0].keyword)
-            count1.setText("${array[0].count}명 참여중")
-            date1.setText("${array[0].date}일 남음")
+            name1.setText(categoryArray[0].name)
+            keyword1.setText(categoryArray[0].keyword)
+            count1.setText("${categoryArray[0].count}명 참여중")
+            date1.setText("${categoryArray[0].date}일 남음")
 
-            name2.setText(array[1].name)
-            keyword2.setText(array[1].keyword)
-            count2.setText("${array[1].count}명 참여중")
-            date2.setText("${array[1].date}일 남음")
+            name2.setText(categoryArray[1].name)
+            keyword2.setText(categoryArray[1].keyword)
+            count2.setText("${categoryArray[1].count}명 참여중")
+            date2.setText("${categoryArray[1].date}일 남음")
         }else if(categoryArray.count() == 1){
             //챌린지 갯수가 1개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -389,10 +393,10 @@ class HomeActivity  : AppCompatActivity() {
             recom4.setVisibility(View.GONE)
             recom5.setVisibility(View.GONE)
 
-            name1.setText(array[0].name)
-            keyword1.setText(array[0].keyword)
-            count1.setText("${array[0].count}명 참여중")
-            date1.setText("${array[0].date}일 남음")
+            name1.setText(categoryArray[0].name)
+            keyword1.setText(categoryArray[0].keyword)
+            count1.setText("${categoryArray[0].count}명 참여중")
+            date1.setText("${categoryArray[0].date}일 남음")
         }else{
             //총 챌린지 갯수가 0개일 때
                 recomText.setVisibility(View.GONE)

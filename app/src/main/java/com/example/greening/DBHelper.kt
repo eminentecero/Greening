@@ -4,9 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.os.Build.ID
 import android.util.Log
-import java.sql.Types.NULL
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -51,11 +49,11 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         //개별 유저의 테이블을 생성(테이블 이름은 아이디...)
         //CREATE TABLE + Person.ID + (ChID, ChName, StartDate, executeDate);
         //*******************Person table 수정 - ID CHAR(20) PRIMARY KEY, PassWord CHAR(20),Level INT(3)
-        db.execSQL("INSERT INTO Person VALUES ('"+person.nickname+"','"+person.id+"',"
-                +person.password +", 0);")
+        db.execSQL("INSERT INTO Person VALUES ('" + person.nickname + "','" + person.id + "',"
+                + person.password + ", 0);")
 
         //개인 유저 테이블 생성 - 참여한 챌린지 목록들 저장
-        db!!.execSQL("CREATE TABLE "+person.id+" (ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18));")
+        db!!.execSQL("CREATE TABLE " + person.id + " (ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18));")
 
 
         db.close()
@@ -65,24 +63,24 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
     //챌린지 참여
     //개별 유저의 테이블에다가 참여중인 챌린지 이름, 시작한 날짜, 참여한 날짜(생성될 때 NULL)
-    fun join(challenge : Challenge, person: Person)
+    fun join(challenge: Challenge, person: Person)
     {
         var db = this.writableDatabase
         //개인 유저의 Table에다가 해당 유저가 참여할 챌린지에 대한 정보를 입력
         //챌린지 아이디, 챌린지 이름, 챌린지 유형, 챌린지 수행한 횟수...
-        db.execSQL("INSERT INTO "+person.id+" VALUES ('"+challenge.id+"',"
-                +challenge.name +","+challenge.keyword+"0, );")
+        db.execSQL("INSERT INTO " + person.id + " VALUES ('" + challenge.id + "',"
+                + challenge.name + "," + challenge.keyword + "0, );")
 
         //sql문 입력
         //해당 챌린지 개별 테이블에 참여한 사람을 명단에다가 올림
         //****************그날 날짜에 대한 정보 받을 필요있음 - 수정해야함
-        db.execSQL("INSERT INTO "+challenge.id+" VALUES('"+person.id+",그날 날짜., 0);")
+        db.execSQL("INSERT INTO " + challenge.id + " VALUES('" + person.id + ",그날 날짜., 0);")
         db.close()
     }
 
     //중복확인하기
     //전체 유저 DB에서 확인
-    fun checkNickname (editNickname : String) :String{
+    fun checkNickname(editNickname: String) :String{
         var db = this.readableDatabase
 
 
@@ -102,7 +100,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
     //중복확인하기
     //전체 유저 DB에서 확인
-    fun checkID (editID : String) :String{
+    fun checkID(editID: String) :String{
         var db = this.readableDatabase
 
 
@@ -123,7 +121,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
     //로그인
     //전체 유저에서 확인
-    fun checkPassWord(id : String) : String{
+    fun checkPassWord(id: String) : String{
         var db = this.readableDatabase
 
         //SQL 조회
@@ -146,7 +144,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     }
 
     //유저의 정보를 반환하는 함수
-    fun DataIn(UserID:String) : Person
+    fun DataIn(UserID: String) : Person
     {
 
         //해당 회원의 ID를 전체 회원 테이블에 검색
@@ -154,7 +152,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var cursor: Cursor
         var User : Person = Person()
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = '"+UserID+"';", null)
+        cursor = db.rawQuery("SELECT * FROM Person WHERE ID = '" + UserID + "';", null)
 
         while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
@@ -199,7 +197,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
             var count:Int = 0
 
             //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-            cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
+            cursor = db.rawQuery("SELECT * FROM " + person.id + ";", null)
 
         while (cursor.moveToNext())
         {
@@ -223,10 +221,10 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var db = this.writableDatabase
         //sql문 입력
         //전체 챌린지 목록에 해당 챌린지 정보들 입력
-        db.execSQL("INSERT INTO Challenge VALUES ('"+challenge.id+"','"+challenge.name+"','"
-                +challenge.keyword +"'," + challenge.date+","+ challenge.count + ","+ challenge.score +");")
+        db.execSQL("INSERT INTO Challenge VALUES ('" + challenge.id + "','" + challenge.name + "','"
+                + challenge.keyword + "'," + challenge.date + "," + challenge.count + "," + challenge.score + ");")
         //추가하는 해당 챌린지에 대한 개별 Table 생성
-        db!!.execSQL("CREATE TABLE CHALLENGE"+challenge.id+"(UserID CHAR(20), Date CHAR(20), Count INT(18));")
+        db!!.execSQL("CREATE TABLE CHALLENGE" + challenge.id + "(UserID CHAR(20), Date CHAR(20), Count INT(18));")
         db.close()
     }
 
@@ -238,7 +236,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var anyArray = arrayOf<Challenge>()
 
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-        cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
+        cursor = db.rawQuery("SELECT * FROM " + person.id + ";", null)
 
         while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
@@ -261,24 +259,29 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var db = this.readableDatabase
         var cursor: Cursor
 
-        var KeyWord = arrayOf<String>("플라스틱", "자원", "운동", "음식", "기타")
+        var KeyWord = arrayOf("플라스틱", "자원", "운동", "음식", "기타")
         var anyArray = arrayOf<Challenge>()
 
         for (i in 0..4 step 1)
         {
-            //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '"+{KeyWord[i]}+"';", null)
+            Log.d("태그", "for 루프 돌고 있음")
+            //각 카테고리의 첫번쨰 데이터 받아옴
+            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '${KeyWord[i].toString()}';", null)
 
+            if(cursor.getCount()>0){
+                cursor.moveToFirst()
                 //해당 행의 row의 정보를 string으로 받아 저장
                 var id = cursor.getString(0)
                 var name = cursor.getString(1)
                 var keyword = cursor.getString(2)
                 var count = cursor.getString(3)
-
                 //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
-                var challenge : Challenge = Challenge(id.toInt(), name, keyword, count.toInt())
-                //Log.d(d, ingchallenge.name)
-                anyArray+=challenge
+                var challenge: Challenge = Challenge(id.toInt(), name, keyword, count.toInt())
+
+                anyArray += challenge
+            } else {
+                continue
+            }
         }
 
         return anyArray
