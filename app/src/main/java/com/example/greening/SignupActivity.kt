@@ -1,15 +1,11 @@
 package com.example.greening
 
 import android.content.Intent
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.greening.MainActivity
-import com.example.greening.R
 
 class SignupActivity : AppCompatActivity() {
 
@@ -65,7 +61,7 @@ class SignupActivity : AppCompatActivity() {
                     ).show()
 
                     //3) 로그인 화면으로 이동하기
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
 
                 } else {
@@ -96,7 +92,7 @@ class SignupActivity : AppCompatActivity() {
 
         button_join_cancel.setOnClickListener {
             // 인텐트 값으로 화면 전환
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }

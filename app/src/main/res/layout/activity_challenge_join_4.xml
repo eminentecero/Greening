@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".ChallengeActivityJoin">
+
+    <!-- 챌린지 목록 화면에서 각 챌린지를 눌렀을 때 나오는 화면입니다. -->
+    <!-- 진행중인 챌린지!! -->
+    <!-- 하단 탭 노!!! -->
+
+    <!-- 컴포넌트 : ID -->
+    <!-- 뒤로가기 : imgBack -->
+    <!-- 챌린지 제목 : nameChallenge -->
+    <!-- 참여 인원 : numPeopleChallenge -->
+    <!-- 기간 : periodChallenge -->
+    <!-- 챌린지달성률 : progressChallenge -->
+    <!-- 달력 : calendarChallenge -->
+    <!-- 오늘의 챌린지 완료 : btnDoneChallenge -->
+
+    <!-- 벡터 사용했어요!! drawable 파일에 있습니다. -->
+    <!-- 뒤로가기, 별(아웃라인, 필) 사용했습니다. -->
+    <!-- 버튼 라운드때문에 button_round.xml 파일도 drawable 파일에 꼭!!!! 추가!!! draw resource file 추가하면 됨니다~ -->
+
+    <!-- Title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7.5">
+
+        <!-- 뒤로가기: 챌린지 화면으로 이동 -->
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/nameChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgBack"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="챌린지 제목"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/numPeopleChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameChallenge"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:text="N"
+            android:textSize="14sp" />
+
+        <!-- 챌린지 달성률 -->
+        <TextView
+            android:id="@+id/periodChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/numPeopleChallenge"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
+            android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:text="2021.01.01 - 01.31"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:id="@+id/progressChallenge"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"/>
+
+    </RelativeLayout>
+
+    <!-- 챌린지 내용 & 버튼 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="2.5"
+        android:weightSum="8">
+
+        <!-- 달력 -->
+        <CalendarView
+            android:id="@+id/calendarChallenge"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnJoinChallenge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 오늘의 챌린지 완료 -->
+        <Button
+            android:id="@+id/btnDoneChallenge"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_round"
+            android:text="오늘의 챌린지 완료"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

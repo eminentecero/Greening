@@ -13,7 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 
 //로그인
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     //변수 선언
     lateinit var editID:EditText
     lateinit var editPassWord:EditText
