@@ -67,7 +67,9 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     fun join(challenge: Challenge, person: Person)
     {
         //중복되거나 유저가 참여한 챌린지의 갯수가 3개면 더이상 참여 안됨.****************************
-        if(UserjoinCount(person)<=3&&checkChallenge(challenge.id, person) == false){
+        if(UserjoinCount(person)>=3||checkChallenge(challenge.id, person).equals(challenge.id)){
+            //안된다는 익셉션 처리 해주기
+        }else{
             var db = this.writableDatabase
             //개인 유저의 Table에다가 해당 유저가 참여할 챌린지에 대한 정보를 입력
             //챌린지 아이디, 챌린지 이름, 챌린지 유형, 챌린지 수행한 횟수...
@@ -83,7 +85,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
     }
 
-    fun checkChallenge(challengeid : Int, person: Person):Boolean
+    fun checkChallenge(challengeid : Int, person: Person):String
     {
         var db = this.readableDatabase
 
@@ -95,13 +97,11 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         var strNickname = ""
 
         while (cursor.moveToNext()) {
-            if(cursor.getString(0).equals(challengeid.toString())){
-                return true
-            }
+            strNickname += cursor.getString(0)
         }
         // 디비 닫기
         db.close()
-        return false
+        return strNickname
     }
 
     //중복확인하기
