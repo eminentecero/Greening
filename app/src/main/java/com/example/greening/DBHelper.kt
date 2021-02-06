@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import java.lang.Exception
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -19,7 +20,7 @@ import android.util.Log
 
 
 //프로그램 시작할 때 필요한 기본으로 필요한 DB - 개인 유저 DB와 전체 챌린지 DB
-public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
+class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     override fun onCreate(db: SQLiteDatabase?) {
         
         //DB 전체, 개별 두개로 나눠서
@@ -35,7 +36,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         //DB 삭제 후 다시 생성
-        db!!.execSQL("DROP TABLE IF EXISTS groupTBL")
+        db!!.execSQL("DROP TABLE IF EXISTS Greener")
         onCreate(db)
     }
 
@@ -65,17 +66,42 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     //개별 유저의 테이블에다가 참여중인 챌린지 이름, 시작한 날짜, 참여한 날짜(생성될 때 NULL)
     fun join(challenge: Challenge, person: Person)
     {
-        var db = this.writableDatabase
-        //개인 유저의 Table에다가 해당 유저가 참여할 챌린지에 대한 정보를 입력
-        //챌린지 아이디, 챌린지 이름, 챌린지 유형, 챌린지 수행한 횟수...
-        db.execSQL("INSERT INTO " + person.id + " VALUES ('" + challenge.id + "',"
-                + challenge.name + "," + challenge.keyword + "0, );")
+        //중복되거나 유저가 참여한 챌린지의 갯수가 3개면 더이상 참여 안됨.****************************
+        if(UserjoinCount(person)<=3&&checkChallenge(challenge.id, person) == false){
+            var db = this.writableDatabase
+            //개인 유저의 Table에다가 해당 유저가 참여할 챌린지에 대한 정보를 입력
+            //챌린지 아이디, 챌린지 이름, 챌린지 유형, 챌린지 수행한 횟수...
+            db.execSQL("INSERT INTO " + person.id + " VALUES ('" + challenge.id + "','"
+                    + challenge.name + "','" + challenge.keyword + "', 0);")
 
-        //sql문 입력
-        //해당 챌린지 개별 테이블에 참여한 사람을 명단에다가 올림
-        //****************그날 날짜에 대한 정보 받을 필요있음 - 수정해야함
-        db.execSQL("INSERT INTO " + challenge.id + " VALUES('" + person.id + ",그날 날짜., 0);")
+            //sql문 입력
+            //해당 챌린지 개별 테이블에 참여한 사람을 명단에다가 올림
+            //****************그날 날짜에 대한 정보 받을 필요있음 - 수정해야함
+            db.execSQL("INSERT INTO Challenge" + challenge.id + " VALUES('" + person.id + "','210207', 0);")
+            db.close()
+        }
+
+    }
+
+    fun checkChallenge(challengeid : Int, person: Person):Boolean
+    {
+        var db = this.readableDatabase
+
+
+        var cursor: Cursor
+        cursor =db.rawQuery("SELECT * FROM "+person.id+" WHERE 'ChallengeID' = " + challengeid + ";", null)
+
+        // 저장할 배열 설정
+        var strNickname = ""
+
+        while (cursor.moveToNext()) {
+            if(cursor.getString(0).equals(challengeid.toString())){
+                return true
+            }
+        }
+        // 디비 닫기
         db.close()
+        return false
     }
 
     //중복확인하기
@@ -236,7 +262,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var anyArray = arrayOf<Challenge>()
 
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-        cursor = db.rawQuery("SELECT * FROM " + person.id + ";", null)
+        cursor = db.rawQuery("SELECT * FROM '" + person.id + "';", null)
 
         while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
@@ -266,9 +292,9 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         {
             Log.d("태그", "for 루프 돌고 있음")
             //각 카테고리의 첫번쨰 데이터 받아옴
-            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '${KeyWord[i].toString()}';", null)
+            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '${KeyWord[i]}';", null)
 
-            if(cursor.getCount()>0){
+            if(cursor.count >0){
                 cursor.moveToFirst()
                 //해당 행의 row의 정보를 string으로 받아 저장
                 var id = cursor.getString(0)

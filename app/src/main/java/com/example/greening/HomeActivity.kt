@@ -5,10 +5,7 @@ import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class HomeActivity  : AppCompatActivity() {
@@ -191,84 +188,19 @@ class HomeActivity  : AppCompatActivity() {
         date5 = findViewById(R.id.Date5)
 
 
+
         //User가 가지고 참여하고 있는 챌린지 목록 불러오기
         var array = Array<Challenge>(4,{Challenge()})
         array = db.ChallengeIn(User)
 
-        //참여중인 챌린지
-        //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
-        //기본은 setVisibility(View.GONE)으로 설정해두기
-        //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
-        var UserjoinCount = db.UserjoinCount(User)
+        ingVisible(array, User)
 
-        //count 갯수에 따라 프레임 레이아웃 보이도록 설정
-        if(UserjoinCount>2)
-        {
-            var C1 : Challenge = array[0]
-            var C2 : Challenge = array[1]
-            var C3 : Challenge = array[2]
-
-            //챌린지 갯수가 3개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
-            ingChallenge2.setVisibility(View.VISIBLE)
-            ingChallenge3.setVisibility(View.VISIBLE)
-
-            ing1_TextView.setText(C1.name)
-            ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
-            ing1Date_TextView.setText("${C1.date}일 남음")
-
-            ing2_TextView.setText(C2.name)
-            ing2_Button.setText(C2.keyword)
-            ing2Count_TextView.setText("${C2.count}명 참여중")
-            ing2Date_TextView.setText("${C2.date}일 남음")
-
-            ing3_TextView.setText(C3.name)
-            ing3_Button.setText(C3.keyword)
-            ing3Count_TextView.setText("${C3.count}명 참여중")
-            ing3Date_TextView.setText("${C3.date}일 남음")
-
-        }else if(UserjoinCount>1)
-        {
-            var C1 : Challenge = array[0]
-            var C2 : Challenge = array[1]
-            //챌린지 갯수가 2개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
-            ingChallenge2.setVisibility(View.VISIBLE)
-            ingChallenge3.setVisibility(View.GONE)
-
-            ing1_TextView.setText(C1.name)
-            ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
-            ing1Date_TextView.setText("${C1.date}일 남음")
-
-            ing2_TextView.setText(C2.name)
-            ing2_Button.setText(C2.keyword)
-            ing2Count_TextView.setText("${C2.count}명 참여중")
-            ing2Date_TextView.setText("${C2.date}일 남음")
-        }else if(UserjoinCount ==1){
-            var C1 : Challenge = array[0]
-            //챌린지 갯수가 1개일 때
-            ingChallenge1.setVisibility(View.VISIBLE)
-            ingChallenge2.setVisibility(View.GONE)
-            ingChallenge3.setVisibility(View.GONE)
-
-            ing1_TextView.setText(C1.name)
-            ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
-            ing1Date_TextView.setText("${C1.date}일 남음")
-        }
-        else{
-            clgText.setVisibility(View.GONE)
-            ingChallenge1.setVisibility(View.GONE)
-            ingChallenge2.setVisibility(View.GONE)
-            ingChallenge3.setVisibility(View.GONE)
-        }
 
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
         ingmore1_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", name.toString())
+
         }
 
         ingmore2_Button.setOnClickListener  {
@@ -284,8 +216,45 @@ class HomeActivity  : AppCompatActivity() {
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
         var categoryArray: Array<Challenge>
         categoryArray = db.Challengecategory()
-        Log.d("태그", array.count().toString())
 
+        recomVisible(categoryArray)
+
+
+        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
+        join1Btn.setOnClickListener {
+
+                db.join(categoryArray[0], User)
+                array = db.ChallengeIn(User)
+                ingVisible(array, User)
+
+        }
+        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
+        join2Btn.setOnClickListener {
+            db.join(categoryArray[1], User)
+            array = db.ChallengeIn(User)
+            ingVisible(array, User)
+        }
+        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
+        join3Btn.setOnClickListener {
+            db.join(categoryArray[2], User)
+            array = db.ChallengeIn(User)
+            ingVisible(array, User)
+        }
+        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
+        join4Btn.setOnClickListener {
+            db.join(categoryArray[3], User)
+            array = db.ChallengeIn(User)
+            ingVisible(array, User)
+        }
+        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
+        join5Btn.setOnClickListener {
+            db.join(categoryArray[4], User)
+            array = db.ChallengeIn(User)
+            ingVisible(array, User)
+        }
+    }
+
+    private fun recomVisible(categoryArray: Array<Challenge>) {
         if(categoryArray.count() == 5)
         {
             //챌린지 갯수가 5개일 때
@@ -399,19 +368,91 @@ class HomeActivity  : AppCompatActivity() {
             date1.setText("${categoryArray[0].date}일 남음")
         }else{
             //총 챌린지 갯수가 0개일 때
-                recomText.setVisibility(View.GONE)
+            recomText.setVisibility(View.GONE)
             recom1.setVisibility(View.GONE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
             recom4.setVisibility(View.GONE)
             recom5.setVisibility(View.GONE)
         }
+    }
 
-        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
-        join1Btn.setOnClickListener {
+    private fun ingVisible(array: Array<Challenge>, User: Person) {
 
+        //참여중인 챌린지
+        //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
+        //기본은 setVisibility(View.GONE)으로 설정해두기
+        //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
+        var UserjoinCount = db.UserjoinCount(User)
+
+        //count 갯수에 따라 프레임 레이아웃 보이도록 설정
+        if(UserjoinCount>2)
+        {
+            var C1 : Challenge = array[0]
+            var C2 : Challenge = array[1]
+            var C3 : Challenge = array[2]
+
+            //챌린지 갯수가 3개일 때
+            clgText.setVisibility(View.VISIBLE)
+            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.VISIBLE)
+            ingChallenge3.setVisibility(View.VISIBLE)
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
+
+            ing2_TextView.setText(C2.name)
+            ing2_Button.setText(C2.keyword)
+            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Date_TextView.setText("${C2.date}일 남음")
+
+            ing3_TextView.setText(C3.name)
+            ing3_Button.setText(C3.keyword)
+            ing3Count_TextView.setText("${C3.count}명 참여중")
+            ing3Date_TextView.setText("${C3.date}일 남음")
+
+        }else if(UserjoinCount>1)
+        {
+            var C1 : Challenge = array[0]
+            var C2 : Challenge = array[1]
+            //챌린지 갯수가 2개일 때
+            clgText.setVisibility(View.VISIBLE)
+            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.VISIBLE)
+            ingChallenge3.setVisibility(View.GONE)
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
+
+            ing2_TextView.setText(C2.name)
+            ing2_Button.setText(C2.keyword)
+            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Date_TextView.setText("${C2.date}일 남음")
+        }else if(UserjoinCount ==1){
+            var C1 : Challenge = array[0]
+            //챌린지 갯수가 1개일 때
+            clgText.setVisibility(View.VISIBLE)
+            ingChallenge1.setVisibility(View.VISIBLE)
+            ingChallenge2.setVisibility(View.GONE)
+            ingChallenge3.setVisibility(View.GONE)
+
+            ing1_TextView.setText(C1.name)
+            ing1_Button.setText(C1.keyword)
+            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Date_TextView.setText("${C1.date}일 남음")
+        }
+        else{
+            clgText.setVisibility(View.GONE)
+            ingChallenge1.setVisibility(View.GONE)
+            ingChallenge2.setVisibility(View.GONE)
+            ingChallenge3.setVisibility(View.GONE)
         }
     }
+
 }
 
 
