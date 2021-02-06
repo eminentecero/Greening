@@ -292,13 +292,14 @@
 
                 // 추천 챌린지 카드 (1)
                 <FrameLayout
+                    android:id="@+id/recom1"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp">
+                    android:layout_marginLeft="16dp" >
 
                     <ImageView
-                        android:id="@+id/recom1"
+                        android:id="@+id/ImageView1"
                         android:layout_width="150dp"
                         android:layout_height="200dp"
                         android:layout_gravity="top"
@@ -357,13 +358,14 @@
 
                 // 추천 챌린지 카드 (2)
                 <FrameLayout
+                    android:id="@+id/recom2"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:id="@+id/recom2"
+                        android:id="@+id/ImageView2"
                         android:layout_width="150dp"
                         android:layout_height="200dp"
                         android:layout_gravity="top"
@@ -422,13 +424,14 @@
 
                 // 추천 챌린지 카드 (3)
                 <FrameLayout
+                    android:id="@+id/recom3"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:id="@+id/recom3"
+                        android:id="@+id/ImageView3"
                         android:layout_width="150dp"
                         android:layout_height="200dp"
                         android:layout_gravity="top"
@@ -487,13 +490,14 @@
 
                 // 추천 챌린지 카드 (4)
                 <FrameLayout
+                    android:id="@+id/recom4"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:id="@+id/recom4"
+                        android:id="@+id/ImageView4"
                         android:layout_width="150dp"
                         android:layout_height="200dp"
                         android:layout_gravity="top"
@@ -552,13 +556,14 @@
 
                 // 추천 챌린지 카드 (5)
                 <FrameLayout
+                    android:id="@+id/recom5"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp">
 
                     <ImageView
-                        android:id="@+id/recom5"
+                        android:id="@+id/ImageView5"
                         android:layout_width="150dp"
                         android:layout_height="200dp"
                         android:layout_gravity="top"

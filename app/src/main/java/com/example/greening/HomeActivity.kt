@@ -1,6 +1,7 @@
 package com.example.greening
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -69,6 +70,12 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var recom3 : FrameLayout
     lateinit var recom4 : FrameLayout
     lateinit var recom5 : FrameLayout
+
+    lateinit var ImageView1 : ImageView
+    lateinit var ImageView2 : ImageView
+    lateinit var ImageView3 : ImageView
+    lateinit var ImageView4 : ImageView
+    lateinit var ImageView5 : ImageView
 
 
     lateinit var join1Btn : Button
@@ -139,14 +146,21 @@ class HomeActivity  : AppCompatActivity() {
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
         join3Btn = findViewById(R.id.join3)
-        join4Btn = findViewById(R.id.join4)
-        join5Btn = findViewById(R.id.join5)
+        //join4Btn = findViewById(R.id.join4)
+        //join5Btn = findViewById(R.id.join5)
 
         recom1 = findViewById(R.id.recom1)
         recom2 = findViewById(R.id.recom2)
         recom3 = findViewById(R.id.recom3)
         recom4 = findViewById(R.id.recom4)
         recom5 = findViewById(R.id.recom5)
+
+        ImageView1 = findViewById(R.id.ImageView1)
+        ImageView2 = findViewById(R.id.ImageView2)
+        ImageView3 = findViewById(R.id.ImageView3)
+        ImageView4 = findViewById(R.id.ImageView4)
+        ImageView5 = findViewById(R.id.ImageView5)
+
 
         name1 = findViewById(R.id.name1)
         keyword1 = findViewById(R.id.keyword1)
