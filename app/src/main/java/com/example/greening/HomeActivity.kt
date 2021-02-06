@@ -49,6 +49,7 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var more2Btn : Button
     lateinit var more3Btn : Button
 
+    lateinit var clgText:TextView
 
     //레벨에 따라 다른 image 표시할 ImageView
     lateinit var level : ImageView
@@ -72,8 +73,11 @@ class HomeActivity  : AppCompatActivity() {
         var name = intent.getStringExtra("id")
         UserName.setText(name + "님")
 
+        //id를 인텐트로 받아서 DB에 검색해서 그 정보로 객체 생성
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         var User : Person = Person()
+        
+        //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(name.toString())
 
         //참여중인 챌린지
@@ -99,6 +103,8 @@ class HomeActivity  : AppCompatActivity() {
         ing3Date_TextView = findViewById(R.id.ing3Date_TextView)
         ingmore3_Button = findViewById(R.id.ingmore3_Button)
 
+        clgText = findViewById(R.id.clgText)
+
         //추천하는 챌린지
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
@@ -112,14 +118,6 @@ class HomeActivity  : AppCompatActivity() {
         var array = Array<Challenge>(4,{Challenge()})
         array = db.ChallengeIn(User)
 
-        //임시로 챌린지 생성 - 원래는 챌린지 목록에 있어야하는 부분
-        //var C1 : Challenge = Challenge("001", "텀블러 사용하기", "Plastic",30)
-        //var C2 : Challenge = Challenge("002","스테인리스 빨대 사용하기", "Plastic", 20)
-        //var C3 : Challenge = Challenge("003","채식하기","Food", 20)
-
-        var C1 : Challenge = array[0]
-        var C2 : Challenge = array[1]
-        var C3 : Challenge = array[2]
 
         //참여중인 챌린지
         //사용자가 참여하고 있는 챌린지 정보를 받아와서 그 갯수 만큼 프레임 레이아웃 생성
@@ -127,11 +125,16 @@ class HomeActivity  : AppCompatActivity() {
         //사용자가 참여하고 있는 챌린지 배열 갯수 불러오기
         //var count = db.ChallengeCount(name.toString())
 
-        var challenge_count = 2
+        var challenge_count = db.ChallengeCount(User)
+
 
         //count 갯수에 따라 프레임 레이아웃 보이도록 설정
         if(challenge_count>2)
         {
+            var C1 : Challenge = array[0]
+            var C2 : Challenge = array[1]
+            var C3 : Challenge = array[2]
+
             //챌린지 갯수가 3개일 때
             ingChallenge1.setVisibility(View.VISIBLE)
             ingChallenge2.setVisibility(View.VISIBLE)
@@ -154,6 +157,8 @@ class HomeActivity  : AppCompatActivity() {
 
         }else if(challenge_count>1)
         {
+            var C1 : Challenge = array[0]
+            var C2 : Challenge = array[1]
             //챌린지 갯수가 2개일 때
             ingChallenge1.setVisibility(View.VISIBLE)
             ingChallenge2.setVisibility(View.VISIBLE)
@@ -168,7 +173,8 @@ class HomeActivity  : AppCompatActivity() {
             ing2_Button.setText(C2.keyword)
             ing2Count_TextView.setText("${C2.count}명 참여중")
             ing2Date_TextView.setText("${C2.date}일 남음")
-        }else{
+        }else if(challenge_count ==0){
+            var C1 : Challenge = array[0]
             //챌린지 갯수가 1개일 때
             ingChallenge1.setVisibility(View.GONE)
             ingChallenge2.setVisibility(View.GONE)
@@ -179,20 +185,26 @@ class HomeActivity  : AppCompatActivity() {
             ing1Count_TextView.setText("${C1.count}명 참여중")
             ing1Date_TextView.setText("${C1.date}일 남음")
         }
+        else{
+            clgText.setVisibility(View.GONE)
+            ingChallenge1.setVisibility(View.GONE)
+            ingChallenge2.setVisibility(View.GONE)
+            ingChallenge3.setVisibility(View.GONE)
+        }
 
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
         more1Btn.setOnClickListener  {
-            var intent = Intent(this, HomeActivity::class.java)
+            var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", name.toString())
         }
 
         more2Btn.setOnClickListener  {
-            var intent = Intent(this, HomeActivity::class.java)
+            var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", name.toString())
         }
 
         more3Btn.setOnClickListener  {
-            var intent = Intent(this, HomeActivity::class.java)
+            var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", name.toString())
         }
 

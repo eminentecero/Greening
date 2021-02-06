@@ -51,11 +51,11 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         //개별 유저의 테이블을 생성(테이블 이름은 아이디...)
         //CREATE TABLE + Person.ID + (ChID, ChName, StartDate, executeDate);
         //*******************Person table 수정 - ID CHAR(20) PRIMARY KEY, PassWord CHAR(20),Level INT(3)
-        db.execSQL("INSERT INTO Person VALUES ('"+person.id+"',"
+        db.execSQL("INSERT INTO Person VALUES ('"+person.nickname+"','"+person.id+"',"
                 +person.password +", 0);")
 
         //개인 유저 테이블 생성 - 참여한 챌린지 목록들 저장
-        db!!.execSQL("CREATE TABLE "+person.id+"(ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18));")
+        db!!.execSQL("CREATE TABLE "+person.id+" (ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18));")
 
 
         db.close()
@@ -82,6 +82,26 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
     //중복확인하기
     //전체 유저 DB에서 확인
+    fun checkNickname (editNickname : String) :String{
+        var db = this.readableDatabase
+
+
+        var cursor: Cursor
+        cursor =db.rawQuery("SELECT * FROM Person WHERE NickName = '" + editNickname + "';", null)
+
+        // 저장할 배열 설정
+        var strNickname = ""
+
+        while (cursor.moveToNext()) {
+            strNickname += cursor.getString(0)
+        }
+        // 디비 닫기
+        db.close()
+        return strNickname
+    }
+
+    //중복확인하기
+    //전체 유저 DB에서 확인
     fun checkID (editID : String) :String{
         var db = this.readableDatabase
 
@@ -93,12 +113,13 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         var strId = ""
 
         while (cursor.moveToNext()) {
-            strId += cursor.getString(0)
+            strId += cursor.getString(1)
         }
         // 디비 닫기
         db.close()
         return strId
     }
+
 
     //로그인
     //전체 유저에서 확인
@@ -115,7 +136,7 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
         while (cursor.moveToNext()) {
             //1번째 행에 있는 것은 번호
             //비밀번호 조회 - 조회하는 변수에 조회된 비밀번호 넣음
-            strPassWord += cursor.getString(1)
+            strPassWord += cursor.getString(2)
         }
 
         //DB 닫음
@@ -137,10 +158,12 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
 
         while (cursor.moveToNext()) {
             //해당 행의 row의 정보를 string으로 받아 저장
-            var id = cursor.getString(0)
-            var passWord = cursor.getString(1)
-            var level = cursor.getString(2)
+            var nickname = cursor.getString(0)
+            var id = cursor.getString(1)
+            var passWord = cursor.getString(2)
+            var level = cursor.getString(3)
 
+            User.nickname = nickname
             User.id = id
             User.password = passWord
             User.level = level.toInt()
@@ -154,11 +177,17 @@ public class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", nu
     {
             var db = this.readableDatabase
             var cursor: Cursor
+            var count:Int = -1
 
             //개인 유저의 Table에서 챌린지 갯수 세어서 반환
             cursor = db.rawQuery("SELECT * FROM "+person.id+";", null)
 
-            var count = cursor.columnCount
+        while (cursor.moveToNext())
+        {
+            count++
+        }
+
+            count --
             return count
     }
 

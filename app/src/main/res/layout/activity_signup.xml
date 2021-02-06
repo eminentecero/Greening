@@ -67,6 +67,52 @@
 
     </LinearLayout>
 
+    <!-- 닉네임 입력 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="닉네임   "
+            android:textColor="@color/teal_700"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/nicknameEdit"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:hint="닉네임을 입력하세요." />
+
+
+    </LinearLayout>
+
+    <!-- 중복확인 버튼 부분 -->
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="      "
+            android:gravity="right"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/teal_700"/>
+
+        <Button
+            android:id="@+id/button_nicknameCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복확인" />
+
+
+    </LinearLayout>
+
     <!-- 비밀번호 입력 부분 -->
     <LinearLayout
         android:padding="8dp"

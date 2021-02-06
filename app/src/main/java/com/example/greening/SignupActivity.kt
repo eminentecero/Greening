@@ -16,6 +16,8 @@ class SignupActivity : AppCompatActivity() {
     lateinit var passwordOkEdit: EditText
     lateinit var button_join_cancel: Button
     lateinit var button_join_ok: Button
+    lateinit var nicknameEdit:EditText
+    lateinit var button_nicknameCheck:Button
 
     internal lateinit var db:DBHelper
 
@@ -31,6 +33,9 @@ class SignupActivity : AppCompatActivity() {
         button_join_cancel = findViewById(R.id.button_join_cancel)
         button_join_ok = findViewById(R.id.button_join_ok)
 
+        nicknameEdit = findViewById(R.id.nicknameEdit)
+        button_nicknameCheck = findViewById(R.id.button_nicknameCheck)
+
 
         db = DBHelper(this)
 
@@ -42,7 +47,8 @@ class SignupActivity : AppCompatActivity() {
             val passwordOk= passwordOkEdit.text.toString()
             val password= passwordEdit.text.toString()
 
-            if (idEdit.text.toString().equals("") || passwordEdit.text.toString().equals("") || passwordOkEdit.text.toString().equals("")) {
+            if (nicknameEdit.text.toString().equals("")||
+                    idEdit.text.toString().equals("") || passwordEdit.text.toString().equals("") || passwordOkEdit.text.toString().equals("")) {
                 //"아이디와 비밀번호를 모두 입력해주세요."라는 토스트 메시지를 띄우기
                 Toast.makeText(applicationContext, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_LONG)
                         .show()
@@ -50,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
             // 비밀번호 입력과 비밀번호 확인이 일치하면
             //수영 : String끼리는 equals로 동일한 지 확인해야해요
                 if (password.equals(passwordOk)) {
-                    var person1 = Person(idEdit.text.toString(), passwordEdit.text.toString())
+                    var person1 = Person(nicknameEdit.text.toString(), idEdit.text.toString(), passwordEdit.text.toString())
                     db.addPerson(person1)
 
                     // 2) 회원가입이 완료되었다는 토스트 띄우기
@@ -71,6 +77,24 @@ class SignupActivity : AppCompatActivity() {
 
         }
 
+        //닉네임 중복 확인하기
+        button_nicknameCheck.setOnClickListener{
+            //공백 확인
+            if(!(nicknameEdit.text.toString().equals(""))) {
+                var strnickname : String
+                strnickname = db.checkNickname(nicknameEdit.text.toString())
+
+                if (!(nicknameEdit.text.toString().equals(strnickname))) {
+                    Toast.makeText(applicationContext, "입력하신 닉네임은 사용이 가능합니다.", Toast.LENGTH_LONG)
+                            .show()
+                } else {
+                    Toast.makeText(applicationContext, "다른 닉네임을 입력해주세요.", Toast.LENGTH_LONG).show()
+                    nicknameEdit.setText("")
+                }
+            }
+            
+        }
+        
         //아이디 중복 확인하기
         button_idCheck.setOnClickListener {
 
