@@ -1,11 +1,16 @@
 package com.example.greening
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.*
+import android.widget.CalendarView.OnDateChangeListener
 import org.w3c.dom.Text
+import java.util.*
 
 class ChallengeActivityJoin : AppCompatActivity() {
 
@@ -21,13 +26,14 @@ class ChallengeActivityJoin : AppCompatActivity() {
     lateinit var progressChallenge : ProgressBar
 
     // 달력
-    lateinit var calendarChallenge : CalendarView
+    lateinit var calendar : CalendarView
 
     // 확인 버튼
     lateinit var btnDoneChallenge : Button
 
     //데이터 베이스 변수
     internal lateinit var db:DBHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +48,8 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge = findViewById(R.id.numPeopleChallenge)
         periodChallenge = findViewById(R.id.periodChallenge)
         progressChallenge = findViewById(R.id.progressChallenge)
-        calendarChallenge = findViewById(R.id.calendarChallenge)
+        calendar = findViewById(R.id.calendarChallenge)
         btnDoneChallenge = findViewById(R.id.btnDoneChallenge)
-
-
         var UserId = intent.getStringExtra("id")
 
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
@@ -68,13 +72,13 @@ class ChallengeActivityJoin : AppCompatActivity() {
 
 
         btnDoneChallenge.setOnClickListener {
-            var intent = Intent(this, ChallengeActivityDone::class.java)
-            startActivity(intent)
+            //var intent = Intent(this, ChallengeActivityDone::class.java)
+            //startActivity(intent)
         }
 
         imgBack.setOnClickListener {
-            var intent = Intent(this, ChallengeActivityNojoin::class.java)
-            startActivity(intent)
+            //var intent = Intent(this, ChallengeActivityNojoin::class.java)
+            //startActivity(intent)
         }
 
     }
