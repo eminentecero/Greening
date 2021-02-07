@@ -1,9 +1,7 @@
 package com.example.greening
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -199,18 +197,26 @@ class HomeActivity  : AppCompatActivity() {
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
         ingmore1_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
-            intent.putExtra("id", name.toString())
-
+            intent.putExtra("id", User.id)
+            intent.putExtra("ChallengeId", array[0].id.toString())
+            intent.putExtra("ChallengeName", array[0].name)
+            intent.putExtra("ChallengeKeyWord", array[0].keyword)
+            intent.putExtra("ChallengeDate", array[0].date.toString())
+            startActivity(intent)
         }
 
         ingmore2_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
-            intent.putExtra("id", name.toString())
+            intent.putExtra("id", User.id)
+            intent.putExtra("ChallengeName", array[1].id)
+            startActivity(intent)
         }
 
         ingmore2_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
-            intent.putExtra("id", name.toString())
+            intent.putExtra("id", User.id)
+            intent.putExtra("ChallengeName", array[2].id)
+            startActivity(intent)
         }
 
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
@@ -222,11 +228,9 @@ class HomeActivity  : AppCompatActivity() {
 
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join1Btn.setOnClickListener {
-
                 db.join(categoryArray[0], User)
                 array = db.ChallengeIn(User)
                 ingVisible(array, User)
-
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join2Btn.setOnClickListener {

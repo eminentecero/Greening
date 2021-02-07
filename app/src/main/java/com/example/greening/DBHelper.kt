@@ -5,7 +5,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import java.lang.Exception
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -67,7 +66,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     fun join(challenge: Challenge, person: Person)
     {
         //중복되거나 유저가 참여한 챌린지의 갯수가 3개면 더이상 참여 안됨.****************************
-        if(UserjoinCount(person)>=3||checkChallenge(challenge.id, person).equals(challenge.id)){
+        if(UserjoinCount(person)>=3||checkChallenge(challenge, person).equals(challenge.id.toString())){
             //안된다는 익셉션 처리 해주기
         }else{
             var db = this.writableDatabase
@@ -85,13 +84,13 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
     }
 
-    fun checkChallenge(challengeid : Int, person: Person):String
+    fun checkChallenge(challenge: Challenge, person: Person):String
     {
         var db = this.readableDatabase
 
 
         var cursor: Cursor
-        cursor =db.rawQuery("SELECT * FROM "+person.id+" WHERE 'ChallengeID' = " + challengeid + ";", null)
+        cursor =db.rawQuery("SELECT * FROM "+person.id+" WHERE ChallengeID = '" + challenge.id + "';", null)
 
         // 저장할 배열 설정
         var strNickname = ""
@@ -196,21 +195,19 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     }
 
     //전체 챌린지 갯수 - 챌린지 추가할 때 사용
-    fun ChallengeCount():Int
+    fun ChallengeJoinCount(challenge: Challenge):Int
     {
         var db = this.readableDatabase
         var cursor: Cursor
         var count:Int = 0
 
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
-        cursor = db.rawQuery("SELECT * FROM Challenge;", null)
+        cursor = db.rawQuery("SELECT * FROM Challenge where ID = '"+challenge.id+"';", null)
 
         while (cursor.moveToNext())
         {
-            count++
+            count = cursor.getString(4).toInt()
         }
-
-        count
         return count
     }
 

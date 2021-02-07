@@ -3,6 +3,7 @@ package com.example.greening
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import org.w3c.dom.Text
 
@@ -25,9 +26,15 @@ class ChallengeActivityJoin : AppCompatActivity() {
     // 확인 버튼
     lateinit var btnDoneChallenge : Button
 
+    //데이터 베이스 변수
+    internal lateinit var db:DBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge_join_4)
+
+        //DB 객체 연결
+        db = DBHelper(this)
 
         // 아이디 연결
         imgBack = findViewById(R.id.imgBack)
@@ -37,6 +44,28 @@ class ChallengeActivityJoin : AppCompatActivity() {
         progressChallenge = findViewById(R.id.progressChallenge)
         calendarChallenge = findViewById(R.id.calendarChallenge)
         btnDoneChallenge = findViewById(R.id.btnDoneChallenge)
+
+
+        var UserId = intent.getStringExtra("id")
+
+        //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
+        var User : Person = Person()
+
+        //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
+        User = db.DataIn(UserId.toString())
+
+        var Id = intent.getStringExtra("ChallengeId")
+        var Name = intent.getStringExtra("ChallengeName")
+        var KeyWord = intent.getStringExtra("ChallengeKeyWord")
+        var Date = intent.getStringExtra("ChallengeDate")
+
+        Log.d("태그", Id+Name+KeyWord+Date)
+        var challenge : Challenge = Challenge(Id.toString().toInt(), Name.toString(), KeyWord.toString(), Date.toString().toInt())
+
+        nameChallenge.setText(challenge.name)
+        numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
+        periodChallenge.setText(challenge.date.toString())
+
 
         btnDoneChallenge.setOnClickListener {
             var intent = Intent(this, ChallengeActivityDone::class.java)
