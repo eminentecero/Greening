@@ -4,7 +4,8 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
+import com.applikeysolutions.cosmocalendar.model.Day
+import java.util.*
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -78,6 +79,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             //전체 챌린지 관리에 참가중인 인원 변경
             db.execSQL("UPDATE Challenge SET Count = "+ challenge.count +" WHERE ID = '"+challenge.id.toString()+"';")
 
+            db!!.execSQL("CREATE TABLE CHALLENGE" + challenge.id + " (Year INT(18), Month INT(18), Date INT(18));")
             //sql문 입력
             //해당 챌린지 개별 테이블에 참여한 사람을 명단에다가 올림
             //****************그날 날짜에 대한 정보 받을 필요있음 - 수정해야함
@@ -317,4 +319,45 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     }
 
     //챌린지 즐겨찾기
+
+    //챌린지 수행완료한 리스트 불러오기
+    fun ChallengeCompelete(challenge: Challenge): Array<Calendar>
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+        var anyArray = arrayOf<Calendar>()
+        //각 카테고리의 첫번쨰 데이터 받아옴
+            cursor = db.rawQuery("SELECT * FROM CHALLENGE"+challenge.id+";", null)
+
+        while (cursor.moveToNext()) {
+            //해당 행의 row의 정보를 string으로 받아 저장
+            var year = cursor.getString(0)
+            var month = cursor.getString(1)
+            var date = cursor.getString(2)
+            var days:Calendar = Calendar(year, month, date)
+
+            anyArray+=days
+        }
+        return anyArray
+    }
+
+    //챌린지 수행한 날짜 DB에 저장하기
+    fun ChallengeRecord(challenge: Challenge,date: Date)
+    {
+        var db = this.writableDatabase
+        //sql문 입력
+        //전체 챌린지 목록에 해당 챌린지 정보들 입력
+
+        //해당 챌린지 데이터 다 삭제하기
+        db.execSQL("delete from CHALLENGE" + challenge.id +";")
+        var dateArray = arrayOf<Date>()
+
+        //받은 date 배열 만큼 반복 - 순서대로 해당 챌린지 DB에 저장
+       for(i in dateArray)
+        {
+            db.execSQL("INSERT INTO CHALLENGE "+challenge.id+" VALUES("+date.year+", "+date.month+","+date.date+");")
+        }
+
+        db.close()
+    }
 }

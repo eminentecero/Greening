@@ -1,18 +1,13 @@
 package com.example.greening
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.R.attr.textColor
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import android.widget.*
-import android.widget.CalendarView.OnDateChangeListener
-import org.w3c.dom.Text
-import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
-import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
+import androidx.appcompat.app.AppCompatActivity
+import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays
 import com.applikeysolutions.cosmocalendar.utils.SelectionType
+import java.util.*
 
 
 class ChallengeActivityJoin : AppCompatActivity() {
@@ -66,8 +61,13 @@ class ChallengeActivityJoin : AppCompatActivity() {
         var KeyWord = intent.getStringExtra("ChallengeKeyWord")
         var Date = intent.getStringExtra("ChallengeDate")
 
-        Log.d("태그", Id+Name+KeyWord+Date)
-        var challenge : Challenge = Challenge(Id.toString().toInt(), Name.toString(), KeyWord.toString(), Date.toString().toInt())
+        Log.d("태그", Id + Name + KeyWord + Date)
+        var challenge : Challenge = Challenge(
+            Id.toString().toInt(),
+            Name.toString(),
+            KeyWord.toString(),
+            Date.toString().toInt()
+        )
 
         nameChallenge.setText(challenge.name)
         numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
@@ -76,6 +76,10 @@ class ChallengeActivityJoin : AppCompatActivity() {
 
         calendar_view.setSelectionType(SelectionType.MULTIPLE)
         calendar_view.selectionManager
+        var array: Array<Calendar>
+        array = db.ChallengeCompelete(challenge)
+        calendar_view.selectedDates += array.toList()
+
 
         btnDoneChallenge.setOnClickListener {
             //var intent = Intent(this, ChallengeActivityDone::class.java)
