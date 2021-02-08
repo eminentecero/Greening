@@ -10,7 +10,10 @@ import android.view.View
 import android.widget.*
 import android.widget.CalendarView.OnDateChangeListener
 import org.w3c.dom.Text
-import java.util.*
+import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
+import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
+import com.applikeysolutions.cosmocalendar.utils.SelectionType
+
 
 class ChallengeActivityJoin : AppCompatActivity() {
 
@@ -26,7 +29,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
     lateinit var progressChallenge : ProgressBar
 
     // 달력
-    lateinit var calendar : CalendarView
+    lateinit var calendar_view : com.applikeysolutions.cosmocalendar.view.CalendarView
 
     // 확인 버튼
     lateinit var btnDoneChallenge : Button
@@ -48,7 +51,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge = findViewById(R.id.numPeopleChallenge)
         periodChallenge = findViewById(R.id.periodChallenge)
         progressChallenge = findViewById(R.id.progressChallenge)
-        calendar = findViewById(R.id.calendarChallenge)
+        calendar_view = findViewById(R.id.calendarChallenge)
         btnDoneChallenge = findViewById(R.id.btnDoneChallenge)
         var UserId = intent.getStringExtra("id")
 
@@ -70,6 +73,9 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
         periodChallenge.setText(challenge.date.toString())
 
+
+        calendar_view.setSelectionType(SelectionType.MULTIPLE);
+        calendar_view.selectionManager
 
         btnDoneChallenge.setOnClickListener {
             //var intent = Intent(this, ChallengeActivityDone::class.java)
