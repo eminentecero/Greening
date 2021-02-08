@@ -208,14 +208,20 @@ class HomeActivity  : AppCompatActivity() {
         ingmore2_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeName", array[1].id)
+            intent.putExtra("ChallengeId", array[1].id.toString())
+            intent.putExtra("ChallengeName", array[1].name)
+            intent.putExtra("ChallengeKeyWord", array[1].keyword)
+            intent.putExtra("ChallengeDate", array[1].date.toString())
             startActivity(intent)
         }
 
         ingmore3_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeName", array[2].id)
+            intent.putExtra("ChallengeId", array[2].id.toString())
+            intent.putExtra("ChallengeName", array[2].name)
+            intent.putExtra("ChallengeKeyWord", array[2].keyword)
+            intent.putExtra("ChallengeDate", array[2].date.toString())
             startActivity(intent)
         }
 

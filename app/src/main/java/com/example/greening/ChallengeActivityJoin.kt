@@ -79,6 +79,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         imgBack.setOnClickListener {
             //var intent = Intent(this, ChallengeActivityNojoin::class.java)
             //startActivity(intent)
+            finish()
         }
 
     }
