@@ -34,6 +34,14 @@ class Challenge {
          val MAXSCORE : Float = 5.0F
          val MINSCORE : Float = 0.0F
 
+        fun joinUP(){
+            this.count++
+        }
+
+        fun joinDown(){
+            this.count--
+        }
+
         fun currentPersonCount() : Int{
             return count
         }

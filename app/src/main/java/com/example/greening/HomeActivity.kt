@@ -212,7 +212,7 @@ class HomeActivity  : AppCompatActivity() {
             startActivity(intent)
         }
 
-        ingmore2_Button.setOnClickListener  {
+        ingmore3_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
             intent.putExtra("ChallengeName", array[2].id)
@@ -228,30 +228,35 @@ class HomeActivity  : AppCompatActivity() {
 
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join1Btn.setOnClickListener {
+            categoryArray[0].joinUP()
                 db.join(categoryArray[0], User)
                 array = db.ChallengeIn(User)
                 ingVisible(array, User)
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join2Btn.setOnClickListener {
+            categoryArray[1].joinUP()
             db.join(categoryArray[1], User)
             array = db.ChallengeIn(User)
             ingVisible(array, User)
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join3Btn.setOnClickListener {
+            categoryArray[2].count +=1
             db.join(categoryArray[2], User)
             array = db.ChallengeIn(User)
             ingVisible(array, User)
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join4Btn.setOnClickListener {
+            categoryArray[3].joinUP()
             db.join(categoryArray[3], User)
             array = db.ChallengeIn(User)
             ingVisible(array, User)
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join5Btn.setOnClickListener {
+            categoryArray[4].joinUP()
             db.join(categoryArray[4], User)
             array = db.ChallengeIn(User)
             ingVisible(array, User)
@@ -270,27 +275,27 @@ class HomeActivity  : AppCompatActivity() {
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${categoryArray[0].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${categoryArray[1].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
             name3.setText(categoryArray[2].name)
             keyword3.setText(categoryArray[2].keyword)
-            count3.setText("${categoryArray[2].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
 
             name4.setText(categoryArray[3].name)
             keyword4.setText(categoryArray[3].keyword)
-            count4.setText("${categoryArray[3].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[3])}명 참여중")
             date4.setText("${categoryArray[3].date}일 남음")
 
             name5.setText(categoryArray[4].name)
             keyword5.setText(categoryArray[4].keyword)
-            count5.setText("${categoryArray[4].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[4])}명 참여중")
             date5.setText("${categoryArray[4].date}일 남음")
         }else if(categoryArray.count() == 4){
             //챌린지 갯수가 4개일 때
@@ -302,23 +307,24 @@ class HomeActivity  : AppCompatActivity() {
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${categoryArray[0].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${categoryArray[1].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
             name3.setText(categoryArray[2].name)
             keyword3.setText(categoryArray[2].keyword)
-            count3.setText("${categoryArray[2].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
 
             name4.setText(categoryArray[3].name)
             keyword4.setText(categoryArray[3].keyword)
-            count4.setText("${categoryArray[3].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[3])}명 참여중")
             date4.setText("${categoryArray[3].date}일 남음")
+
         }else if(categoryArray.count() == 3){
             //챌린지 갯수가 3개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -329,18 +335,19 @@ class HomeActivity  : AppCompatActivity() {
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${categoryArray[0].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${categoryArray[1].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
             name3.setText(categoryArray[2].name)
             keyword3.setText(categoryArray[2].keyword)
-            count3.setText("${categoryArray[2].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
+
         }else if(categoryArray.count() == 2){
             //챌린지 갯수가 2개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -351,12 +358,12 @@ class HomeActivity  : AppCompatActivity() {
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${categoryArray[0].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${categoryArray[1].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
         }else if(categoryArray.count() == 1){
             //챌린지 갯수가 1개일 때
@@ -368,7 +375,7 @@ class HomeActivity  : AppCompatActivity() {
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${categoryArray[0].count}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
         }else{
             //총 챌린지 갯수가 0개일 때
@@ -404,17 +411,17 @@ class HomeActivity  : AppCompatActivity() {
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Count_TextView.setText("${db.ChallengeJoinCount(C1)}명 참여중")
             ing1Date_TextView.setText("${C1.date}일 남음")
 
             ing2_TextView.setText(C2.name)
             ing2_Button.setText(C2.keyword)
-            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Count_TextView.setText("${db.ChallengeJoinCount(C2)}명 참여중")
             ing2Date_TextView.setText("${C2.date}일 남음")
 
             ing3_TextView.setText(C3.name)
             ing3_Button.setText(C3.keyword)
-            ing3Count_TextView.setText("${C3.count}명 참여중")
+            ing3Count_TextView.setText("${db.ChallengeJoinCount(C3)}명 참여중")
             ing3Date_TextView.setText("${C3.date}일 남음")
 
         }else if(UserjoinCount>1)
@@ -429,13 +436,14 @@ class HomeActivity  : AppCompatActivity() {
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Count_TextView.setText("${db.ChallengeJoinCount(C1)}명 참여중")
             ing1Date_TextView.setText("${C1.date}일 남음")
 
             ing2_TextView.setText(C2.name)
             ing2_Button.setText(C2.keyword)
-            ing2Count_TextView.setText("${C2.count}명 참여중")
+            ing2Count_TextView.setText("${db.ChallengeJoinCount(C2)}명 참여중")
             ing2Date_TextView.setText("${C2.date}일 남음")
+
         }else if(UserjoinCount ==1){
             var C1 : Challenge = array[0]
             //챌린지 갯수가 1개일 때
@@ -446,7 +454,7 @@ class HomeActivity  : AppCompatActivity() {
 
             ing1_TextView.setText(C1.name)
             ing1_Button.setText(C1.keyword)
-            ing1Count_TextView.setText("${C1.count}명 참여중")
+            ing1Count_TextView.setText("${db.ChallengeJoinCount(C1)}명 참여중")
             ing1Date_TextView.setText("${C1.date}일 남음")
         }
         else{
