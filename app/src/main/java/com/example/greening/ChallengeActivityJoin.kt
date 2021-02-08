@@ -74,7 +74,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         periodChallenge.setText(challenge.date.toString())
 
 
-        calendar_view.setSelectionType(SelectionType.MULTIPLE);
+        calendar_view.setSelectionType(SelectionType.MULTIPLE)
         calendar_view.selectionManager
 
         btnDoneChallenge.setOnClickListener {
