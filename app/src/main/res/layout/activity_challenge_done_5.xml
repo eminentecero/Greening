@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".ChallengeDone">
+    tools:context=".ChallengeListDone">
 
     <!-- 챌린지 목록 화면에서 각 챌린지를 눌렀을 때 나오는 화면입니다. -->
     <!-- 완료한 챌린지!! -->
