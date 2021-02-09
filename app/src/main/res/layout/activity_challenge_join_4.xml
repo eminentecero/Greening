@@ -99,7 +99,8 @@
         android:weightSum="8">
 
         <!-- 달력 -->
-        <com.applikeysolutions.cosmocalendar.view.CalendarView
+        <!-- 오늘의 챌린지 완료 -->
+        <sun.bob.mcalendarview.MCalendarView
             android:id="@+id/calendarChallenge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -107,19 +108,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnJoinChallenge"
+            app:layout_constraintBottom_toTopOf="@+id/btnDoneChallenge"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:connectedDayIconPosition="top"
-            app:currentDayTextColor="#f79256"
-            app:firstDayOfTheWeek="sunday"
-            app:selectedDayBackgroundColor="#FFEACA"
-            app:selectedDayBackgroundEndColor="#f79256"
-            app:selectedDayBackgroundStartColor="#f79256"
-            app:selectedDayTextColor="#FFFFFF"
-            app:selectionType="range"
-            app:weekendDayTextColor="#ef4550" />
+            tools:context=".ChallengeActivityJoin" />
 
         <!-- 오늘의 챌린지 완료 -->
         <Button

@@ -1,13 +1,15 @@
 package com.example.greening
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager
-import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
-import com.applikeysolutions.cosmocalendar.utils.SelectionType
-import java.util.*
+import sun.bob.mcalendarview.MarkStyle
+import sun.bob.mcalendarview.listeners.OnDateClickListener
+import sun.bob.mcalendarview.vo.DateData
+
+//import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
 
 
 class ChallengeActivityJoin : AppCompatActivity() {
@@ -24,7 +26,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
     lateinit var progressChallenge : ProgressBar
 
     // 달력
-    lateinit var calendar_view : com.applikeysolutions.cosmocalendar.view.CalendarView
+    lateinit var calendar_view : sun.bob.mcalendarview.MCalendarView
 
     // 확인 버튼
     lateinit var btnDoneChallenge : Button
@@ -72,22 +74,40 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
         periodChallenge.setText(challenge.date.toString())
 
-        Log.d("태그", "화면 구성")
-        calendar_view.setSelectionType(SelectionType.MULTIPLE)
-        Log.d("태그", "날짜 선택")
-        //array = db.ChallengeCompelete(challenge)
-        calendar_view.selectionManager = MultipleSelectionManager(OnDaySelectedListener {
-            Log.d("태그", "========== setSelectionManager ==========")
-            Log.d("태그", "Selected Dates : " + calendar_view.selectedDates.size)
-            if (calendar_view.selectedDates.size <= 0) return@OnDaySelectedListener
-            Log.d("태그", "Selected Days : " + calendar_view.selectedDays)
-        })
+        //캘린더에 넣을 날짜 받아오기
+        var array = arrayOf<Dates>()
+        array = db.ChallengeDay(challenge)
 
-        //array = array
+        if(array.size != 0)
+        {
+            for(i in 0..(array.size-1))
+            {
+                calendar_view.markDate(
+                    DateData(array.get(i).year, array.get(i).month, array.get(i).day).setMarkStyle(MarkStyle(
+                        MarkStyle.BACKGROUND, Color.GREEN)))
+            }
+        }
+
+
+        //캘린더
+
+        MarkStyle.BACKGROUND
+
+
+
+        calendar_view.setOnDateClickListener(object  : OnDateClickListener(){
+            override fun onDateClick(view: View, date:DateData){
+                calendar_view.markDate(
+                    DateData(date.year, date.month, date.day).setMarkStyle(MarkStyle(
+                    MarkStyle.BACKGROUND, Color.GREEN)))
+                var dates = Dates(date.year, date.month, date.day)
+                array += dates
+            }
+        })
 
         btnDoneChallenge.setOnClickListener {
 
-            //db.ChallengeRecord(challenge, calendar_view.selectedDays)
+            db.ChallengeRecord(challenge, array)
         }
 
         imgBack.setOnClickListener {

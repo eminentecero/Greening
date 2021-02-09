@@ -48,7 +48,6 @@ class ChallengeActivityDone : AppCompatActivity() {
         numPeople = findViewById(R.id.numPeople)
         period = findViewById(R.id.period)
         rate = findViewById(R.id.rate)
-        btnReJoinChallenge = findViewById(R.id.btnReJoinChallenge)
         btnRate = findViewById(R.id.btnRate)
 
         //var UserId = intent.getStringExtra("id")

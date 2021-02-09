@@ -213,27 +213,13 @@
         </LinearLayout>
 
         <!-- 다음 기간에도 참여하기 -->
-        <Button
-            android:id="@+id/btnReJoinChallenge"
-            android:layout_width="wrap_content"
-            android:layout_height="64dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button_round"
-            android:text="다음 기간에도 참여하기"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnRate"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
         <!-- 후기쓰기 -->
         <Button
             android:id="@+id/btnRate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="64dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_round"
@@ -241,7 +227,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintStart_toEndOf="@+id/btnReJoinChallenge" />
+            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

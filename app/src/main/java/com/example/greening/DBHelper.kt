@@ -4,7 +4,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.applikeysolutions.cosmocalendar.model.Day
 import java.util.*
 
 //Table 정의
@@ -343,7 +342,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     }
 
     //챌린지 수행한 날짜 DB에 저장하기
-    fun ChallengeRecord(challenge: Challenge, date: Days)
+    fun ChallengeRecord(challenge: Challenge, date: Array<Dates>)
     {
         var db = this.writableDatabase
         //sql문 입력
@@ -351,15 +350,35 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         //해당 챌린지 데이터 다 삭제하기
         db.execSQL("delete from CHALLENGE" + challenge.id +";")
-        var dateArray = arrayOf<Date>()
 
         //받은 date 배열 만큼 반복 - 순서대로 해당 챌린지 DB에 저장
-       for(i in dateArray)
+       for(i in 0..(date.size-1))
         {
-            db.execSQL("INSERT INTO CHALLENGE "+challenge.id+" VALUES("+date.year+", "+date.month+","+date.date+");")
+            db.execSQL("INSERT INTO CHALLENGE"+challenge.id+" VALUES("+date.get(i).year+","+date.get(i).month+","+date.get(i).day+");")
         }
 
         db.close()
+    }
+
+    fun ChallengeDay(challenge: Challenge):Array<Dates>
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var dates = arrayOf<Dates>()
+        //각 카테고리의 첫번쨰 데이터 받아옴
+        cursor = db.rawQuery("SELECT * FROM CHALLENGE" + challenge.id +";", null)
+
+        while (cursor.moveToNext()) {
+            //해당 행의 row의 정보를 string으로 받아 저장
+            var year = cursor.getString(0).toInt()
+            var month = cursor.getString(1).toInt()
+            var day = cursor.getString(2).toInt()
+            var date = Dates(year, month, day)
+
+            dates += date
+        }
+        return dates
     }
 
     fun Challengereturn(id:Int):Challenge
