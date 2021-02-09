@@ -38,7 +38,7 @@ class ChallengeActivityExercise : AppCompatActivity() {
         // 아이디 연결
         imgBack = findViewById(R.id.imgBack)
         exerciseChallenge = findViewById(R.id.exerciseChallenge)
-        explnExercise = findViewById(R.id.explnExercise)
+        explnExercise = findViewById(R.id.expln)
 
         // 챌린지 아이디 연결
         challenge1 = findViewById(R.id.challenge1)

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 화면 전체 스크롤 -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyPageActivity">
+
+    <!-- 마이페이지 -->
+    <!-- Vector Resource들은 drawble 폴더에 있습니다. -->
+    <!-- ProgressBar는 구글링해서 찾아 넣었는데 drawble > progressbar.xml 파일 추가하면 돼요! -->
+    <!-- ProgressBar 참고 사이트 : https://techlog.gurucat.net/77 -->
+
+    <!-- Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/mypageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:text="MyPage"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"></TextView>
+
+        <!-- 사용자 프로필 사진 -->
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="center"
+            app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+        <!-- 레벨 및 닉네임 -->
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="레벨"></Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="OOO님"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="다음 레벨까지 10% 남았습니다."
+            android:textSize="15dp"
+            android:textColor="@color/black"></TextView>
+
+        <!--         <ProgressBar android:id="@+id/levelProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/progressbar"
+            android:layout_width="350dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"/>-->
+
+
+        <!-- 참여중인 챌린지 -->
+        <TextView
+        android:id="@+id/ongoingChall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="30dp"
+        android:text="참여 중인 챌린지  >"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"></TextView>
+
+    // 가로 스크롤
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!-- 참여중인 챌린지 카드(1) -->
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:id="@+id/ongoing1"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="15dp"
+                android:text="챌린지 이름"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"></TextView>
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="유형"
+                android:textColor="@color/black"
+                app:backgroundTint="#CDCDCD"></Button>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="93dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_baseline_person_24"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="95dp"
+                android:layout_marginLeft="33dp"
+                android:text="1,000명 참가 중"
+                android:textSize="15dp"
+                android:textColor="@color/black"></TextView>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="115dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_baseline_calendar_today_24"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_marginLeft="33dp"
+                android:text="10일 남음"
+                android:textSize="15dp"
+                android:textColor="@color/black"></TextView>
+
+            <Button
+                android:id="@+id/more1"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="145dp"
+                android:layout_marginLeft="10dp"
+                android:text="더보기  >"></Button>
+        </FrameLayout>
+    </LinearLayout>
+    </HorizontalScrollView>
+
+        <!-- 관심 챌린지 -->
+        <TextView
+        android:id="@+id/likeChall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="30dp"
+        android:text="관심 챌린지  >"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"></TextView>
+
+    // 가로 스크롤
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!-- 관심 챌린지 카드(1) -->
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:id="@+id/like1"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="top"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="챌린지 이름"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_baseline_star_border_24"></ImageView>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="유형"
+                android:textColor="@color/black"
+                app:backgroundTint="#CDCDCD"></Button>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="93dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_baseline_person_24"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="95dp"
+                android:layout_marginLeft="33dp"
+                android:text="1,000명 참가 중"
+                android:textSize="15dp"
+                android:textColor="@color/black"></TextView>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="115dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_baseline_calendar_today_24"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_marginLeft="33dp"
+                android:text="10일 남음"
+                android:textSize="15dp"
+                android:textColor="@color/black"></TextView>
+
+            <Button
+                android:id="@+id/join1"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="145dp"
+                android:layout_marginLeft="10dp"
+                android:text="참여하기  >"></Button>
+        </FrameLayout>
+    </LinearLayout>
+    </HorizontalScrollView>
+
+        <!-- 완료 챌린지  -->
+        <TextView
+            android:id="@+id/finishChall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="30dp"
+            android:text="완료 챌린지  >"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 전체 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp">
+
+                <ImageView
+                    android:id="@+id/finishAll"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="전체"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+
+            <!-- 음식 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/finishFood"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="음식"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+
+            <!-- 플라스틱 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/finishPlastic"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="플라스틱"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 운동 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp">
+
+                <ImageView
+                    android:id="@+id/finishExercise"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="운동"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+
+            <!-- 자원 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/finishResource"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="자원"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+
+            <!-- 기타 카테고리 -->
+            <FrameLayout
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/finishEtc"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@android:drawable/screen_background_dark_transparent"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="기타"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="N개"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

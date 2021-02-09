@@ -277,6 +277,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             name = cursor.getString(1)
             keyword = cursor.getString(2)
             date = cursor.getString(5)
+
             var ingchallenge : Challenge = Challenge(id.toInt(), name, keyword, date.toInt())
             anyArray+=ingchallenge
         }
@@ -360,4 +361,61 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         db.close()
     }
-}
+
+    fun Challengereturn(id:Int):Challenge
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+        var challenge = Challenge()
+        //각 카테고리의 첫번쨰 데이터 받아옴
+        cursor = db.rawQuery("SELECT * FROM Challenge WHERE ID = '"+id.toString()+"';", null)
+
+        while (cursor.moveToNext()) {
+            //해당 행의 row의 정보를 string으로 받아 저장
+            var id = cursor.getString(0).toInt()
+            var name = cursor.getString(1)
+            var keyword = cursor.getString(2)
+            var date = cursor.getString(3).toInt()
+            var count = cursor.getString(4).toInt()
+            var score = cursor.getString(5).toFloat()
+            var bookmark = cursor.getString(6).toInt()
+
+            challenge.id = id
+            challenge.name = name
+            challenge.keyword = keyword
+            challenge.date = date
+            challenge.count = count
+            challenge.score = score
+            challenge.bookmark = bookmark
+        }
+        return challenge
+    }
+
+    //완료한 챌린지 가져오기
+    fun ChallengeListDone(keyword:String, id:String):Array<Challenge>
+    {
+            var db = this.readableDatabase
+            var cursor: Cursor
+
+            var anyArray = arrayOf<Challenge>()
+
+            if(keyword.equals("all")) {
+                cursor = db.rawQuery("SELECT * FROM ${id} WHERE State = 1;", null)
+            }else {
+                cursor = db.rawQuery("SELECT * FROM ${id} WHERE Keyword = '${keyword}' AND State = 1 ;", null)
+            }
+
+            while (cursor.moveToNext()) {
+                var id = cursor.getString(0).toInt()
+                var name = cursor.getString(1)
+                var keyword = cursor.getString(2)
+                var date = cursor.getString(5).toInt()
+
+                var challenge =  Challenge(id, name, keyword, date)
+                anyArray+=challenge
+            }
+
+            db.close()
+            return anyArray
+        }
+    }
