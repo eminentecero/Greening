@@ -334,15 +334,15 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             var year = cursor.getString(0)
             var month = cursor.getString(1)
             var date = cursor.getString(2)
-            var days:Calendar = Calendar(year, month, date)
+            //var days:Calendar = Calendar(year, month, date)
 
-            anyArray+=days
+            //anyArray+=days
         }
         return anyArray
     }
 
     //챌린지 수행한 날짜 DB에 저장하기
-    fun ChallengeRecord(challenge: Challenge,date: Date)
+    fun ChallengeRecord(challenge: Challenge, date: Days)
     {
         var db = this.writableDatabase
         //sql문 입력

@@ -1,11 +1,11 @@
 package com.example.greening
 
-import android.R.attr.textColor
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays
+import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager
+import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
 import com.applikeysolutions.cosmocalendar.utils.SelectionType
 import java.util.*
 
@@ -61,7 +61,6 @@ class ChallengeActivityJoin : AppCompatActivity() {
         var KeyWord = intent.getStringExtra("ChallengeKeyWord")
         var Date = intent.getStringExtra("ChallengeDate")
 
-        Log.d("태그", Id + Name + KeyWord + Date)
         var challenge : Challenge = Challenge(
             Id.toString().toInt(),
             Name.toString(),
@@ -73,17 +72,22 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
         periodChallenge.setText(challenge.date.toString())
 
-
+        Log.d("태그", "화면 구성")
         calendar_view.setSelectionType(SelectionType.MULTIPLE)
-        calendar_view.selectionManager
-        var array: Array<Calendar>
-        array = db.ChallengeCompelete(challenge)
-        calendar_view.selectedDates += array.toList()
+        Log.d("태그", "날짜 선택")
+        //array = db.ChallengeCompelete(challenge)
+        calendar_view.selectionManager = MultipleSelectionManager(OnDaySelectedListener {
+            Log.d("태그", "========== setSelectionManager ==========")
+            Log.d("태그", "Selected Dates : " + calendar_view.selectedDates.size)
+            if (calendar_view.selectedDates.size <= 0) return@OnDaySelectedListener
+            Log.d("태그", "Selected Days : " + calendar_view.selectedDays)
+        })
 
+        //array = array
 
         btnDoneChallenge.setOnClickListener {
-            //var intent = Intent(this, ChallengeActivityDone::class.java)
-            //startActivity(intent)
+
+            //db.ChallengeRecord(challenge, calendar_view.selectedDays)
         }
 
         imgBack.setOnClickListener {

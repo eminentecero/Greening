@@ -31,9 +31,15 @@ class ChallengeActivityDone : AppCompatActivity() {
     // 후기쓰기 버튼
     lateinit var btnRate : Button
 
+    //데이터 베이스 변수
+    internal lateinit var db:DBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge_done_5)
+
+        //DB 객체 연결
+        db = DBHelper(this)
 
         // 아이디 연결
         imgBack = findViewById(R.id.imgBack)
