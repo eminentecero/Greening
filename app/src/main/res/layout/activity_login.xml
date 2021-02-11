@@ -1,101 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_login_bg"
     android:orientation="vertical"
-    android:gravity="center_vertical"
+    android:weightSum="10"
     tools:context=".LoginActivity">
 
-    <!-- 로그인 텍스트 뷰 -->
-    <LinearLayout
+    <!-- 로그인 화면입니다. -->
 
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center" >
+    <!-- 컴포넌트 : ID -->
+    <!-- 아이디 에디트텍스트 : editID -->
+    <!-- 비밀번호 에디트텍스트 : button_idCheck -->
+    <!-- 로그인버튼 : button_join_cancel -->
+    <!-- 회원가입버튼 : button_join_ok -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그인"
-            android:textSize="23dp"
-            android:textColor="@color/mint" />
-    </LinearLayout>
-
-
-    <!-- 아이디 에디트 텍스트 -->
-    <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:text="id   "
-            android:gravity = "right"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/mint"/>
-
-        <EditText
-            android:id="@+id/editID"
-            android:hint="아이디를 입력하세요."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="textUri|textShortMessage" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:text="비밀번호  "
-            android:gravity="right"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/mint"/>
-
-        <EditText
-            android:id="@+id/editPassWord"
-            android:hint="비밀번호를 입력하세요."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="textUri" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/TextView"
-        android:padding="8dp"
+    <!-- Title -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_weight="2.5">
 
-
-        <Button
-            android:id="@+id/btnSignup"
-            android:layout_marginLeft="10dp"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="회원가입" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="36dp"
+            android:src="@drawable/ic_greening_title" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="로그인" />
+    </RelativeLayout>
 
+    <!-- 로그인 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="40dp"
+        android:layout_weight="7.5"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp" >
 
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="40dp">
 
+            <!-- 로그인 텍스트 뷰 -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="로그인"
+                android:textColor="@color/black"
+                android:textSize="26dp"
+                android:textStyle="bold" />
+
+            <!-- ID 입력 -->
+            <EditText
+                android:id="@+id/editID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/rounding_12dp"
+                android:backgroundTint="@color/gray_light"
+                android:hint="ID를 입력하세요"
+                android:padding="12dp"
+                android:textColor="@color/gray_dark"
+                android:textSize="22sp" />
+
+            <!-- 비밀번호 입력 -->
+            <EditText
+                android:id="@+id/editPassWord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editID"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounding_12dp"
+                android:backgroundTint="@color/gray_light"
+                android:hint="비밀번호를 입력하세요"
+                android:padding="12dp"
+                android:textColor="@color/gray_dark"
+                android:textSize="22sp" />
+
+            <!-- 로그인 버튼 -->
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnSignup"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounding_12dp"
+                android:padding="8dp"
+                android:text="로그인"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- 회원가입 버튼 -->
+            <Button
+                android:id="@+id/btnSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/stroke_button"
+                android:padding="8dp"
+                android:text="회원가입"
+                android:textColor="@color/mint"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

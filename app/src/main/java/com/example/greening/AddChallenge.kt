@@ -11,7 +11,7 @@ import sun.bob.mcalendarview.utils.CalendarUtil.date
 
 
 class AddChallenge : AppCompatActivity(){
-    lateinit var button : Button
+    lateinit var btnCalandar : ImageButton
 
     lateinit var editTitle : EditText
     lateinit var editDuration : TextView
@@ -21,8 +21,10 @@ class AddChallenge : AppCompatActivity(){
     lateinit var editKey3 : EditText
     lateinit var btnCancel : Button
     lateinit var btnDone : Button
-    lateinit var btnPlus1 : Button
-    lateinit var btnPlus2 : Button
+    lateinit var btnPlus1 : ImageButton
+    lateinit var btnPlus2 : ImageButton
+
+    lateinit var imgBack:ImageView
 
     internal lateinit var db:DBHelper
 
@@ -44,7 +46,8 @@ class AddChallenge : AppCompatActivity(){
         btnPlus1 = findViewById(R.id.btnPlus1)
         btnPlus2 = findViewById(R.id.btnPlus2)
 
-        button = findViewById(R.id.button)
+        btnCalandar = findViewById(R.id.btnCalandar)
+        imgBack = findViewById(R.id.imgBack)
 
         //마지막에 저장한 값 받아오기
         loadData()
@@ -52,8 +55,15 @@ class AddChallenge : AppCompatActivity(){
         //DB 객체 받아오기
         db = DBHelper(this)
 
-        var data1 = arrayOf("음식", "운동", "플라스틱", "자원", "기타")
+        val list = mutableListOf(
+            "음식",
+            "운동",
+            "플라스틱",
+            "자원",
+            "기타"
+        )
 
+        list.add(0,"챌린지의 유형을 선택하세요")
         //스피너(선택 항목) 연결
         var items = resources.getStringArray(R.array.type_challenges)
         var spinner: Spinner = findViewById(R.id.typeSpinner)
@@ -72,7 +82,7 @@ class AddChallenge : AppCompatActivity(){
 
 
         var category:String = ""
-        var adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, data1)
+        var adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
 
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -88,15 +98,14 @@ class AddChallenge : AppCompatActivity(){
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                category = data1[p2].toString()
-                Log.d("내용", "확인하기 : "+category)
+                category = list[p2].toString()
             }
         }
+
 
         var startdate = intent.getStringExtra("dayFirst").toString()
         var lastdate = intent.getStringExtra("dayLast").toString()
         var whileDate = intent.getIntExtra("date", 0)
-        Log.d("내용", "기간 : ${whileDate}")
 
         if(startdate.equals("null"))
         {
@@ -105,9 +114,6 @@ class AddChallenge : AppCompatActivity(){
             editDuration.text = "${startdate} - ${lastdate}"
         }
 
-        var title = editTitle.text.toString()
-        var summary1 = editSummary.text.toString()
-        var summary2 = "#${editKey1.text} #${editKey2.text} #${editKey3.text}"
 
         //키워드 항목 기본 설정
         editKey1.setVisibility(View.VISIBLE)
@@ -128,13 +134,38 @@ class AddChallenge : AppCompatActivity(){
         }
 
         //기간 설정하는 달력으로 가는 버튼
-        button.setOnClickListener {
+        btnCalandar.setOnClickListener {
             saveData(editTitle.text.toString(), spinner.adapter, editSummary.text.toString(),
                 editKey1.text.toString(), editKey2.text.toString(), editKey3.text.toString())
             var intent = Intent(this, DatePicker::class.java)
             startActivity(intent)
         }
 
+        imgBack.setOnClickListener {
+            editTitle.setText("")
+            editDuration.setText("")
+            editSummary.setText("")
+            editKey1.setText("")
+            editKey2.setText("")
+            editKey3.setText("")
+
+            saveData(editTitle.text.toString(), spinner.adapter, editSummary.text.toString(),
+                editKey1.text.toString(), editKey2.text.toString(), editKey3.text.toString())
+            finish()
+        }
+
+        btnCancel.setOnClickListener {
+            editTitle.setText("")
+            editDuration.setText("")
+            editSummary.setText("")
+            editKey1.setText("")
+            editKey2.setText("")
+            editKey3.setText("")
+
+            saveData(editTitle.text.toString(), spinner.adapter, editSummary.text.toString(),
+                editKey1.text.toString(), editKey2.text.toString(), editKey3.text.toString())
+            finish()
+        }
 
         //챌린지 저장
         btnDone.setOnClickListener {
@@ -146,7 +177,7 @@ class AddChallenge : AppCompatActivity(){
             }
             else{
 
-                var challenge = Challenge(db.ChallengeCount(), editTitle.text.toString(), category,
+                var challenge = Challenge(db.ChallengeTotalCount(), editTitle.text.toString(), category,
                     whileDate, 0, 0.0f,0,startdate ,lastdate, editSummary.text.toString(),
                     editKey1.text.toString(), editKey2.text.toString(), editKey3.text.toString())
 

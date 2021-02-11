@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="10"
 
-    tools:context=".Challenge">
+    tools:context=".ChallengeActivitySelect">
 
     <!--themes.xml 파일에서 actionbar는 noactionbar로 해주세요~~ -->
 
@@ -113,14 +113,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/foodCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
-                    android:textColor="@color/black"
 
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -166,14 +167,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/plasticCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
-                    android:textColor="@color/black"
 
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -219,14 +221,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/exerciseCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
-                    android:textColor="@color/black"
 
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -272,14 +275,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/naturalCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
-                    android:textColor="@color/black"
 
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -325,14 +329,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/etcCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
-                    android:textColor="@color/black"
 
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </FrameLayout>
         </androidx.cardview.widget.CardView>

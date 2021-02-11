@@ -160,7 +160,10 @@ class ChallengeActivityEtc : AppCompatActivity() {
         Array = db.ChallengeList(keyword, id)
         isVisible(Array)
 
-        Log.d("태그", Array[0].State.toString())
+        addChallenge.setOnClickListener{
+            var intent = Intent(this, AddChallenge::class.java)
+            startActivity(intent)
+        }
 
         imgBack.setOnClickListener {
             finish()
@@ -363,6 +366,7 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
     }
 
+
     fun isVisible(Array:Array<Challenge>)
     {
         if(Array.size>7)
@@ -379,13 +383,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -395,13 +401,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -411,13 +419,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -427,13 +437,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[3].State == 0){
                 NameTextView4.setText(Array[3].name+" - 참여중")
-            }else if(Array[3].State == 1){
-                NameTextView4.setText(Array[3].name+" - 참여완료")
+            }else if(Array[3].State == 1 && Array[3].date<0){
+                NameTextView4.setText(Array[3].name+" - 기간 만료")
+            }else if(Array[3].State == 1) {
+                NameTextView4.setText(Array[3].name+" - 참여 완료")
             }else{
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
-            if(Array[3].State == 1){
+            if(Array[3].bookmark == 1){
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -443,13 +455,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[4].State == 0){
                 NameTextView5.setText(Array[4].name+" - 참여중")
-            }else if(Array[4].State == 1){
-                NameTextView5.setText(Array[4].name+" - 참여완료")
+            }else if(Array[4].State == 1 && Array[4].date<0){
+                NameTextView5.setText(Array[4].name+" - 기간 만료")
+            }else if(Array[4].State == 1) {
+                NameTextView5.setText(Array[4].name+" - 참여 완료")
             }else{
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
-            if(Array[4].State == 1){
+            if(Array[4].bookmark == 1){
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -459,14 +473,16 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
 
             if(Array[5].State == 0){
-                NameTextView6.setText(Array[0].name+" - 참여중")
-            }else if(Array[5].State == 1){
-                NameTextView6.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여중")
+            }else if(Array[5].State == 1 && Array[5].date<0){
+                NameTextView6.setText(Array[5].name+" - 기간 만료")
+            }else if(Array[5].State == 1) {
+                NameTextView6.setText(Array[5].name+" - 참여 완료")
             }else{
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
-            if(Array[5].State == 1){
+            if(Array[5].bookmark == 1){
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -476,13 +492,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[6].State == 0){
                 NameTextView7.setText(Array[6].name+" - 참여중")
-            }else if(Array[6].State == 1){
-                NameTextView7.setText(Array[6].name+" - 참여완료")
+            }else if(Array[6].State == 1 && Array[6].date<0){
+                NameTextView7.setText(Array[6].name+" - 기간 만료")
+            }else if(Array[6].State == 1) {
+                NameTextView7.setText(Array[6].name+" - 참여 완료")
             }else{
                 NameTextView7.setText(Array[6].name)
             }
             KeyWordTextView7.setText(Array[6].ShortSummary())
-            if(Array[6].State == 1){
+            if(Array[6].bookmark == 1){
                 MarkButton7.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton7.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -492,19 +510,22 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[7].State == 0){
                 NameTextView8.setText(Array[7].name+" - 참여중")
-            }else if(Array[7].State == 1){
-                NameTextView8.setText(Array[7].name+" - 참여완료")
+            }else if(Array[7].State == 1 && Array[7].date<0){
+                NameTextView8.setText(Array[7].name+" - 기간 만료")
+            }else if(Array[7].State == 1) {
+                NameTextView8.setText(Array[7].name+" - 참여 완료")
             }else{
                 NameTextView8.setText(Array[7].name)
             }
             KeyWordTextView8.setText(Array[7].ShortSummary())
-            if(Array[7].State == 1){
+            if(Array[7].bookmark == 1){
                 MarkButton8.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton8.setImageResource(R.drawable.ic_baseline_star_border_24)
             }
             JoinTextView8.setText("${db.ChallengeJoinCount(Array[7])}")
             DateTextView8.setText("${Array[7].StartDate} - ${Array[7].LastDate}")
+
         }else if(Array.size>6){
             //챌린지 갯수가 7개일 때
             challenge1.setVisibility(View.VISIBLE)
@@ -518,13 +539,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -534,13 +557,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -550,13 +575,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -566,13 +593,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[3].State == 0){
                 NameTextView4.setText(Array[3].name+" - 참여중")
-            }else if(Array[3].State == 1){
-                NameTextView4.setText(Array[3].name+" - 참여완료")
+            }else if(Array[3].State == 1 && Array[3].date<0){
+                NameTextView4.setText(Array[3].name+" - 기간 만료")
+            }else if(Array[3].State == 1) {
+                NameTextView4.setText(Array[3].name+" - 참여 완료")
             }else{
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
-            if(Array[3].State == 1){
+            if(Array[3].bookmark == 1){
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -582,13 +611,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[4].State == 0){
                 NameTextView5.setText(Array[4].name+" - 참여중")
-            }else if(Array[4].State == 1){
-                NameTextView5.setText(Array[4].name+" - 참여완료")
+            }else if(Array[4].State == 1 && Array[4].date<0){
+                NameTextView5.setText(Array[4].name+" - 기간 만료")
+            }else if(Array[4].State == 1) {
+                NameTextView5.setText(Array[4].name+" - 참여 완료")
             }else{
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
-            if(Array[4].State == 1){
+            if(Array[4].bookmark == 1){
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -598,14 +629,16 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
 
             if(Array[5].State == 0){
-                NameTextView6.setText(Array[0].name+" - 참여중")
-            }else if(Array[5].State == 1){
-                NameTextView6.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여중")
+            }else if(Array[5].State == 1 && Array[5].date<0){
+                NameTextView6.setText(Array[5].name+" - 기간 만료")
+            }else if(Array[5].State == 1) {
+                NameTextView6.setText(Array[5].name+" - 참여 완료")
             }else{
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
-            if(Array[5].State == 1){
+            if(Array[5].bookmark == 1){
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -615,13 +648,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[6].State == 0){
                 NameTextView7.setText(Array[6].name+" - 참여중")
-            }else if(Array[6].State == 1){
-                NameTextView7.setText(Array[6].name+" - 참여완료")
+            }else if(Array[6].State == 1 && Array[6].date<0){
+                NameTextView7.setText(Array[6].name+" - 기간 만료")
+            }else if(Array[6].State == 1) {
+                NameTextView7.setText(Array[6].name+" - 참여 완료")
             }else{
                 NameTextView7.setText(Array[6].name)
             }
             KeyWordTextView7.setText(Array[6].ShortSummary())
-            if(Array[6].State == 1){
+            if(Array[6].bookmark == 1){
                 MarkButton7.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton7.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -642,13 +677,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -658,13 +695,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -674,13 +713,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -690,13 +731,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[3].State == 0){
                 NameTextView4.setText(Array[3].name+" - 참여중")
-            }else if(Array[3].State == 1){
-                NameTextView4.setText(Array[3].name+" - 참여완료")
+            }else if(Array[3].State == 1 && Array[3].date<0){
+                NameTextView4.setText(Array[3].name+" - 기간 만료")
+            }else if(Array[3].State == 1) {
+                NameTextView4.setText(Array[3].name+" - 참여 완료")
             }else{
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
-            if(Array[3].State == 1){
+            if(Array[3].bookmark == 1){
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -706,13 +749,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[4].State == 0){
                 NameTextView5.setText(Array[4].name+" - 참여중")
-            }else if(Array[4].State == 1){
-                NameTextView5.setText(Array[4].name+" - 참여완료")
+            }else if(Array[4].State == 1 && Array[4].date<0){
+                NameTextView5.setText(Array[4].name+" - 기간 만료")
+            }else if(Array[4].State == 1) {
+                NameTextView5.setText(Array[4].name+" - 참여 완료")
             }else{
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
-            if(Array[4].State == 1){
+            if(Array[4].bookmark == 1){
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -722,14 +767,16 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
 
             if(Array[5].State == 0){
-                NameTextView6.setText(Array[0].name+" - 참여중")
-            }else if(Array[5].State == 1){
-                NameTextView6.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여중")
+            }else if(Array[5].State == 1 && Array[5].date<0){
+                NameTextView6.setText(Array[5].name+" - 기간 만료")
+            }else if(Array[5].State == 1) {
+                NameTextView6.setText(Array[5].name+" - 참여 완료")
             }else{
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
-            if(Array[5].State == 1){
+            if(Array[5].bookmark == 1){
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -750,13 +797,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -766,13 +815,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -782,13 +833,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -798,13 +851,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[3].State == 0){
                 NameTextView4.setText(Array[3].name+" - 참여중")
-            }else if(Array[3].State == 1){
-                NameTextView4.setText(Array[3].name+" - 참여완료")
+            }else if(Array[3].State == 1 && Array[3].date<0){
+                NameTextView4.setText(Array[3].name+" - 기간 만료")
+            }else if(Array[3].State == 1) {
+                NameTextView4.setText(Array[3].name+" - 참여 완료")
             }else{
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
-            if(Array[3].State == 1){
+            if(Array[3].bookmark == 1){
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -814,13 +869,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[4].State == 0){
                 NameTextView5.setText(Array[4].name+" - 참여중")
-            }else if(Array[4].State == 1){
-                NameTextView5.setText(Array[4].name+" - 참여완료")
+            }else if(Array[4].State == 1 && Array[4].date<0){
+                NameTextView5.setText(Array[4].name+" - 기간 만료")
+            }else if(Array[4].State == 1) {
+                NameTextView5.setText(Array[4].name+" - 참여 완료")
             }else{
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
-            if(Array[4].State == 1){
+            if(Array[4].bookmark == 1){
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -841,13 +898,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -857,13 +916,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -873,13 +934,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -889,13 +952,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[3].State == 0){
                 NameTextView4.setText(Array[3].name+" - 참여중")
-            }else if(Array[3].State == 1){
-                NameTextView4.setText(Array[3].name+" - 참여완료")
+            }else if(Array[3].State == 1 && Array[3].date<0){
+                NameTextView4.setText(Array[3].name+" - 기간 만료")
+            }else if(Array[3].State == 1) {
+                NameTextView4.setText(Array[3].name+" - 참여 완료")
             }else{
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
-            if(Array[3].State == 1){
+            if(Array[3].bookmark == 1){
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -916,13 +981,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -932,13 +999,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -948,13 +1017,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[2].State == 0){
                 NameTextView3.setText(Array[2].name+" - 참여중")
-            }else if(Array[2].State == 1){
-                NameTextView3.setText(Array[2].name+" - 참여완료")
+            }else if(Array[2].State == 1 && Array[2].date<0){
+                NameTextView3.setText(Array[2].name+" - 기간 만료")
+            }else if(Array[2].State == 1) {
+                NameTextView3.setText(Array[2].name+" - 참여 완료")
             }else{
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
-            if(Array[2].State == 1){
+            if(Array[2].bookmark == 1){
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -975,38 +1046,39 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
             }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
-            Log.d("태그", Array[0].State.toString())
-
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
-            }else if(Array[1].State == 1){
-                NameTextView2.setText(Array[1].name+" - 참여완료")
+            }else if(Array[1].State == 1 && Array[1].date<0){
+                NameTextView2.setText(Array[1].name+" - 기간 만료")
+            }else if(Array[1].State == 1) {
+                NameTextView2.setText(Array[1].name+" - 참여 완료")
             }else{
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
-            if(Array[1].State == 1){
+            if(Array[1].bookmark == 1){
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
             }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
-            Log.d("태그", Array[0].State.toString())
 
 
         }else if(Array.size>0)
@@ -1023,13 +1095,15 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
             if(Array[0].State == 0){
                 NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[0].State == 1){
-                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else if(Array[0].State == 1 && Array[0].date<0){
+                NameTextView1.setText(Array[0].name+" - 기간 만료")
+            }else if(Array[0].State == 1) {
+                NameTextView1.setText(Array[0].name+" - 참여 완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
-            if(Array[0].State == 1){
+            if(Array[0].bookmark == 1){
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
             }else{
                 MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)

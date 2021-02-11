@@ -1,5 +1,8 @@
 package com.example.greening
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 //사용자에게 보여지는 챌린지 내용을 담은 클래스
 class Challenge {
     //public static Context mContext
@@ -94,7 +97,6 @@ class Challenge {
         }else{
             this.Short3 = Short2
         }
-        State
     }
     constructor(id: Int, name: String, keyword: String, date: Int, count:Int, Score:Float, bookmark:Int,
     startDate:String, lastdate : String, summaryLong:String, Short1: String, Short2:String){
@@ -137,15 +139,24 @@ class Challenge {
     fun ShortSummary():String{
         var ShortSummary: String = ""
 
-        if(!this.Short1.equals("")&&!this.Short2.equals("")&&!Short3.equals(""))
+        if(!this.Short1.equals("")&&!this.Short2.equals("")&&!this.Short3.equals(""))
         {
             ShortSummary = "#${Short1} #${Short2} #${Short3}"
-        }else if(!this.Short1.equals("")&&!this.Short2.equals(""))
+        }else if(!this.Short1.equals("")&&!this.Short2.equals("")&&this.Short3.equals(""))
         {
             ShortSummary = "#${Short1} #${Short2}"
         }else{
             ShortSummary = "#${Short1}"
         }
         return ShortSummary
+    }
+
+    fun D_Day(LastDate:String) : Long
+    {
+        var sf = SimpleDateFormat("yyyy년 MM월 dd일")
+        var date = sf.parse(LastDate)
+        var today = Calendar.getInstance()
+        var calcuDate = (today.time.time - date.time) / (60 * 60 * 24 * 1000)
+        return calcuDate
     }
 }

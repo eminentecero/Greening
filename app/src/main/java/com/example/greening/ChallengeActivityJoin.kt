@@ -1,5 +1,6 @@
 package com.example.greening
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -23,7 +24,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
     lateinit var periodChallenge : TextView
 
     // 프로그레스 바
-    lateinit var progressChallenge : ProgressBar
+    lateinit var progressChallenge : com.dinuscxj.progressbar.CircleProgressBar
 
     // 달력
     lateinit var calendar_view : sun.bob.mcalendarview.MCalendarView
@@ -51,7 +52,9 @@ class ChallengeActivityJoin : AppCompatActivity() {
         calendar_view = findViewById(R.id.calendarChallenge)
         btnDoneChallenge = findViewById(R.id.btnDoneChallenge)
 
-        var UserId = intent.getStringExtra("id")
+        var UserId: String? = intent.getStringExtra("id")
+
+        Toast.makeText(applicationContext, "${UserId}님 반갑습니다!", Toast.LENGTH_LONG).show()
 
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         var User : Person = Person()
@@ -80,7 +83,6 @@ class ChallengeActivityJoin : AppCompatActivity() {
             }
         }
 
-
         //캘린더
 
         MarkStyle.BACKGROUND
@@ -94,10 +96,18 @@ class ChallengeActivityJoin : AppCompatActivity() {
             }
         })
 
+
         btnDoneChallenge.setOnClickListener {
-            db.ChallengeRecord(challenge, array)
-
-
+            if(challenge.date > array.size-1)
+            {
+                db.ChallengeRecord(challenge, array)
+            }else{
+                Toast.makeText(applicationContext, "챌린지를 완료했습니다!!!\n    축하드립니다", Toast.LENGTH_LONG).show()
+                db.ChallengeCompelete(challenge, UserId.toString())
+                var intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("id", UserId.toString())
+                startActivity(intent)
+            }
         }
 
         imgBack.setOnClickListener {

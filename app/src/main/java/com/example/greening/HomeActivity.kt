@@ -104,12 +104,16 @@ class HomeActivity  : AppCompatActivity() {
         var name = intent.getStringExtra("id")
         UserName.setText(name + "님")
 
+
+
         //id를 인텐트로 받아서 DB에 검색해서 그 정보로 객체 생성
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         var User : Person = Person()
 
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(name.toString())
+
+        db.cleanChallenge(name.toString())
 
         //참여중인 챌린지
         ingChallenge1 = findViewById(R.id.ingChallenge1)
@@ -198,7 +202,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore1_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[0].id.toString())
+            intent.putExtra("ChallengeId", array[0].id)
             intent.putExtra("ChallengeName", array[0].name)
             intent.putExtra("ChallengeKeyWord", array[0].keyword)
             intent.putExtra("ChallengeDate", array[0].date.toString())
@@ -208,7 +212,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore2_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[1].id.toString())
+            intent.putExtra("ChallengeId", array[1].id)
             intent.putExtra("ChallengeName", array[1].name)
             intent.putExtra("ChallengeKeyWord", array[1].keyword)
             intent.putExtra("ChallengeDate", array[1].date.toString())
@@ -218,7 +222,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore3_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[2].id.toString())
+            intent.putExtra("ChallengeId", array[2].id)
             intent.putExtra("ChallengeName", array[2].name)
             intent.putExtra("ChallengeKeyWord", array[2].keyword)
             intent.putExtra("ChallengeDate", array[2].date.toString())
