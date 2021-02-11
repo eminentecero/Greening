@@ -469,13 +469,13 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             cursor = db.rawQuery("SELECT * FROM ${id} WHERE Keyword = '${keyword}' AND State = 1 ;", null)
         }
 
+
         while (cursor.moveToNext()) {
             var id = cursor.getString(0).toInt()
             var name = cursor.getString(1)
             var keyword = cursor.getString(2)
             var date = cursor.getString(5).toInt()
-
-            var challenge =  Challenge(id, name, keyword, date)
+            var challenge = Challenge(id, name, keyword, date)
             anyArray+=challenge
         }
 
@@ -496,9 +496,18 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             var id = cursor.getString(0).toInt()
             var name = cursor.getString(1)
             var keyword = cursor.getString(2)
-            var date = cursor.getString(5).toInt()
+            var date = cursor.getString(3).toInt()
+            var count = cursor.getString(4).toInt()
+            var score = cursor.getString(5).toFloat()
+            var bookmark = cursor.getString(6).toInt()
+            var startdate = cursor.getString(7)
+            var lastdate = cursor.getString(8)
+            var longSummary = cursor.getString(9)
+            var short1 = cursor.getString(10)
+            var short2 = cursor.getString(11)
+            var short3 = cursor.getString(12)
 
-            var challenge =  Challenge(id, name, keyword, date)
+            var challenge =  Challenge(id, name, keyword, date, count, score, bookmark, startdate, lastdate, longSummary, short1, short2, short3)
             anyArray+=challenge
         }
 

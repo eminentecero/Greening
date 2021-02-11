@@ -90,4 +90,19 @@ class Challenge {
     }
 
     constructor(){}
+
+    fun ShortSummary():String{
+        var ShortSummary: String = ""
+
+        if(!this.Short1.equals("")&&!this.Short2.equals("")&&!Short3.equals(""))
+        {
+            ShortSummary = "#${Short1} #${Short2} #${Short3}"
+        }else if(!this.Short1.equals("")&&!this.Short2.equals(""))
+        {
+            ShortSummary = "#${Short1} #${Short2}"
+        }else{
+            ShortSummary = "#${Short1}"
+        }
+        return ShortSummary
+    }
 }

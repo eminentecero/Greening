@@ -179,85 +179,85 @@ class ChallengeActivityExercise : AppCompatActivity() {
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
             if(Array[3].State == 0){
-                NameTextView1.setText(Array[3].name+" - 참여중")
+                NameTextView4.setText(Array[3].name+" - 참여중")
             }else if(Array[3].State == 1){
-                NameTextView1.setText(Array[3].name+" - 참여완료")
+                NameTextView4.setText(Array[3].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[3].name)
+                NameTextView4.setText(Array[3].name)
             }
-            KeyWordTextView4.setText(Array[3].keyword)
+            KeyWordTextView4.setText(Array[3].ShortSummary())
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
             if(Array[4].State == 0){
-                NameTextView1.setText(Array[4].name+" - 참여중")
+                NameTextView5.setText(Array[4].name+" - 참여중")
             }else if(Array[4].State == 1){
-                NameTextView1.setText(Array[4].name+" - 참여완료")
+                NameTextView5.setText(Array[4].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[4].name)
+                NameTextView5.setText(Array[4].name)
             }
-            KeyWordTextView5.setText(Array[4].keyword)
+            KeyWordTextView5.setText(Array[4].ShortSummary())
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
 
             if(Array[5].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
+                NameTextView6.setText(Array[0].name+" - 참여중")
             }else if(Array[5].State == 1){
-                NameTextView1.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[5].name)
+                NameTextView6.setText(Array[5].name)
             }
-            KeyWordTextView1.setText(Array[5].keyword)
-            JoinTextView1.setText("${db.ChallengeJoinCount(Array[5])}")
-            DateTextView1.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
+            KeyWordTextView6.setText(Array[5].ShortSummary())
+            JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
+            DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
             if(Array[6].State == 0){
-                NameTextView1.setText(Array[6].name+" - 참여중")
+                NameTextView7.setText(Array[6].name+" - 참여중")
             }else if(Array[6].State == 1){
-                NameTextView1.setText(Array[6].name+" - 참여완료")
+                NameTextView7.setText(Array[6].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[6].name)
+                NameTextView7.setText(Array[6].name)
             }
-            KeyWordTextView2.setText(Array[6].keyword)
-            JoinTextView2.setText("${db.ChallengeJoinCount(Array[6])}")
-            DateTextView2.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
+            KeyWordTextView7.setText(Array[6].ShortSummary())
+            JoinTextView7.setText("${db.ChallengeJoinCount(Array[6])}")
+            DateTextView7.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
 
             if(Array[7].State == 0){
-                NameTextView1.setText(Array[7].name+" - 참여중")
+                NameTextView8.setText(Array[7].name+" - 참여중")
             }else if(Array[7].State == 1){
-                NameTextView1.setText(Array[7].name+" - 참여완료")
+                NameTextView8.setText(Array[7].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[7].name)
+                NameTextView8.setText(Array[7].name)
             }
-            KeyWordTextView8.setText(Array[7].keyword)
+            KeyWordTextView8.setText(Array[7].ShortSummary())
             JoinTextView8.setText("${db.ChallengeJoinCount(Array[7])}")
             DateTextView8.setText("${Array[7].StartDate} - ${Array[7].LastDate}")
         }else if(Array.size>6){
@@ -278,76 +278,77 @@ class ChallengeActivityExercise : AppCompatActivity() {
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
             if(Array[3].State == 0){
-                NameTextView1.setText(Array[3].name+" - 참여중")
+                NameTextView4.setText(Array[3].name+" - 참여중")
             }else if(Array[3].State == 1){
-                NameTextView1.setText(Array[3].name+" - 참여완료")
+                NameTextView4.setText(Array[3].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[3].name)
+                NameTextView4.setText(Array[3].name)
             }
-            KeyWordTextView4.setText(Array[3].keyword)
+            KeyWordTextView4.setText(Array[3].ShortSummary())
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
             if(Array[4].State == 0){
-                NameTextView1.setText(Array[4].name+" - 참여중")
+                NameTextView5.setText(Array[4].name+" - 참여중")
             }else if(Array[4].State == 1){
-                NameTextView1.setText(Array[4].name+" - 참여완료")
+                NameTextView5.setText(Array[4].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[4].name)
+                NameTextView5.setText(Array[4].name)
             }
-            KeyWordTextView5.setText(Array[4].keyword)
+            KeyWordTextView5.setText(Array[4].ShortSummary())
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
 
             if(Array[5].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
+                NameTextView6.setText(Array[0].name+" - 참여중")
             }else if(Array[5].State == 1){
-                NameTextView1.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[5].name)
+                NameTextView6.setText(Array[5].name)
             }
-            KeyWordTextView1.setText(Array[5].keyword)
-            JoinTextView1.setText("${db.ChallengeJoinCount(Array[5])}")
-            DateTextView1.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
+            KeyWordTextView6.setText(Array[5].ShortSummary())
+            JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
+            DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
             if(Array[6].State == 0){
-                NameTextView1.setText(Array[6].name+" - 참여중")
+                NameTextView7.setText(Array[6].name+" - 참여중")
             }else if(Array[6].State == 1){
-                NameTextView1.setText(Array[6].name+" - 참여완료")
+                NameTextView7.setText(Array[6].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[6].name)
+                NameTextView7.setText(Array[6].name)
             }
-            KeyWordTextView2.setText(Array[6].keyword)
-            JoinTextView2.setText("${db.ChallengeJoinCount(Array[6])}")
-            DateTextView2.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
+            KeyWordTextView7.setText(Array[6].ShortSummary())
+            JoinTextView7.setText("${db.ChallengeJoinCount(Array[6])}")
+            DateTextView7.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
+
         }else if(Array.size>5){
             //챌린지 갯수가 6개일 때
             challenge1.setVisibility(View.VISIBLE)
@@ -366,65 +367,65 @@ class ChallengeActivityExercise : AppCompatActivity() {
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
             if(Array[3].State == 0){
-                NameTextView1.setText(Array[3].name+" - 참여중")
+                NameTextView4.setText(Array[3].name+" - 참여중")
             }else if(Array[3].State == 1){
-                NameTextView1.setText(Array[3].name+" - 참여완료")
+                NameTextView4.setText(Array[3].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[3].name)
+                NameTextView4.setText(Array[3].name)
             }
-            KeyWordTextView4.setText(Array[3].keyword)
+            KeyWordTextView4.setText(Array[3].ShortSummary())
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
             if(Array[4].State == 0){
-                NameTextView1.setText(Array[4].name+" - 참여중")
+                NameTextView5.setText(Array[4].name+" - 참여중")
             }else if(Array[4].State == 1){
-                NameTextView1.setText(Array[4].name+" - 참여완료")
+                NameTextView5.setText(Array[4].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[4].name)
+                NameTextView5.setText(Array[4].name)
             }
-            KeyWordTextView5.setText(Array[4].keyword)
+            KeyWordTextView5.setText(Array[4].ShortSummary())
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
 
             if(Array[5].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
+                NameTextView6.setText(Array[0].name+" - 참여중")
             }else if(Array[5].State == 1){
-                NameTextView1.setText(Array[5].name+" - 참여완료")
+                NameTextView6.setText(Array[5].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[5].name)
+                NameTextView6.setText(Array[5].name)
             }
-            KeyWordTextView1.setText(Array[5].keyword)
-            JoinTextView1.setText("${db.ChallengeJoinCount(Array[5])}")
-            DateTextView1.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
+            KeyWordTextView6.setText(Array[5].ShortSummary())
+            JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
+            DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
         }else if(Array.size>4){
             //챌린지 갯수가 5개일 때
@@ -444,51 +445,51 @@ class ChallengeActivityExercise : AppCompatActivity() {
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
             if(Array[3].State == 0){
-                NameTextView1.setText(Array[3].name+" - 참여중")
+                NameTextView4.setText(Array[3].name+" - 참여중")
             }else if(Array[3].State == 1){
-                NameTextView1.setText(Array[3].name+" - 참여완료")
+                NameTextView4.setText(Array[3].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[3].name)
+                NameTextView4.setText(Array[3].name)
             }
-            KeyWordTextView4.setText(Array[3].keyword)
+            KeyWordTextView4.setText(Array[3].ShortSummary())
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
             if(Array[4].State == 0){
-                NameTextView1.setText(Array[4].name+" - 참여중")
+                NameTextView5.setText(Array[4].name+" - 참여중")
             }else if(Array[4].State == 1){
-                NameTextView1.setText(Array[4].name+" - 참여완료")
+                NameTextView5.setText(Array[4].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[4].name)
+                NameTextView5.setText(Array[4].name)
             }
-            KeyWordTextView5.setText(Array[4].keyword)
+            KeyWordTextView5.setText(Array[4].ShortSummary())
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
@@ -503,47 +504,47 @@ class ChallengeActivityExercise : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if(Array[0].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
+            if (Array[0].State == 0) {
+                NameTextView1.setText(Array[0].name + " - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
             if(Array[3].State == 0){
-                NameTextView1.setText(Array[3].name+" - 참여중")
+                NameTextView4.setText(Array[3].name+" - 참여중")
             }else if(Array[3].State == 1){
-                NameTextView1.setText(Array[3].name+" - 참여완료")
+                NameTextView4.setText(Array[3].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[3].name)
+                NameTextView4.setText(Array[3].name)
             }
-            KeyWordTextView4.setText(Array[3].keyword)
+            KeyWordTextView4.setText(Array[3].ShortSummary())
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -558,36 +559,36 @@ class ChallengeActivityExercise : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if(Array[0].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
+            if (Array[0].State == 0) {
+                NameTextView1.setText(Array[0].name + " - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
             if(Array[2].State == 0){
-                NameTextView1.setText(Array[2].name+" - 참여중")
+                NameTextView3.setText(Array[2].name+" - 참여중")
             }else if(Array[2].State == 1){
-                NameTextView1.setText(Array[2].name+" - 참여완료")
+                NameTextView3.setText(Array[2].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[2].name)
+                NameTextView3.setText(Array[2].name)
             }
-            KeyWordTextView3.setText(Array[2].keyword)
+            KeyWordTextView3.setText(Array[2].ShortSummary())
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -604,23 +605,23 @@ class ChallengeActivityExercise : AppCompatActivity() {
 
             if (Array[0].State == 0) {
                 NameTextView1.setText(Array[0].name + " - 참여중")
-            } else if (Array[0].State == 1) {
-                NameTextView1.setText(Array[0].name + " - 참여완료")
-            } else {
+            }else if(Array[0].State == 1){
+                NameTextView1.setText(Array[0].name+" - 참여완료")
+            }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView1.setText(Array[0].keyword)
+            KeyWordTextView1.setText(Array[0].ShortSummary())
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
             if(Array[1].State == 0){
-                NameTextView1.setText(Array[1].name+" - 참여중")
+                NameTextView2.setText(Array[1].name+" - 참여중")
             }else if(Array[1].State == 1){
-                NameTextView1.setText(Array[1].name+" - 참여완료")
+                NameTextView2.setText(Array[1].name+" - 참여완료")
             }else{
-                NameTextView1.setText(Array[1].name)
+                NameTextView2.setText(Array[1].name)
             }
-            KeyWordTextView2.setText(Array[1].keyword)
+            KeyWordTextView2.setText(Array[1].ShortSummary())
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -637,18 +638,17 @@ class ChallengeActivityExercise : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if(Array[0].State == 0){
-                NameTextView1.setText(Array[0].name+" - 참여중")
-            }else if(Array[1].State == 1){
+            if (Array[0].State == 0) {
+                NameTextView1.setText(Array[0].name + " - 참여중")
+            }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
-            KeyWordTextView2.setText(Array[0].keyword)
-            JoinTextView2.setText("${db.ChallengeJoinCount(Array[0])}")
-            DateTextView2.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
-
-            }else{
+            KeyWordTextView1.setText(Array[0].ShortSummary())
+            JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
+            DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
+        }else{
             //챌린지 갯수가 0개일 때
             challenge1.setVisibility(View.GONE)
             challenge2.setVisibility(View.GONE)
