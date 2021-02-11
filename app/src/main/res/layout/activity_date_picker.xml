@@ -10,23 +10,23 @@
         android:id="@+id/imgBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--
     <com.applikeysolutions.cosmocalendar.view.CalendarView
         android:id="@+id/calendar_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:connectedDayIconPosition="top"
-        app:currentDayTextColor="#f79256"
-        app:firstDayOfTheWeek="sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBack"
+        app:connectedDayIconPosition="top"
+        app:currentDayTextColor="#f79256"
+        app:firstDayOfTheWeek="sunday"
         app:orientation="horizontal"
         app:selectedDayBackgroundColor="#FFEACA"
         app:selectedDayBackgroundEndColor="#f79256"
@@ -34,17 +34,5 @@
         app:selectedDayTextColor="#FFFFFF"
         app:selectionType="range"
         app:weekendDayTextColor="#ef4550" />
-        -->
-
-    <CalendarView
-        android:id="@+id/calendar_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgBack">
-
-    </CalendarView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

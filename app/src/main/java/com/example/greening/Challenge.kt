@@ -17,6 +17,14 @@ class Challenge {
     //분류하는 - 음식, 플라스틱, 운동, 자원, 기타
     var keyword : String = ""
 
+    var StartDate :String = ""
+    var LastDate :String = ""
+    var SummaryLong : String = ""
+    var Short1 : String = ""
+    var Short2 : String = ""
+    var Short3 : String = ""
+
+    var State: Int = -1
     //공적 메소드
         //인원 설정하는 메소드
         var count : Int = 0
@@ -53,9 +61,18 @@ class Challenge {
         this.keyword = keyword
         count = 0
         score = 0.0f
+        bookmark
+        StartDate
+        LastDate
+        SummaryLong
+        Short1
+        Short2
+        Short3
+        State
     }
 
-    constructor(id: Int, name: String, keyword: String, date: Int, count:Int, Score:Float, bookmark:Int){
+    constructor(id: Int, name: String, keyword: String, date: Int, count:Int, Score:Float, bookmark:Int,
+    startDate:String, lastdate : String, summaryLong:String, Short1: String, Short2:String, Short3:String){
         this.id = id
         this.name = name
         this.date = date
@@ -63,6 +80,13 @@ class Challenge {
         this.count = count
         this.score = score
         this.bookmark = bookmark
+        this.StartDate = startDate
+        this.LastDate = lastdate
+        this.SummaryLong = summaryLong
+        this.Short1 = Short1
+        this.Short2 = Short2
+        this.Short3 = Short3
+        State
     }
 
     constructor(){}

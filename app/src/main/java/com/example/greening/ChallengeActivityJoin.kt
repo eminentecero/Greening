@@ -2,6 +2,7 @@ package com.example.greening
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -58,25 +59,16 @@ class ChallengeActivityJoin : AppCompatActivity() {
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(UserId.toString())
 
-        var Id = intent.getStringExtra("ChallengeId")
-        var Name = intent.getStringExtra("ChallengeName")
-        var KeyWord = intent.getStringExtra("ChallengeKeyWord")
-        var Date = intent.getStringExtra("ChallengeDate")
+        var Id = intent.getStringExtra("ChallengeId")?.toInt()
 
-        var challenge : Challenge = Challenge(
-            Id.toString().toInt(),
-            Name.toString(),
-            KeyWord.toString(),
-            Date.toString().toInt()
-        )
-
+        var challenge : Challenge = db.Challengereturn(Id)
         nameChallenge.setText(challenge.name)
-        numPeopleChallenge.setText(db.ChallengeJoinCount(challenge).toString())
-        periodChallenge.setText(challenge.date.toString())
+        numPeopleChallenge.setText(db.ChallengeJoinCount(challenge))
+        periodChallenge.setText("${challenge.StartDate} - ${challenge.LastDate}")
 
         //캘린더에 넣을 날짜 받아오기
         var array = arrayOf<Dates>()
-        array = db.ChallengeDay(challenge)
+        array = db.ChallengeDay(Id.toString())
 
         if(array.size != 0)
         {
@@ -92,9 +84,6 @@ class ChallengeActivityJoin : AppCompatActivity() {
         //캘린더
 
         MarkStyle.BACKGROUND
-
-
-
         calendar_view.setOnDateClickListener(object  : OnDateClickListener(){
             override fun onDateClick(view: View, date:DateData){
                 calendar_view.markDate(
@@ -106,13 +95,23 @@ class ChallengeActivityJoin : AppCompatActivity() {
         })
 
         btnDoneChallenge.setOnClickListener {
-
             db.ChallengeRecord(challenge, array)
+
+
         }
 
         imgBack.setOnClickListener {
-            //var intent = Intent(this, ChallengeActivityNojoin::class.java)
-            //startActivity(intent)
+            array = db.ChallengeDay(Id.toString())
+
+            if(array.size != 0)
+            {
+                for(i in 0..(array.size-1))
+                {
+                    calendar_view.markDate(
+                        DateData(array.get(i).year, array.get(i).month, array.get(i).day).setMarkStyle(MarkStyle(
+                            MarkStyle.DEFAULT, Color.WHITE)))
+                }
+            }
             finish()
         }
 

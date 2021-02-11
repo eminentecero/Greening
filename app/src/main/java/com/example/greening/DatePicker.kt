@@ -23,6 +23,7 @@ class DatePicker : AppCompatActivity() {
 
         var day_fist: String = ""
         var day_last: String = ""
+        var Date:Int = -1
 
 //            calendar_view.isShowDaysOfWeekTitle = false
         calendar_view.selectionManager = RangeSelectionManager(OnDaySelectedListener {
@@ -35,20 +36,24 @@ class DatePicker : AppCompatActivity() {
             var days = calendar_view.getSelectedDates()
             var result = ""
 
+            for(i in 0..calendar_view.selectedDates.size-1)
+            {
+                Date++
+            }
 
             var firstcalendar = days.get(0)
             var day = firstcalendar.get(Calendar.DAY_OF_MONTH)
             var month = firstcalendar.get(Calendar.MONTH)
             var year = firstcalendar.get(Calendar.YEAR)
             day_fist = "${year}년 ${month + 1}월 ${day}일"
+            var StartDays:Dates = Dates(year, month+1, day)
 
             var lastcalendar = days.get(calendar_view.selectedDates.size-1)
             day = lastcalendar.get(Calendar.DAY_OF_MONTH)
             month = lastcalendar.get(Calendar.MONTH)
             year = lastcalendar.get(Calendar.YEAR)
             day_last = "${year}년 ${month + 1}월 ${day}일"
-
-            var array = arrayOf(day_fist, day_last)
+            var LastDays:Dates = Dates(year, month+1, day)
         })
 
 
@@ -56,7 +61,8 @@ class DatePicker : AppCompatActivity() {
             var intent = Intent(this, AddChallenge::class.java)
             intent.putExtra("dayFirst", day_fist)
             intent.putExtra("dayLast", day_last)
-            intent.putExtra("date", calendar_view.selectedDates.size)
+            intent.putExtra("date", Date)
+
             startActivity(intent)
         }
 

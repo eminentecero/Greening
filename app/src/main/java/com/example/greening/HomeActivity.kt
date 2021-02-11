@@ -269,6 +269,7 @@ class HomeActivity  : AppCompatActivity() {
         }
     }
 
+    //추천 챌린지
     private fun recomVisible(categoryArray: Array<Challenge>) {
         if(categoryArray.count() == 5)
         {

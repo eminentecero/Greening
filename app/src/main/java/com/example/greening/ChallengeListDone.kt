@@ -122,7 +122,7 @@ class ChallengeListDone : AppCompatActivity() {
         JoinTextView7 = findViewById(R.id.JoinTextView7)
         JoinTextView8 = findViewById(R.id.JoinTextView8)
 
-        DateTextView1 = findViewById(R.id.DateTextView1)
+        DateTextView1 = findViewById(R.id.DateTextView3)
         DateTextView2 = findViewById(R.id.DateTextView2)
         DateTextView3 = findViewById(R.id.DateTextView3)
         DateTextView4 = findViewById(R.id.DateTextView4)
