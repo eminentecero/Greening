@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import java.util.*
 
 //Table 정의
@@ -79,11 +80,6 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             db.execSQL("UPDATE Challenge SET Count = "+ challenge.count +" WHERE ID = '"+challenge.id.toString()+"';")
 
             db!!.execSQL("CREATE TABLE CHALLENGE" + challenge.id + " (Year INT(18), Month INT(18), Date INT(18));")
-            //sql문 입력
-            //해당 챌린지 개별 테이블에 참여한 사람을 명단에다가 올림
-            //****************그날 날짜에 대한 정보 받을 필요있음 - 수정해야함
-
-            //db.execSQL("INSERT INTO Challenge" + challenge.id + " VALUES('" + person.id + "','210207', 0);")
             db.close()
         }
 
@@ -337,13 +333,42 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
             if(cursor.count >0){
                 cursor.moveToFirst()
-                //해당 행의 row의 정보를 string으로 받아 저장
-                var id = cursor.getString(0)
+                var id = cursor.getString(0).toInt()
                 var name = cursor.getString(1)
                 var keyword = cursor.getString(2)
-                var count = cursor.getString(3)
-                //ChallengeID CHAR(20), Name CHAR(20), Keyword CHAR(20), Count INT(18)
-                var challenge: Challenge = Challenge(id.toInt(), name, keyword, count.toInt())
+                var date = cursor.getString(3).toInt()
+                var count = cursor.getString(4).toInt()
+                var score = cursor.getString(5).toFloat()
+                var bookmark = cursor.getString(6).toInt()
+                var startdate = cursor.getString(7)
+                var lastdate = cursor.getString(8)
+                var summarylong = cursor.getString(9)
+                var short1 = cursor.getString(10)
+                var short2 = cursor.getString(11)
+                var short3 = cursor.getString(12)
+
+                var challenge = Challenge()
+                challenge.id = id
+                challenge.name = name
+                challenge.keyword = keyword
+                challenge.date = date
+                challenge.count = count
+                challenge.score = score
+                challenge.bookmark = bookmark
+                challenge.StartDate = startdate
+                challenge.LastDate = lastdate
+                challenge.Short1 = short1
+                if(short2 ==null){
+                    challenge.Short2 = ""
+                }else{
+                    challenge.Short2 = short2
+                }
+                if(short3 ==null){
+                    challenge.Short3 = ""
+                }else{
+                    challenge.Short3 = short3
+                }
+
 
                 anyArray += challenge
             } else {
@@ -396,7 +421,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         db.close()
     }
 
-    fun ChallengeDay(challengeId: String):Array<Dates>
+    fun ChallengeDay(challengeId: Int):Array<Dates>
     {
         var db = this.readableDatabase
         var cursor: Cursor
@@ -450,7 +475,17 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             challenge.bookmark = bookmark
             challenge.StartDate = startdate
             challenge.LastDate = lastdate
-            challenge.SummaryLong = summarylong
+            challenge.Short1 = short1
+            if(short2 ==null){
+                challenge.Short2 = ""
+            }else{
+                challenge.Short2 = short2
+            }
+            if(short3 ==null){
+                challenge.Short3 = ""
+            }else{
+                challenge.Short3 = short3
+            }
         }
         return challenge
     }
@@ -490,7 +525,28 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         var anyArray = arrayOf<Challenge>()
 
-        cursor = db.rawQuery("SELECT * FROM Challenge WHERE Keyword = '${keyword}';", null)
+        cursor = db.rawQuery("SELECT * FROM Challenge WHERE Keyword = '${keyword}' AND BookMark = 1 ;", null)
+
+        while(cursor.moveToNext()){
+            var id = cursor.getString(0).toInt()
+            var name = cursor.getString(1)
+            var keyword = cursor.getString(2)
+            var date = cursor.getString(3).toInt()
+            var count = cursor.getString(4).toInt()
+            var score = cursor.getString(5).toFloat()
+            var bookmark = cursor.getString(6).toInt()
+            var startdate = cursor.getString(7)
+            var lastdate = cursor.getString(8)
+            var longSummary = cursor.getString(9)
+            var short1 = cursor.getString(10)
+            var short2 = cursor.getString(11)
+            var short3 = cursor.getString(12)
+
+            var challenge =  Challenge(id, name, keyword, date, count, score, bookmark, startdate, lastdate, longSummary, short1, short2, short3)
+            anyArray+=challenge
+        }
+
+        cursor = db.rawQuery("SELECT * FROM Challenge WHERE Keyword = '${keyword}' AND BookMark = 0;", null)
 
         while (cursor.moveToNext()) {
             var id = cursor.getString(0).toInt()
@@ -513,7 +569,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         for(i in 0..anyArray.size-1)
         {
-            cursor = db.rawQuery("SELECT * FROM swim WHERE ChallengeID = '${anyArray[0].id}';", null)
+            cursor = db.rawQuery("SELECT * FROM swim WHERE ChallengeID = '${anyArray[i].id}';", null)
 
             if(cursor.count >0){
                 cursor.moveToFirst()
@@ -525,6 +581,112 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         }
 
         db.close()
+        return anyArray
+    }
+
+    fun ChallengeMark(challenge:Challenge)
+    {
+        var db = this.writableDatabase
+
+        if(challenge.bookmark == 0)
+        {
+            //전체 챌린지 관리에 참가중인
+            db.execSQL("UPDATE Challenge SET BookMark = 1 WHERE ID = '"+challenge.id+"';")
+        }else{
+            //전체 챌린지 관리에 참가중인
+            db.execSQL("UPDATE Challenge SET BookMark = 0 WHERE ID = '"+challenge.id+"';")
+        }
+        db.close()
+    }
+
+    fun ChallengeCategoryMark(Array: Array<Challenge>): Array<Challenge>
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var anyArray = arrayOf<Challenge>()
+
+        for (i in 0..4 step 1)
+        {
+            //각 카테고리의 첫번쨰 데이터 받아옴
+            cursor = db.rawQuery("SELECT * FROM Challenge WHERE ID = '${Array[i].id}' AND BookMark = 1;", null)
+
+            if(cursor.count >0){
+                cursor.moveToFirst()
+                var id = cursor.getString(0).toInt()
+                var name = cursor.getString(1)
+                var keyword = cursor.getString(2)
+                var date = cursor.getString(3).toInt()
+                var count = cursor.getString(4).toInt()
+                var score = cursor.getString(5).toFloat()
+                var bookmark = cursor.getString(6).toInt()
+                var startdate = cursor.getString(7)
+                var lastdate = cursor.getString(8)
+                var summarylong = cursor.getString(9)
+                var short1 = cursor.getString(10)
+                var short2 = cursor.getString(11)
+                var short3 = cursor.getString(12)
+
+                var challenge = Challenge()
+                challenge.id = id
+                challenge.name = name
+                challenge.keyword = keyword
+                challenge.date = date
+                challenge.count = count
+                challenge.score = score
+                challenge.bookmark = bookmark
+                challenge.StartDate = startdate
+                challenge.LastDate = lastdate
+                challenge.SummaryLong = summarylong
+                challenge.Short1 = short1
+                challenge.Short2 = short2
+                challenge.Short3 = short3
+                anyArray += challenge
+            } else {
+                continue
+            }
+        }
+
+        for (i in 0..4 step 1)
+        {
+            //각 카테고리의 첫번쨰 데이터 받아옴
+            cursor = db.rawQuery("SELECT * FROM Challenge WHERE ID = '${Array[i].id}' AND BookMark = 0;", null)
+
+            if(cursor.count >0){
+                cursor.moveToFirst()
+                var id = cursor.getString(0).toInt()
+                var name = cursor.getString(1)
+                var keyword = cursor.getString(2)
+                var date = cursor.getString(3).toInt()
+                var count = cursor.getString(4).toInt()
+                var score = cursor.getString(5).toFloat()
+                var bookmark = cursor.getString(6).toInt()
+                var startdate = cursor.getString(7)
+                var lastdate = cursor.getString(8)
+                var summarylong = cursor.getString(9)
+                var short1 = cursor.getString(10)
+                var short2 = cursor.getString(11)
+                var short3 = cursor.getString(12)
+
+                var challenge = Challenge()
+                challenge.id = id
+                challenge.name = name
+                challenge.keyword = keyword
+                challenge.date = date
+                challenge.count = count
+                challenge.score = score
+                challenge.bookmark = bookmark
+                challenge.StartDate = startdate
+                challenge.LastDate = lastdate
+                challenge.SummaryLong = summarylong
+                challenge.Short1 = short1
+                challenge.Short2 = short2
+                challenge.Short3 = short3
+                anyArray += challenge
+            } else {
+                continue
+            }
+        }
         return anyArray
     }
 }

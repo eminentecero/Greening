@@ -1,7 +1,6 @@
 package com.example.greening
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,13 +10,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ChallengeActivityEtc : AppCompatActivity() {
+class ChallengeActivityRecommand : AppCompatActivity() {
     // 변수 선언
     // 뒤로가기
     lateinit var imgBack : ImageView
 
     // 제목
-    lateinit var etcChallenge : TextView
+    lateinit var naturalChallenge : TextView
     lateinit var expln : TextView
 
     // 챌린지 목록
@@ -83,15 +82,16 @@ class ChallengeActivityEtc : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge_etc_9)
+        setContentView(R.layout.activity_challenge_recommand)
 
         //DB 객체 연결
         db = DBHelper(this)
 
+
         // 아이디 연결
         imgBack = findViewById(R.id.imgBack)
-        etcChallenge = findViewById(R.id.etcChallenge)
-        expln = findViewById(R.id.explnEtc)
+        naturalChallenge = findViewById(R.id.recommandChallenge)
+        expln = findViewById(R.id.expln)
 
         // 챌린지 아이디 연결
         challenge1 = findViewById(R.id.challenge1)
@@ -151,59 +151,58 @@ class ChallengeActivityEtc : AppCompatActivity() {
         // 플러팅 버튼 - 챌린지 작성하기
         addChallenge = findViewById(R.id.addChallenge)
 
-        var keyword = "기타"
+        var keyword = "추천"
+        var id = "swim"
 
-        //var keyword = intent.getStringExtra("keyword").toString()
-        var id = intent.getStringExtra("id").toString()
-
+        //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
         var Array: Array<Challenge>
-        Array = db.ChallengeList(keyword, id)
+        Array = db.Challengecategory()
+
         isVisible(Array)
 
-        Log.d("태그", Array[0].State.toString())
 
         imgBack.setOnClickListener {
-            finish()
+            var intent = Intent(this, ChallengeActivitySelect::class.java)
+            startActivity(intent)
         }
-
         MarkButton1.setOnClickListener{
             db.ChallengeMark(Array[0])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton2.setOnClickListener{
             db.ChallengeMark(Array[1])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton3.setOnClickListener{
             db.ChallengeMark(Array[2])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton4.setOnClickListener{
             db.ChallengeMark(Array[3])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton5.setOnClickListener{
             db.ChallengeMark(Array[4])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton6.setOnClickListener{
             db.ChallengeMark(Array[5])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton7.setOnClickListener{
             db.ChallengeMark(Array[6])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
         MarkButton8.setOnClickListener{
             db.ChallengeMark(Array[7])
-            Array = db.ChallengeList(keyword, id)
+            Array = db.ChallengeCategoryMark(Array)
             isVisible(Array)
         }
 

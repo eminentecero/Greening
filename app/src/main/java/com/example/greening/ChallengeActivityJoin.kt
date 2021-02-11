@@ -2,7 +2,6 @@ package com.example.greening
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +50,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         progressChallenge = findViewById(R.id.progressChallenge)
         calendar_view = findViewById(R.id.calendarChallenge)
         btnDoneChallenge = findViewById(R.id.btnDoneChallenge)
+
         var UserId = intent.getStringExtra("id")
 
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
@@ -59,7 +59,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(UserId.toString())
 
-        var Id = intent.getStringExtra("ChallengeId")?.toInt()
+        var Id = intent.getIntExtra("ChallengeId",0)
 
         var challenge : Challenge = db.Challengereturn(Id)
         nameChallenge.setText(challenge.name)
@@ -68,7 +68,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
 
         //캘린더에 넣을 날짜 받아오기
         var array = arrayOf<Dates>()
-        array = db.ChallengeDay(Id.toString())
+        array = db.ChallengeDay(Id)
 
         if(array.size != 0)
         {
@@ -101,7 +101,7 @@ class ChallengeActivityJoin : AppCompatActivity() {
         }
 
         imgBack.setOnClickListener {
-            array = db.ChallengeDay(Id.toString())
+            array = db.ChallengeDay(Id)
 
             if(array.size != 0)
             {

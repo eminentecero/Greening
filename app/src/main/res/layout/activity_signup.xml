@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="회원가입"
             android:textSize="23dp"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/mint" />
     </LinearLayout>
 
 
@@ -33,7 +33,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <EditText
             android:id="@+id/idEdit"
@@ -56,7 +56,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <Button
             android:id="@+id/button_idCheck"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:text="닉네임   "
-            android:textColor="@color/teal_700"
+            android:textColor="@color/mint"
             android:textSize="15dp" />
 
         <EditText
@@ -102,7 +102,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <Button
             android:id="@+id/button_nicknameCheck"
@@ -125,7 +125,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <EditText
             android:id="@+id/passwordEdit"
@@ -146,7 +146,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <EditText
             android:id="@+id/passwordOkEdit"

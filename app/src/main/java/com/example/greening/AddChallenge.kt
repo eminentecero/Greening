@@ -93,9 +93,6 @@ class AddChallenge : AppCompatActivity(){
             }
         }
 
-
-
-
         var startdate = intent.getStringExtra("dayFirst").toString()
         var lastdate = intent.getStringExtra("dayLast").toString()
         var whileDate = intent.getIntExtra("date", 0)

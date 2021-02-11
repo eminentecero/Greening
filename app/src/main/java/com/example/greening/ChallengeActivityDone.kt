@@ -50,7 +50,7 @@ class ChallengeActivityDone : AppCompatActivity() {
         rate = findViewById(R.id.rate)
         btnRate = findViewById(R.id.btnRate)
 
-        //var UserId = intent.getStringExtra("id")
+        var UserId = intent.getStringExtra("id")
 
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         //var User : Person = Person()
@@ -59,7 +59,6 @@ class ChallengeActivityDone : AppCompatActivity() {
         //User = db.DataIn(UserId.toString())
 
         var Id: String? = intent.getStringExtra("ChallengeId")
-        Id = "7"
         var challenge:Challenge = Challenge()
         challenge = db.Challengereturn(Id!!.toInt())
 
@@ -73,11 +72,6 @@ class ChallengeActivityDone : AppCompatActivity() {
 
         }
 
-        
-        //다음기간에도 참여하기 버튼
-        btnReJoinChallenge.setOnClickListener {
-
-        }
 
         imgBack.setOnClickListener{
             var intent = Intent(this, ChallengeActivityJoin::class.java)

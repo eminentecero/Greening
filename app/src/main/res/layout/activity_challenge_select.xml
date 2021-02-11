@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_challenge_bg"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".LoginActivity">
+
+    tools:context=".Challenge">
 
     <!--themes.xml 파일에서 actionbar는 noactionbar로 해주세요~~ -->
 
@@ -26,15 +28,11 @@
     <!-- 자원 카드뷰 : cardResource -->
     <!-- 기타 카드뷰 : cardOthers -->
 
-    <!-- 그리고.. 저 카드뷰들을 정사각형으로 하고 싶은데 어떻게 하는지 아시면.. 수정 부탁드려요🥰 -->
-
-
     <!-- Title -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="8">
-        <!-- weight가 8인데 왜 이렇게 나올까요..? 이건 2같은데..ㅠㅠ -->
+        android:layout_height="0dp"
+        android:layout_weight="1.8">
 
         <TextView
             android:id="@+id/titleChallenge"
@@ -43,7 +41,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="36dp"
             android:text="챌린지"
-            android:textSize="30sp" />
+            android:textColor="@color/white"
+
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/explnChallenge"
@@ -51,29 +52,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleChallenge"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:text="다른 그리너들과 함께 환경 보호 챌린지를 진행해보세요!"
+            android:textColor="@color/white"
+
             android:textSize="14sp" />
 
     </RelativeLayout>
 
     <!-- 챌린지 유형 -->
     <GridLayout
-        android:layout_weight="2"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.2"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:columnOrderPreserved="false"
+        android:orientation="horizontal"
         android:padding="4dp"
-        android:orientation="horizontal">
+        android:rowCount="3">
 
         <!-- colunm 0, row 0 -->
         <!-- 음식 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/selectFood"
+            android:id="@+id/cardFood"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -91,25 +94,33 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@android:color/darker_gray" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chal_food"
+                    android:padding="25dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="5dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="35dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="30dp"
                     android:text="음식"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
+                    android:textColor="@color/black"
+
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -118,7 +129,7 @@
         <!-- colunm 1, row 0 -->
         <!-- 플라스틱 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/selectPlastic"
+            android:id="@+id/cardPlastic"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -131,30 +142,38 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@android:color/darker_gray" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chal_plastic"
+                    android:padding="25dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="35dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="30dp"
                     android:text="플라스틱"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
+                    android:textColor="@color/black"
+
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -163,7 +182,7 @@
         <!-- colunm 0, row 1 -->
         <!-- 운동 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/selectExercise"
+            android:id="@+id/cardExercise"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -176,30 +195,38 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@android:color/darker_gray" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chal_exercise"
+                    android:padding="25dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="35dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="30dp"
                     android:text="운동"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
+                    android:textColor="@color/black"
+
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -208,7 +235,7 @@
         <!-- colunm 1, row 1 -->
         <!-- 자원 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/selectNatural"
+            android:id="@+id/cardResource"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -221,30 +248,38 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@android:color/darker_gray" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chal_resource"
+                    android:padding="25dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="35dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="30dp"
                     android:text="자원"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
+                    android:textColor="@color/black"
+
                     android:textSize="15sp" />
             </FrameLayout>
 
@@ -253,7 +288,7 @@
         <!-- colunm 0, row 2 -->
         <!-- 기타 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/selectEtc"
+            android:id="@+id/cardOthers"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -266,36 +301,113 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <ImageView
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@android:color/darker_gray" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chal_others"
+                    android:padding="25dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="35dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="30dp"
                     android:text="기타"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
                     android:text="n 챌린지"
+                    android:textColor="@color/black"
+
                     android:textSize="15sp" />
             </FrameLayout>
-
         </androidx.cardview.widget.CardView>
-
     </GridLayout>
+
+    <!-- 하단 내비게이션 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_bottomnavigation" >
+
+        <!-- 홈 -->
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_home_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_challenge"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark" />
+
+        <!-- 챌린지 -->
+        <ImageView
+            android:id="@+id/nav_challenge"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_medal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_my"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_home"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/green" />
+
+        <!-- 마이페이지 -->
+        <ImageView
+            android:id="@+id/nav_my"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_setting"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_challenge"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark" />
+
+        <!-- 설정 -->
+        <ImageView
+            android:id="@+id/nav_setting"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_my"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

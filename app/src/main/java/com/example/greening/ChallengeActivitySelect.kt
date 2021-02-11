@@ -22,7 +22,7 @@ class ChallengeActivitySelect : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge_1)
+        setContentView(R.layout.activity_challenge_select)
 
         // 아이디와 변수 연결
         // 제목
@@ -30,11 +30,11 @@ class ChallengeActivitySelect : AppCompatActivity() {
         explnChallenge = findViewById(R.id.explnChallenge)
 
         // 선택 보더
-        selectFood = findViewById(R.id.selectFood)
-        selectPlastic = findViewById(R.id.selectPlastic)
-        selectExercise = findViewById(R.id.selectExercise)
-        selectNatural = findViewById(R.id.selectNatural)
-        selectEtc = findViewById(R.id.selectEtc)
+        selectFood = findViewById(R.id.cardFood)
+        selectPlastic = findViewById(R.id.cardPlastic)
+        selectExercise = findViewById(R.id.cardExercise)
+        selectNatural = findViewById(R.id.cardResource)
+        selectEtc = findViewById(R.id.cardOthers)
 
 
         // 보더 클릭 이벤트 실행(화면 전환)
@@ -45,27 +45,27 @@ class ChallengeActivitySelect : AppCompatActivity() {
         }
 
         selectPlastic.setOnClickListener {
-            // 인텐트 값으로 화면 전환
-            //var intent = Intent(this, SignupActivity::class.java)
-            //tartActivity(intent)
+            //인텐트 값으로 화면 전환
+            var intent = Intent(this, ChallengeActivityPlastic::class.java)
+            startActivity(intent)
         }
 
         selectExercise.setOnClickListener {
-            // 인텐트 값으로 화면 전환
-            //var intent = Intent(this, SignupActivity::class.java)
-            //tartActivity(intent)
+            //인텐트 값으로 화면 전환
+            var intent = Intent(this, ChallengeActivityExercise::class.java)
+            startActivity(intent)
         }
 
         selectNatural.setOnClickListener {
-            // 인텐트 값으로 화면 전환
-            //var intent = Intent(this, SignupActivity::class.java)
-            //tartActivity(intent)
+            //인텐트 값으로 화면 전환
+            var intent = Intent(this, ChallengeActivityNatural::class.java)
+            startActivity(intent)
         }
 
         selectEtc.setOnClickListener {
-            // 인텐트 값으로 화면 전환
-            //var intent = Intent(this, SignupActivity::class.java)
-            //tartActivity(intent)
+            //인텐트 값으로 화면 전환
+            var intent = Intent(this, ChallengeActivityEtc::class.java)
+            startActivity(intent)
         }
     }
 }

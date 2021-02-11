@@ -34,7 +34,7 @@ class ChallengeActivityNojoin : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge_done_5)
+        setContentView(R.layout.activity_challenge_no_join_3)
 
         //DB 객체 연결
         db = DBHelper(this)
@@ -56,20 +56,20 @@ class ChallengeActivityNojoin : AppCompatActivity() {
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(UserId.toString())
 
-        var ChallengeId = intent.getStringExtra("challengeid")
+        var ChallengeId = intent.getIntExtra("ChallengeId",0)
 
         var challenge:Challenge = Challenge()
-        challenge = db.Challengereturn(ChallengeId!!.toInt())
+        challenge = db.Challengereturn(ChallengeId)
 
         nameChallenge.setText(challenge.name)
         numPeople.setText(db.ChallengeJoinCount(challenge))
+        detailChallenge.setText(challenge.SummaryLong)
         period.setText("${challenge.StartDate} - ${challenge.LastDate}")
         rate.setText(challenge.score.toString())
 
 
         imgBack.setOnClickListener{
-            var intent = Intent(this, ChallengeActivityJoin::class.java)
-            startActivity(intent)
+            finish()
         }
 
         btnJoinChallenge.setOnClickListener {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivitySettiings"
+
+    android:background="@color/gray_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 제목 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="설정"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <!-- 리스트 뷰 -->
+        <ListView
+            android:layout_marginTop="8dp"
+            android:id="@+id/settingList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 이스터에그 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pray for\nGreening Programmers and Designers..."
+        android:layout_above="@+id/nav"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+
+        android:textColor="@color/gray_dark"/>
+
+    <!-- 하단 내비게이션 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ic_bottomnavigation">
+
+        <!-- 홈 -->
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_home_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_challenge"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 챌린지 -->
+        <ImageView
+            android:id="@+id/nav_challenge"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_medal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_my"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_home"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 마이페이지 -->
+        <ImageView
+            android:id="@+id/nav_my"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_setting"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_challenge"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 설정 -->
+        <ImageView
+            android:id="@+id/nav_setting"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/nav_my"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

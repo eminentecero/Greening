@@ -135,13 +135,14 @@ class ChallengeListDone : AppCompatActivity() {
         addChallenge = findViewById(R.id.addChallenge)
 
         var keyword = "all"
-        var id = "swim"
+        //유저 데이터 들고 오기
+        var id = intent.getStringExtra("id")
 
         //var keyword = intent.getStringExtra("keyword").toString()
         //var id = intent.getStringExtra("id").toString()
 
         var Array: Array<Challenge>
-        Array = db.ChallengeListDone(keyword, id)
+        Array = db.ChallengeListDone(keyword, id.toString())
 
         isVisible(Array)
         imgBack.setOnClickListener {

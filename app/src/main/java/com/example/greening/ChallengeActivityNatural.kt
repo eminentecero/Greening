@@ -1,6 +1,7 @@
 package com.example.greening
 
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -65,7 +66,14 @@ class ChallengeActivityNatural : AppCompatActivity() {
     lateinit var DateTextView7:TextView
     lateinit var DateTextView8:TextView
 
-
+    lateinit var MarkButton1:ImageView
+    lateinit var MarkButton2:ImageView
+    lateinit var MarkButton3:ImageView
+    lateinit var MarkButton4:ImageView
+    lateinit var MarkButton5:ImageView
+    lateinit var MarkButton6:ImageView
+    lateinit var MarkButton7:ImageView
+    lateinit var MarkButton8:ImageView
 
     //데이터 베이스 변수
     internal lateinit var db:DBHelper
@@ -79,9 +87,6 @@ class ChallengeActivityNatural : AppCompatActivity() {
 
         //DB 객체 연결
         db = DBHelper(this)
-
-
-        var id = "swim"
 
         // 아이디 연결
         imgBack = findViewById(R.id.imgBack)
@@ -134,28 +139,234 @@ class ChallengeActivityNatural : AppCompatActivity() {
         DateTextView7 = findViewById(R.id.DateTextView7)
         DateTextView8 = findViewById(R.id.DateTextView8)
 
+        MarkButton1 = findViewById(R.id.MarkButton1)
+        MarkButton2 = findViewById(R.id.MarkButton2)
+        MarkButton3 = findViewById(R.id.MarkButton3)
+        MarkButton4 = findViewById(R.id.MarkButton4)
+        MarkButton5 = findViewById(R.id.MarkButton5)
+        MarkButton6 = findViewById(R.id.MarkButton6)
+        MarkButton7 = findViewById(R.id.MarkButton7)
+        MarkButton8 = findViewById(R.id.MarkButton8)
+
         // 플러팅 버튼 - 챌린지 작성하기
         addChallenge = findViewById(R.id.addChallenge)
 
         var keyword = "자원"
 
         //var keyword = intent.getStringExtra("keyword").toString()
-        //var id = intent.getStringExtra("id").toString()
+        var id = intent.getStringExtra("id").toString()
 
         var Array: Array<Challenge>
         Array = db.ChallengeList(keyword, id)
-        Log.d("챌린지 ","${Array[0].name}+${Array[0].StartDate}+${Array[0].LastDate}")
         isVisible(Array)
 
-        imgBack.setOnClickListener {
-            var intent = Intent(this, ChallengeActivitySelect::class.java)
+        Log.d("태그", Array[0].State.toString())
+
+        addChallenge.setOnClickListener{
+            var intent = Intent(this, ChallengeActivityFood::class.java)
+            intent.putExtra("id", id)
             startActivity(intent)
         }
 
-        challenge1.setOnClickListener {
-            //var intent = Intent(this, ChallengeActivityNojoin::class.java)
-            //startActivity(intent)
+        imgBack.setOnClickListener {
+            finish()
         }
+
+        MarkButton1.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton2.setOnClickListener{
+            db.ChallengeMark(Array[1])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton3.setOnClickListener{
+            db.ChallengeMark(Array[2])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton4.setOnClickListener{
+            db.ChallengeMark(Array[3])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton5.setOnClickListener{
+            db.ChallengeMark(Array[4])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton6.setOnClickListener{
+            db.ChallengeMark(Array[5])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton7.setOnClickListener{
+            db.ChallengeMark(Array[6])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton8.setOnClickListener{
+            db.ChallengeMark(Array[7])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+
+
+        challenge1.setOnClickListener {
+            if(Array[0].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[0].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[0].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[0].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[0].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge2.setOnClickListener {
+            if(Array[1].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[1].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[1].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[1].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[1].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge3.setOnClickListener {
+            if(Array[2].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[2].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[2].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[2].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[2].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge4.setOnClickListener {
+            if(Array[3].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[3].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[3].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[3].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[3].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge5.setOnClickListener {
+            if(Array[4].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[4].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[4].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[4].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[4].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge6.setOnClickListener {
+            if(Array[5].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[5].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[5].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[5].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[5].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge7.setOnClickListener {
+            if(Array[6].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[6].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[6].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[6].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[6].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+        challenge8.setOnClickListener {
+            if(Array[7].State == 0)
+            {
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("ChallengeId", Array[7].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else if(Array[7].State == 1){
+                var intent = Intent(this, ChallengeActivityDone::class.java)
+                intent.putExtra("ChallengeId", Array[7].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, ChallengeActivityNojoin::class.java)
+                intent.putExtra("ChallengeId", Array[7].id)
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+        }
+
     }
 
     fun isVisible(Array:Array<Challenge>)
@@ -180,6 +391,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -191,6 +407,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -202,6 +423,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -213,6 +439,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
+            if(Array[3].State == 1){
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -224,6 +455,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
+            if(Array[4].State == 1){
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
@@ -236,6 +472,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
+            if(Array[5].State == 1){
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
             DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
@@ -247,6 +488,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView7.setText(Array[6].name)
             }
             KeyWordTextView7.setText(Array[6].ShortSummary())
+            if(Array[6].State == 1){
+                MarkButton7.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton7.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView7.setText("${db.ChallengeJoinCount(Array[6])}")
             DateTextView7.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
 
@@ -258,6 +504,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView8.setText(Array[7].name)
             }
             KeyWordTextView8.setText(Array[7].ShortSummary())
+            if(Array[7].State == 1){
+                MarkButton8.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton8.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView8.setText("${db.ChallengeJoinCount(Array[7])}")
             DateTextView8.setText("${Array[7].StartDate} - ${Array[7].LastDate}")
         }else if(Array.size>6){
@@ -279,6 +530,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -290,6 +546,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -301,6 +562,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -312,6 +578,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
+            if(Array[3].State == 1){
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -323,6 +594,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
+            if(Array[4].State == 1){
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
@@ -335,6 +611,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
+            if(Array[5].State == 1){
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
             DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
@@ -346,6 +627,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView7.setText(Array[6].name)
             }
             KeyWordTextView7.setText(Array[6].ShortSummary())
+            if(Array[6].State == 1){
+                MarkButton7.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton7.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView7.setText("${db.ChallengeJoinCount(Array[6])}")
             DateTextView7.setText("${Array[6].StartDate} - ${Array[6].LastDate}")
 
@@ -368,6 +654,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -379,6 +670,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -390,6 +686,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -401,6 +702,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
+            if(Array[3].State == 1){
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -412,6 +718,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
+            if(Array[4].State == 1){
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
@@ -424,6 +735,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView6.setText(Array[5].name)
             }
             KeyWordTextView6.setText(Array[5].ShortSummary())
+            if(Array[5].State == 1){
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton6.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView6.setText("${db.ChallengeJoinCount(Array[5])}")
             DateTextView6.setText("${Array[5].StartDate} - ${Array[5].LastDate}")
 
@@ -446,6 +762,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -457,6 +778,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -468,6 +794,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -479,6 +810,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
+            if(Array[3].State == 1){
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -490,6 +826,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView5.setText(Array[4].name)
             }
             KeyWordTextView5.setText(Array[4].ShortSummary())
+            if(Array[4].State == 1){
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton5.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView5.setText("${db.ChallengeJoinCount(Array[4])}")
             DateTextView5.setText("${Array[4].StartDate} - ${Array[4].LastDate}")
 
@@ -504,14 +845,19 @@ class ChallengeActivityNatural : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if (Array[0].State == 0) {
-                NameTextView1.setText(Array[0].name + " - 참여중")
+            if(Array[0].State == 0){
+                NameTextView1.setText(Array[0].name+" - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -523,6 +869,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -534,6 +885,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -545,6 +901,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView4.setText(Array[3].name)
             }
             KeyWordTextView4.setText(Array[3].ShortSummary())
+            if(Array[3].State == 1){
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton4.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView4.setText("${db.ChallengeJoinCount(Array[3])}")
             DateTextView4.setText("${Array[3].StartDate} - ${Array[3].LastDate}")
 
@@ -559,14 +920,19 @@ class ChallengeActivityNatural : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if (Array[0].State == 0) {
-                NameTextView1.setText(Array[0].name + " - 참여중")
+            if(Array[0].State == 0){
+                NameTextView1.setText(Array[0].name+" - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
 
@@ -578,6 +944,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
 
@@ -589,6 +960,11 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView3.setText(Array[2].name)
             }
             KeyWordTextView3.setText(Array[2].ShortSummary())
+            if(Array[2].State == 1){
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton3.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView3.setText("${db.ChallengeJoinCount(Array[2])}")
             DateTextView3.setText("${Array[2].StartDate} - ${Array[2].LastDate}")
 
@@ -603,16 +979,23 @@ class ChallengeActivityNatural : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if (Array[0].State == 0) {
-                NameTextView1.setText(Array[0].name + " - 참여중")
+            if(Array[0].State == 0){
+                NameTextView1.setText(Array[0].name+" - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
+            Log.d("태그", Array[0].State.toString())
+
 
             if(Array[1].State == 0){
                 NameTextView2.setText(Array[1].name+" - 참여중")
@@ -622,8 +1005,14 @@ class ChallengeActivityNatural : AppCompatActivity() {
                 NameTextView2.setText(Array[1].name)
             }
             KeyWordTextView2.setText(Array[1].ShortSummary())
+            if(Array[1].State == 1){
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton2.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView2.setText("${db.ChallengeJoinCount(Array[1])}")
             DateTextView2.setText("${Array[1].StartDate} - ${Array[1].LastDate}")
+            Log.d("태그", Array[0].State.toString())
 
 
         }else if(Array.size>0)
@@ -638,14 +1027,19 @@ class ChallengeActivityNatural : AppCompatActivity() {
             challenge7.setVisibility(View.GONE)
             challenge8.setVisibility(View.GONE)
 
-            if (Array[0].State == 0) {
-                NameTextView1.setText(Array[0].name + " - 참여중")
+            if(Array[0].State == 0){
+                NameTextView1.setText(Array[0].name+" - 참여중")
             }else if(Array[0].State == 1){
                 NameTextView1.setText(Array[0].name+" - 참여완료")
             }else{
                 NameTextView1.setText(Array[0].name)
             }
             KeyWordTextView1.setText(Array[0].ShortSummary())
+            if(Array[0].State == 1){
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_24)
+            }else{
+                MarkButton1.setImageResource(R.drawable.ic_baseline_star_border_24)
+            }
             JoinTextView1.setText("${db.ChallengeJoinCount(Array[0])}")
             DateTextView1.setText("${Array[0].StartDate} - ${Array[0].LastDate}")
         }else{

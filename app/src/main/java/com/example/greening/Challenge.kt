@@ -84,8 +84,51 @@ class Challenge {
         this.LastDate = lastdate
         this.SummaryLong = summaryLong
         this.Short1 = Short1
-        this.Short2 = Short2
-        this.Short3 = Short3
+        if(Short2 ==null){
+            this.Short2 = ""
+        }else{
+            this.Short2 = Short2
+        }
+        if(Short3 ==null){
+            this.Short3 = ""
+        }else{
+            this.Short3 = Short2
+        }
+        State
+    }
+    constructor(id: Int, name: String, keyword: String, date: Int, count:Int, Score:Float, bookmark:Int,
+    startDate:String, lastdate : String, summaryLong:String, Short1: String, Short2:String){
+        this.id = id
+        this.name = name
+        this.date = date
+        this.keyword = keyword
+        this.count = count
+        this.score = score
+        this.bookmark = bookmark
+        this.StartDate = startDate
+        this.LastDate = lastdate
+        this.SummaryLong = summaryLong
+        this.Short1 = Short1
+        if(Short2 ==null){
+            this.Short2 = ""
+        }else{
+            this.Short2 = Short2
+        }
+        State
+    }
+    constructor(id: Int, name: String, keyword: String, date: Int, count:Int, Score:Float, bookmark:Int,
+    startDate:String, lastdate : String, summaryLong:String, Short1: String){
+        this.id = id
+        this.name = name
+        this.date = date
+        this.keyword = keyword
+        this.count = count
+        this.score = score
+        this.bookmark = bookmark
+        this.StartDate = startDate
+        this.LastDate = lastdate
+        this.SummaryLong = summaryLong
+        this.Short1 = Short1
         State
     }
 

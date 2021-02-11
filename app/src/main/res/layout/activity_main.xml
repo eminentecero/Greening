@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="로그인"
             android:textSize="23dp"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/mint" />
     </LinearLayout>
 
 
@@ -36,7 +36,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <EditText
             android:id="@+id/editID"
@@ -59,7 +59,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/mint"/>
 
         <EditText
             android:id="@+id/editPassWord"

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".ChallengeActivityJoin">
+    android:background="@drawable/ic_challenge_join_bg"
+    tools:context=".ChallengeActivityJoin" >
 
     <!-- 챌린지 목록 화면에서 각 챌린지를 눌렀을 때 나오는 화면입니다. -->
     <!-- 진행중인 챌린지!! -->
@@ -28,8 +29,8 @@
     <!-- Title -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7.5">
+        android:layout_height="0dp"
+        android:layout_weight="2.5">
 
         <!-- 뒤로가기: 챌린지 화면으로 이동 -->
         <ImageView
@@ -38,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@color/white"/>
 
         <TextView
             android:id="@+id/nameChallenge"
@@ -48,7 +50,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:text="챌린지 제목"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/numPeopleChallenge"
@@ -62,55 +67,66 @@
             android:drawablePadding="6dp"
             android:gravity="center"
             android:text="N"
-            android:textSize="14sp" />
+            android:textSize="14sp"
 
-        <!-- 챌린지 달성률 -->
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"/>
+
         <TextView
             android:id="@+id/periodChallenge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/numPeopleChallenge"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginTop="4dp"
             android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
             android:drawablePadding="6dp"
             android:gravity="center"
             android:text="2021.01.01 - 01.31"
-            android:textSize="14sp" />
+            android:textSize="14sp"
 
-        <ProgressBar
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"/>
+
+        <!-- 챌린지 달성률 -->
+        <com.dinuscxj.progressbar.CircleProgressBar
             android:id="@+id/progressChallenge"
-            style="?android:attr/progressBarStyle"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="64dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            app:progress_text_size="20sp"
+            app:style="solid_line"
+            app:progress_stroke_width="5dp "
+            app:progress_stroke_cap="round"
+            app:progress_start_color="@color/white"
+            app:progress_end_color="@color/white"
+            app:progress_text_color="@color/white"
+            app:progress_background_color="@color/mint_light"/>
 
     </RelativeLayout>
 
     <!-- 챌린지 내용 & 버튼 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="2.5"
+        android:layout_weight="7.5"
         android:weightSum="8">
 
         <!-- 달력 -->
-        <!-- 오늘의 챌린지 완료 -->
         <sun.bob.mcalendarview.MCalendarView
             android:id="@+id/calendarChallenge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnDoneChallenge"
+            app:layout_constraintBottom_toTopOf="@+id/btnJoinChallenge"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".ChallengeActivityJoin" />
@@ -123,12 +139,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/button_round"
+            android:background="@drawable/rounding_12dp"
             android:text="오늘의 챌린지 완료"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:textStyle="bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

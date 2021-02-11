@@ -234,38 +234,58 @@ class HomeActivity  : AppCompatActivity() {
 
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join1Btn.setOnClickListener {
-            categoryArray[0].joinUP()
+            if(db.UserjoinCount(User)>=3){
+                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
+            }else{
+                categoryArray[0].joinUP()
                 db.join(categoryArray[0], User)
                 array = db.ChallengeIn(User)
                 ingVisible(array, User)
+            }
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join2Btn.setOnClickListener {
-            categoryArray[1].joinUP()
-            db.join(categoryArray[1], User)
-            array = db.ChallengeIn(User)
-            ingVisible(array, User)
+            if(db.UserjoinCount(User)>=3){
+                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
+            }else {
+                categoryArray[1].joinUP()
+                db.join(categoryArray[1], User)
+                array = db.ChallengeIn(User)
+                ingVisible(array, User)
+            }
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join3Btn.setOnClickListener {
-            categoryArray[2].count +=1
-            db.join(categoryArray[2], User)
-            array = db.ChallengeIn(User)
-            ingVisible(array, User)
+            if(db.UserjoinCount(User)>=3){
+                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
+            }else {
+                categoryArray[2].count += 1
+                db.join(categoryArray[2], User)
+                array = db.ChallengeIn(User)
+                ingVisible(array, User)
+            }
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join4Btn.setOnClickListener {
-            categoryArray[3].joinUP()
-            db.join(categoryArray[3], User)
-            array = db.ChallengeIn(User)
-            ingVisible(array, User)
+            if(db.UserjoinCount(User)>=3){
+                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
+            }else {
+                categoryArray[3].joinUP()
+                db.join(categoryArray[3], User)
+                array = db.ChallengeIn(User)
+                ingVisible(array, User)
+            }
         }
         //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
         join5Btn.setOnClickListener {
-            categoryArray[4].joinUP()
-            db.join(categoryArray[4], User)
-            array = db.ChallengeIn(User)
-            ingVisible(array, User)
+            if(db.UserjoinCount(User)>=3){
+                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
+            }else {
+                categoryArray[4].joinUP()
+                db.join(categoryArray[4], User)
+                array = db.ChallengeIn(User)
+                ingVisible(array, User)
+            }
         }
     }
 
