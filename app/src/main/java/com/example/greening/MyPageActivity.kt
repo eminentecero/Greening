@@ -266,7 +266,7 @@ class MyPageActivity  : AppCompatActivity() {
 
     //관심 챌린지
     private fun recomVisible(categoryArray: Array<Challenge>) {
-        if(categoryArray.count() == 3)
+        if(categoryArray.size == 3)
         {
             //챌린지 갯수가 3개일 때
             recom1.setVisibility(View.VISIBLE)
@@ -288,7 +288,7 @@ class MyPageActivity  : AppCompatActivity() {
             count3.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
 
-        }else if(categoryArray.count() == 2){
+        }else if(categoryArray.size == 2){
             //챌린지 갯수가 2개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
@@ -304,7 +304,7 @@ class MyPageActivity  : AppCompatActivity() {
             count2.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
-        }else if(categoryArray.count() == 1){
+        }else if(categoryArray.size == 1){
             //챌린지 갯수가 1개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.GONE)

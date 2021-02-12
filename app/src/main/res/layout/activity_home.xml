@@ -504,7 +504,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="15dp"
-                        android:text="에코백 사용 챌린지"
+                        android:text="두번째 사용 챌린지"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold" />
@@ -601,7 +601,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="15dp"
-                        android:text="물 아껴쓰기 챌린지"
+                        android:text="물 세번쨰 챌린지"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold" />
@@ -795,7 +795,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
-                        android:text="에코백 사용 챌린지"
+                        android:text="다섯번쨰 "
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>

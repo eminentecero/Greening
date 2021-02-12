@@ -80,13 +80,13 @@ class ChallengeActivityDone : AppCompatActivity() {
                     var btnCancelRD = dialog.findViewById<Button>(R.id.btnCancelRD)
                     var btnOk = dialog.findViewById<Button>(R.id.button_join_ok)
 
-
                     btnOk.setOnClickListener(object: View.OnClickListener {
                         override fun onClick(view:View) {
                             if(Score > 0.0f)
                             {
                                 challenge.score = Score
                                 db.ChallengeReview(challenge, UserId.toString())
+                                rate.setText("${db.ChallengeScoreCalculate(challenge)}")
                                 dialog.dismiss()
                             }else{
                                 Toast.makeText(applicationContext, "챌린지 점수를 입력해주세요.",

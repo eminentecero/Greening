@@ -1,6 +1,7 @@
 package com.example.greening
 
 import android.content.Intent
+import android.database.sqlite.SQLiteException
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -53,8 +54,8 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_LONG)
                         .show()
             } else
+
             // 비밀번호 입력과 비밀번호 확인이 일치하면
-            //수영 : String끼리는 equals로 동일한 지 확인해야해요
                 if (password.equals(passwordOk)) {
                     var person1 = Person(nicknameEdit.text.toString(), idEdit.text.toString(), passwordEdit.text.toString())
                     db.addPerson(person1)
@@ -80,44 +81,53 @@ class SignupActivity : AppCompatActivity() {
         //닉네임 중복 확인하기
         button_nicknameCheck.setOnClickListener{
             //공백 확인
-            if(!(nicknameEdit.text.toString().equals(""))) {
-                var strnickname : String
-                strnickname = db.checkNickname(nicknameEdit.text.toString())
+            try {
+                if (!(nicknameEdit.text.toString().equals(""))) {
+                    var strnickname: String
+                    strnickname = db.checkNickname(nicknameEdit.text.toString())
 
-                if (!(nicknameEdit.text.toString().equals(strnickname))) {
-                    Toast.makeText(applicationContext, "입력하신 닉네임은 사용이 가능합니다.", Toast.LENGTH_LONG)
+                    if (!(nicknameEdit.text.toString().equals(strnickname))) {
+                        Toast.makeText(applicationContext,
+                            "입력하신 닉네임은 사용이 가능합니다.",
+                            Toast.LENGTH_LONG)
                             .show()
-                } else {
-                    Toast.makeText(applicationContext, "다른 닉네임을 입력해주세요.", Toast.LENGTH_LONG).show()
-                    nicknameEdit.setText("")
+                    } else {
+                        Toast.makeText(applicationContext, "다른 닉네임을 입력해주세요.", Toast.LENGTH_LONG)
+                            .show()
+                        nicknameEdit.setText("")
+                    }
                 }
+            }catch (e: SQLiteException){
+                Toast.makeText(applicationContext, "입력하신 닉네임은 사용이 가능합니다.", Toast.LENGTH_LONG)
+                    .show()
             }
             
         }
         
         //아이디 중복 확인하기
         button_idCheck.setOnClickListener {
+            try {
+                //공백 확인
+                if(!(idEdit.text.toString().equals(""))) {
+                    var strId : String
+                    strId = db.checkID(idEdit.text.toString())
 
-            //공백 확인
-            if(!(idEdit.text.toString().equals(""))) {
-                var strId : String
-                strId = db.checkID(idEdit.text.toString())
-
-                if (!(idEdit.text.toString().equals(strId))) {
-                    Toast.makeText(applicationContext, "입력하신 id는 사용이 가능합니다.", Toast.LENGTH_LONG)
+                    if (!(idEdit.text.toString().equals(strId))) {
+                        Toast.makeText(applicationContext, "입력하신 id는 사용이 가능합니다.", Toast.LENGTH_LONG)
                             .show()
-                } else {
-                    Toast.makeText(applicationContext, "다른 id를 입력해주세요.", Toast.LENGTH_LONG).show()
-                    idEdit.setText("")
+                    } else {
+                        Toast.makeText(applicationContext, "다른 id를 입력해주세요.", Toast.LENGTH_LONG).show()
+                        idEdit.setText("")
+                    }
                 }
+            }catch (e: SQLiteException){
+                Toast.makeText(applicationContext, "입력하신 id는 사용이 가능합니다.", Toast.LENGTH_LONG).show()
             }
-
         }
 
         button_join_cancel.setOnClickListener {
             // 인텐트 값으로 화면 전환
-            var intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import java.nio.file.Files.size
 
 //Table 정의
 //Person Table -> 전체 유저 관리용
@@ -23,13 +24,9 @@ import android.util.Log
 class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     override fun onCreate(db: SQLiteDatabase?) {
 
-        //DB 전체, 개별 두개로 나눠서
+        db!!.execSQL("CREATE TABLE Person (nickname CHAR(18) PRIMARY KEY, ID CHAR(20) PRIMARY KEY, PassWord CHAR(20),Level INT(3));")
 
-        //Name을 primary Key로 설정 - 찾아낼때 쓰이는 key
-        //db!!.execSQL("CREATE TABLE Person (ID CHAR(20) PRIMARY KEY, PassWord CHAR(20),Level INT(3));")
-
-        //챌린지 데이터 베이스 생성
-        //db!!.execSQL("CREATE TABLE Challenge (Name CHAR(20) PRIMARY KEY, KeyWord CHAR(20), Date INT(20), Count INT(18), Score INT(18));")
+        db!!.execSQL("CREATE TABLE Challenge (ID INT(18) PRIMARY KEY,Name CHAR(20) PRIMARY KEY, KeyWord CHAR(20), Date INT(20), Count INT(18), Score INT(18), BookMark INT(8),StartDate CHAR(18), LastDate CHAR(18), SummaryLong CHAR(18), Short1 CHAR(18), Short2 CHAR(18), Short3 CHAR(18), State INT(8));")
 
 
     }
@@ -399,7 +396,6 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         var name = ""
         var keyword = ""
 
-        Log.d("태그", person.id)
         //개인 유저의 Table에서 챌린지 갯수 세어서 반환
         cursor = db.rawQuery("SELECT * FROM " + person.id + " WHERE State = 0;", null)
 
@@ -451,19 +447,19 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     //각 카테고리별 챌린지 가져오기 - 추천 챌린지
     fun Challengecategory(User:Person) : Array<Challenge>
     {
-        var Array = arrayOf<Challenge>()
-        Array =ChallengeIn(User)
+        //추천 챌린지를 넣을 챌린지 배열 생성
 
-        var array = Array<Challenge>(4,{Challenge()})
+        var anyArray = arrayOf<Challenge>()
 
         var db = this.readableDatabase
         var cursor: Cursor
 
+        //추천 챌린지 분류할 각각 키워드
         var KeyWord = arrayOf("플라스틱", "자원", "운동", "음식", "기타")
         for (i in 0..4 step 1)
         {
-            //각 카테고리의 첫번쨰 데이터 받아옴
-            cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '${KeyWord[i]}' AND State = 0;", null)
+            //각 카테고리의 첫번쨰 데이터 받아옴 - SQL설명 : 유저 테이블에 아이디가 존재하는 챌린지를 제외한 모든 챌린지
+            cursor = db.rawQuery("SELECT * FROM  Challenge WHERE KeyWord = '${KeyWord[i]}' AND ID NOT IN (SELECT ID FROM ${User.id} WHERE ChallengeID IN (ID));", null)
             if(cursor.count >0) {
                 while(cursor.moveToNext())
                 {
@@ -491,31 +487,24 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
                     challenge.bookmark = bookmark
                     challenge.StartDate = startdate
                     challenge.LastDate = lastdate
-                    challenge.date = challenge.D_Day(lastdate).toInt()
+                    //challenge.date = challenge.D_Day(lastdate).toInt()
+                    challenge.date = date
                     challenge.SummaryLong = summarylong
                     challenge.Short1 = short1
                     challenge.Short2 = short2
                     challenge.Short3 = short3
                     challenge.State = state
-
-                    for(i in 0..Array.size-1){
-                        if(challenge.id == Array[i].id){
-                            continue
-                        }
-                        else{
-                            array += challenge
-                            break
-                        }
-                    }
-
+                    anyArray+=challenge
+                    Log.d("내용", challenge.id.toString())
                 }
+            }
         }
+        Log.d("내용", anyArray.size.toString())
 
-    }
         // 디비 닫기
         db.close()
 
-        return array
+        return anyArray
     }
 
     //챌린지 수행완료 설정하기
@@ -533,7 +522,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     }
 
     //챌린지 수행한 날짜 DB에 저장하기
-    fun ChallengeRecord(challenge: Challenge, date: Array<Dates>)
+    fun ChallengeRecord(challenge: Challenge, date: Array<Dates>, User: Person)
     {
         var db = this.writableDatabase
         //sql문 입력
@@ -548,8 +537,27 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             db.execSQL("INSERT INTO CHALLENGE"+challenge.id+" VALUES("+date.get(i).year+","+date.get(i).month+","+date.get(i).day+");")
         }
 
+        db.execSQL("UPDATE "+User.id+" SET Count = "+date.size+" WHERE ChallengeID = "+challenge.id+";")
+
         db.close()
     }
+
+    fun UserDay(challengeId: Int, User: Person):Int
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var count = 0
+        //각 카테고리의 첫번쨰 데이터 받아옴
+        cursor = db.rawQuery("SELECT * FROM "+User.id+" WHERE ChallengeID = "+challengeId+";", null)
+
+        while(cursor.moveToNext())
+        {
+            count = cursor.getString(3).toInt()
+        }
+       return count
+    }
+
 
     //챌린지 수행한 날 받아오기
     fun ChallengeDay(challengeId: Int):Array<Dates>
@@ -606,7 +614,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             challenge.bookmark = bookmark
             challenge.StartDate = startdate
             challenge.LastDate = lastdate
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            //challenge.date = challenge.D_Day(lastdate).toInt()
+            challenge.date = date
             challenge.SummaryLong = summarylong
             challenge.Short1 = short1
             if(short2 ==null){
@@ -687,7 +696,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             var short3 = cursor.getString(12)
 
             var challenge =  Challenge(id, name, keyword, date, count, score, bookmark, startdate, lastdate, longSummary, short1, short2, short3)
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            //challenge.date = challenge.D_Day(lastdate).toInt()
             anyArray+=challenge
         }
 
@@ -709,7 +718,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             var short3 = cursor.getString(12)
 
             var challenge =  Challenge(id, name, keyword, date, count, score, bookmark, startdate, lastdate, longSummary, short1, short2, short3)
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            //challenge.date = challenge.D_Day(lastdate).toInt()
             anyArray+=challenge
         }
 
@@ -731,7 +740,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             var short3 = cursor.getString(12)
 
             var challenge =  Challenge(id, name, keyword, date, count, score, bookmark, startdate, lastdate, longSummary, short1, short2, short3)
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            //challenge.date = challenge.D_Day(lastdate).toInt()
             anyArray+=challenge
         }
 
@@ -758,7 +767,35 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         db.execSQL("INSERT INTO REVIEW"+challenge.id+" VALUES('"+UserId+"',"+challenge.score+");")
 
+
         db.close()
+    }
+
+    fun ChallengeScoreCalculate(challenge: Challenge):Float
+    {
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var score:Float = 0.0f
+        var count:Int = 0
+        //각 카테고리의 첫번째 데이터 받아옴
+        cursor = db.rawQuery("SELECT * FROM Challenge"+challenge.id+";", null)
+
+        while(cursor.moveToNext())
+        {
+            score += cursor.getFloat(5)
+            count++
+        }
+        //사용자들 총 합산 / 사용자들 몇명
+        var TotalScore = score/count
+        return TotalScore
+
+        challenge.score = TotalScore
+
+        db = this.writableDatabase
+
+        db.execSQL("UPDATE Challenge SET Score = "+TotalScore+" WHERE ID = '"+challenge.id+"';")
+
     }
 
     fun ChallengeMark(challenge:Challenge)
@@ -813,7 +850,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
                 challenge.bookmark = bookmark
                 challenge.StartDate = startdate
                 challenge.LastDate = lastdate
-                challenge.date = challenge.D_Day(lastdate).toInt()
+                //challenge.date = challenge.D_Day(lastdate).toInt()
+                challenge.date = date
                 challenge.SummaryLong = summarylong
                 challenge.Short1 = short1
                 challenge.Short2 = short2
@@ -854,7 +892,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
                 challenge.bookmark = bookmark
                 challenge.StartDate = startdate
                 challenge.LastDate = lastdate
-                challenge.date = challenge.D_Day(lastdate).toInt()
+                //challenge.date = challenge.D_Day(lastdate).toInt()
+                challenge.date = date
                 challenge.SummaryLong = summarylong
                 challenge.Short1 = short1
                 challenge.Short2 = short2
@@ -902,7 +941,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             challenge.bookmark = bookmark
             challenge.StartDate = startdate
             challenge.LastDate = lastdate
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            //challenge.date = challenge.D_Day(lastdate).toInt()
+            challenge.date = date
             challenge.SummaryLong = summarylong
             challenge.Short1 = short1
             challenge.Short2 = short2
@@ -928,14 +968,14 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     {
         var anyArray = arrayOf<Challenge>()
         var array = Array<Challenge>(4,{Challenge()})
+        //유저가 참여하고 있는 것과 동일한지 검사하기 위해 불러옴
         array =ChallengeIn(User)
 
         var db = this.readableDatabase
         var cursor: Cursor
-        cursor =db.rawQuery("SELECT * FROM Challenge WHERE State = 0 ;", null)
+        cursor =db.rawQuery("SELECT * FROM Challenge WHERE BookMark = 1;", null)
 
-        if(cursor.count >0) {
-            cursor.moveToFirst()
+        while(cursor.moveToNext()) {
             var id = cursor.getString(0).toInt()
             var name = cursor.getString(1)
             var keyword = cursor.getString(2)
@@ -960,18 +1000,20 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             challenge.bookmark = bookmark
             challenge.StartDate = startdate
             challenge.LastDate = lastdate
-            challenge.date = challenge.D_Day(lastdate).toInt()
+            challenge.date = date
             challenge.SummaryLong = summarylong
             challenge.Short1 = short1
             challenge.Short2 = short2
             challenge.Short3 = short3
             challenge.State = state
 
-            for(i in 0..array.size-1){
+            /*
+                        for(i in 0..array.size-1){
                 if(challenge.id == array[i].id){
                     break
                 }
             }
+             */
             anyArray += challenge
         }
         // 디비 닫기

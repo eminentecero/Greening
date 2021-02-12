@@ -34,7 +34,6 @@ class ChallengeActivityJoin : AppCompatActivity() {
     //데이터 베이스 변수
     internal lateinit var db:DBHelper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge_join_4)
@@ -68,6 +67,18 @@ class ChallengeActivityJoin : AppCompatActivity() {
         numPeopleChallenge.setText(db.ChallengeJoinCount(challenge))
         periodChallenge.setText("${challenge.StartDate} - ${challenge.LastDate}")
 
+        var IngPercent = db.UserDay(challenge.id, User)
+
+
+        progressChallenge.max = challenge.date
+        progressChallenge.progress = IngPercent
+
+        progressChallenge.setProgressFormatter { progress, max ->
+            var DEFAULT_PATTERN = "%d%%"
+            String.format(DEFAULT_PATTERN, (progress.toFloat() / max.toFloat() * 100).toInt())
+        }
+
+
         //캘린더에 넣을 날짜 받아오기
         var array = arrayOf<Dates>()
         array = db.ChallengeDay(Id)
@@ -97,30 +108,26 @@ class ChallengeActivityJoin : AppCompatActivity() {
 
 
         btnDoneChallenge.setOnClickListener {
-            if(challenge.date > array.size-1)
+            if(challenge.date == array.size)
             {
-                db.ChallengeRecord(challenge, array)
-            }else{
+
                 Toast.makeText(applicationContext, "챌린지를 완료했습니다!!!\n    축하드립니다", Toast.LENGTH_LONG).show()
                 db.ChallengeCompelete(challenge, UserId.toString())
-                var intent = Intent(this, HomeActivity::class.java)
+                var intent = Intent(this, ChallengeActivityDone::class.java)
                 intent.putExtra("id", UserId.toString())
+                intent.putExtra("ChallengeId", challenge.id)
+                startActivity(intent)
+            }else{
+                db.ChallengeRecord(challenge, array, User)
+                var intent = Intent(this, ChallengeActivityJoin::class.java)
+                intent.putExtra("id", UserId.toString())
+                intent.putExtra("ChallengeId", challenge.id)
                 startActivity(intent)
             }
         }
 
         imgBack.setOnClickListener {
             array = db.ChallengeDay(Id)
-
-            if(array.size != 0)
-            {
-                for(i in 0..(array.size-1))
-                {
-                    calendar_view.markDate(
-                        DateData(array.get(i).year, array.get(i).month, array.get(i).day).setMarkStyle(MarkStyle(
-                            MarkStyle.DEFAULT, Color.WHITE)))
-                }
-            }
             finish()
         }
 
