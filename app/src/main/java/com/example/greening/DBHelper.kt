@@ -139,6 +139,25 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         return challenge
     }
 
+    fun CategoryDoneCount(KeyWord: String, User:Person):Int
+    {
+        var db = this.readableDatabase
+
+        var cursor:Cursor
+        cursor =db.rawQuery("SELECT * FROM "+User.id+" WHERE KeyWord = '${KeyWord}' AND State = 1;", null)
+
+        // 저장할 배열 설정
+        var challenge = 0
+
+
+        while (cursor.moveToNext()) {
+            challenge ++
+        }
+        // 디비 닫기
+        db.close()
+        return challenge
+    }
+
     fun checkChallenge(challenge: Challenge, person: Person):String
     {
         var db = this.readableDatabase
@@ -616,7 +635,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         for(i in 0..anyArray.size-1)
         {
-            cursor = db.rawQuery("SELECT * FROM swim WHERE ChallengeID = '${anyArray[i].id}';", null)
+            cursor = db.rawQuery("SELECT * FROM +id+ WHERE ChallengeID = '${anyArray[i].id}';", null)
 
             if(cursor.count >0){
                 cursor.moveToFirst()
@@ -655,7 +674,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         for (i in 0..4 step 1)
         {
-            //각 카테고리의 첫번쨰 데이터 받아옴
+            //각 카테고리의 첫번째 데이터 받아옴
             cursor = db.rawQuery("SELECT * FROM Challenge WHERE ID = '${Array[i].id}' AND BookMark = 1;", null)
 
             if(cursor.count >0){
@@ -791,6 +810,62 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
                 ChallengeCompelete(anyArray[i], person)
             }
         }
+    }
 
+    //마이 페이지 -  관심 챌린지(즐겨찾기 + 신청 안 한 챌린지여야 함)
+    fun MyMarkChallenge(User:Person):Array<Challenge>
+    {
+        var anyArray = arrayOf<Challenge>()
+        var array = Array<Challenge>(4,{Challenge()})
+        array =ChallengeIn(User)
+
+        var db = this.readableDatabase
+        var cursor: Cursor
+        cursor =db.rawQuery("SELECT * FROM Challenge WHERE State = 0 ;", null)
+
+        if(cursor.count >0) {
+            cursor.moveToFirst()
+            var id = cursor.getString(0).toInt()
+            var name = cursor.getString(1)
+            var keyword = cursor.getString(2)
+            var date = cursor.getString(3).toInt()
+            var count = cursor.getString(4).toInt()
+            var score = cursor.getString(5).toFloat()
+            var bookmark = cursor.getString(6).toInt()
+            var startdate = cursor.getString(7)
+            var lastdate = cursor.getString(8)
+            var summarylong = cursor.getString(9)
+            var short1 = cursor.getString(10)
+            var short2 = cursor.getString(11)
+            var short3 = cursor.getString(12)
+            var state = cursor.getInt(13)
+
+            var challenge = Challenge()
+            challenge.id = id
+            challenge.name = name
+            challenge.keyword = keyword
+            challenge.count = count
+            challenge.score = score
+            challenge.bookmark = bookmark
+            challenge.StartDate = startdate
+            challenge.LastDate = lastdate
+            challenge.date = challenge.D_Day(lastdate).toInt()
+            challenge.SummaryLong = summarylong
+            challenge.Short1 = short1
+            challenge.Short2 = short2
+            challenge.Short3 = short3
+            challenge.State = state
+
+            for(i in 0..array.size-1){
+                if(challenge.id == array[i].id){
+                    break
+                }
+            }
+            anyArray += challenge
+        }
+        // 디비 닫기
+        db.close()
+
+        return anyArray
     }
 }

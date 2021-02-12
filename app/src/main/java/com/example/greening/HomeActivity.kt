@@ -11,9 +11,9 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var UserName:TextView
 
     //참여중인 챌린지에서 더보기 버튼
-    lateinit var ingChallenge1: FrameLayout
-    lateinit var ingChallenge2: FrameLayout
-    lateinit var ingChallenge3: FrameLayout
+    lateinit var ingChallenge1: androidx.cardview.widget.CardView
+    lateinit var ingChallenge2: androidx.cardview.widget.CardView
+    lateinit var ingChallenge3: androidx.cardview.widget.CardView
 
     lateinit var ing1_TextView : TextView
     lateinit var ing1_Button : Button
@@ -61,11 +61,11 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var count5 : TextView
     lateinit var date5 : TextView
 
-    lateinit var recom1 : FrameLayout
-    lateinit var recom2 : FrameLayout
-    lateinit var recom3 : FrameLayout
-    lateinit var recom4 : FrameLayout
-    lateinit var recom5 : FrameLayout
+    lateinit var recom1 : androidx.cardview.widget.CardView
+    lateinit var recom2 : androidx.cardview.widget.CardView
+    lateinit var recom3 : androidx.cardview.widget.CardView
+    lateinit var recom4 : androidx.cardview.widget.CardView
+    lateinit var recom5 : androidx.cardview.widget.CardView
 
     lateinit var ImageView1 : ImageView
     lateinit var ImageView2 : ImageView
@@ -116,14 +116,14 @@ class HomeActivity  : AppCompatActivity() {
         db.cleanChallenge(name.toString())
 
         //참여중인 챌린지
-        ingChallenge1 = findViewById(R.id.ingChallenge1)
-        ingChallenge2 = findViewById(R.id.ingChallenge2)
-        ingChallenge3 = findViewById(R.id.ingChallenge3)
+        ingChallenge1 = findViewById(R.id.challenge1)
+        ingChallenge2 = findViewById(R.id.challenge2)
+        ingChallenge3 = findViewById(R.id.challenge3)
 
-        ing1_TextView = findViewById(R.id.ing2_TextView)
-        ing1_Button = findViewById(R.id.ing2_Button)
-        ing1Count_TextView = findViewById(R.id.ing2Count_TextView)
-        ing1Date_TextView = findViewById(R.id.ing2Date_TextView)
+        ing1_TextView = findViewById(R.id.ing1_TextView)
+        ing1_Button = findViewById(R.id.ing1_Button)
+        ing1Count_TextView = findViewById(R.id.ing1Count_TextView)
+        ing1Date_TextView = findViewById(R.id.ing1Date_TextView)
         ingmore1_Button = findViewById(R.id.ingmore1_Button)
 
         ing2_TextView = findViewById(R.id.ing2_TextView)
@@ -149,19 +149,11 @@ class HomeActivity  : AppCompatActivity() {
         join4Btn = findViewById(R.id.join4)
         join5Btn = findViewById(R.id.join5)
 
-        recom1 = findViewById(R.id.recom1)
-        recom2 = findViewById(R.id.recom2)
-        recom3 = findViewById(R.id.recom3)
-        recom4 = findViewById(R.id.recom4)
-        recom5 = findViewById(R.id.recom5)
-
-
-
-        ImageView1 = findViewById(R.id.ImageView1)
-        ImageView2 = findViewById(R.id.ImageView2)
-        ImageView3 = findViewById(R.id.ImageView3)
-        ImageView4 = findViewById(R.id.ImageView4)
-        ImageView5 = findViewById(R.id.ImageView5)
+        recom1 = findViewById(R.id.recommend1)
+        recom2 = findViewById(R.id.recommend1)
+        recom3 = findViewById(R.id.recommend1)
+        recom4 = findViewById(R.id.recommend4)
+        recom5 = findViewById(R.id.recommend5)
 
 
         name1 = findViewById(R.id.name1)

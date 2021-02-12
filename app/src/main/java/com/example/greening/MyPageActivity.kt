@@ -106,7 +106,7 @@ class MyPageActivity  : AppCompatActivity() {
         ingChallenge3 = findViewById(R.id.ongoing3)
 
         ing1_TextView = findViewById(R.id.ing1_TextView)
-        ing1_Button = findViewById(R.id.ing1_Button)
+        ing1_Button = findViewById(R.id.ing1_TextView)
         ing1Count_TextView = findViewById(R.id.ing1Count_TextView)
         ing1Date_TextView = findViewById(R.id.ing1Date_TextView)
         ingmore1_Button = findViewById(R.id.ingmore1_Button)
@@ -123,10 +123,10 @@ class MyPageActivity  : AppCompatActivity() {
         ing3Date_TextView = findViewById(R.id.ing3Date_TextView)
         ingmore3_Button = findViewById(R.id.ingmore3_Button)
 
-        clgText = findViewById(R.id.clgText)
+        clgText = findViewById(R.id.ongoingChall)
 
         //추천하는 챌린지
-        recomText = findViewById(R.id.recomText)
+        recomText = findViewById(R.id.likeChall)
 
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
@@ -171,12 +171,12 @@ class MyPageActivity  : AppCompatActivity() {
 
         ingVisible(array, User)
 
-        allCount.setText("${db.ChallengeTotalCount()}개")
-        naturalCount.setText("${db.CategoryCount("자원")}개")
-        foodCount.setText("${db.CategoryCount("음식")}개")
-        exerciseCount.setText("${db.CategoryCount("운동")}개")
-        plasticCount.setText("${db.CategoryCount("플라스틱")}개")
-        etcCount.setText("${db.CategoryCount("기타")}개")
+        allCount.setText("${db.CategoryDoneCount("all",User)}개")
+        naturalCount.setText("${db.CategoryDoneCount("자원", User)}개")
+        foodCount.setText("${db.CategoryDoneCount("음식", User)}개")
+        exerciseCount.setText("${db.CategoryDoneCount("운동", User)}개")
+        plasticCount.setText("${db.CategoryDoneCount("플라스틱", User)}개")
+        etcCount.setText("${db.CategoryDoneCount("기타", User)}개")
 
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
         ingmore1_Button.setOnClickListener  {
@@ -211,7 +211,7 @@ class MyPageActivity  : AppCompatActivity() {
 
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
         var categoryArray: Array<Challenge>
-        categoryArray = db.Challengecategory()
+        categoryArray = db.MyMarkChallenge(User)
 
         recomVisible(categoryArray)
 
@@ -421,5 +421,4 @@ class MyPageActivity  : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }

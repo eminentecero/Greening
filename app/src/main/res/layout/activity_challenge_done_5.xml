@@ -77,14 +77,6 @@
         <!-- 아웃라인별을 누르면 검정별로 바뀌고 해당 챌린지가 관심챌린지에 추가됩니다! -->
         <!-- 반대로 검정별을 누르면 아웃라인별로 바뀌고 관심챌린지에서 삭제됩니다! -->
         <!-- 관심 챌린지를 마이페이지나 홈 화면에서 따로 모아 볼 수 있으면 어떨까~~ 하는 생각을 갖고 있어요 -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/ic_baseline_star_border_24"
-            app:tint="@color/white" />
 
     </RelativeLayout>
 

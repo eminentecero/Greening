@@ -131,7 +131,7 @@
                         android:textColor="@color/black"/>
 
                     <Button
-                        android:id="@+id/ing1_Button"
+                        android:id="@+id/ing1_TextView"
                         android:layout_width="65dp"
                         android:layout_height="28dp"
                         android:layout_marginTop="72dp"
@@ -814,6 +814,7 @@
                     android:textColor="@color/black"></TextView>
 
                 <TextView
+                    android:id="@+id/foodCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
@@ -849,6 +850,7 @@
                     android:textColor="@color/black"></TextView>
 
                 <TextView
+                    android:id="@+id/plasticCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
@@ -890,6 +892,7 @@
                     android:textColor="@color/black"></TextView>
 
                 <TextView
+                    android:id="@+id/exerciseCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
@@ -924,6 +927,7 @@
                     android:textColor="@color/black"></TextView>
 
                 <TextView
+                    android:id="@+id/naturalCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
@@ -958,6 +962,7 @@
                     android:textColor="@color/black"></TextView>
 
                 <TextView
+                    android:id="@+id/etcCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
