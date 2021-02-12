@@ -967,13 +967,11 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     fun MyMarkChallenge(User:Person):Array<Challenge>
     {
         var anyArray = arrayOf<Challenge>()
-        var array = Array<Challenge>(4,{Challenge()})
-        //유저가 참여하고 있는 것과 동일한지 검사하기 위해 불러옴
-        array =ChallengeIn(User)
 
         var db = this.readableDatabase
         var cursor: Cursor
-        cursor =db.rawQuery("SELECT * FROM Challenge WHERE BookMark = 1;", null)
+        //유저가 참여중이지 않고, 전체 챌린지 테이블에서 북마크 표시되어있는 걸 찾아옴
+        cursor =db.rawQuery("SELECT * FROM  Challenge WHERE BookMark = 1 AND ID NOT IN (SELECT ID FROM "+User.id+" WHERE ChallengeID IN (ID));", null)
 
         while(cursor.moveToNext()) {
             var id = cursor.getString(0).toInt()
@@ -1007,13 +1005,6 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
             challenge.Short3 = short3
             challenge.State = state
 
-            /*
-                        for(i in 0..array.size-1){
-                if(challenge.id == array[i].id){
-                    break
-                }
-            }
-             */
             anyArray += challenge
         }
         // 디비 닫기

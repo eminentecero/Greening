@@ -2,6 +2,7 @@ package com.example.greening
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -195,7 +196,7 @@ class MyPageActivity  : AppCompatActivity() {
         ingmore1_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[0].id)
+            intent.putExtra("ChallengeId", array[0].id.toString())
             intent.putExtra("ChallengeName", array[0].name)
             intent.putExtra("ChallengeKeyWord", array[0].keyword)
             intent.putExtra("ChallengeDate", array[0].date.toString())
@@ -222,7 +223,7 @@ class MyPageActivity  : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
+        //관심 챌린지
         var categoryArray: Array<Challenge>
         categoryArray = db.MyMarkChallenge(User)
 
@@ -264,10 +265,9 @@ class MyPageActivity  : AppCompatActivity() {
         }
     }
 
-    //관심 챌린지
+    //추천 챌린지
     private fun recomVisible(categoryArray: Array<Challenge>) {
-        if(categoryArray.size == 3)
-        {
+        if(categoryArray.count() == 3){
             //챌린지 갯수가 3개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
@@ -280,15 +280,15 @@ class MyPageActivity  : AppCompatActivity() {
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
             name3.setText(categoryArray[2].name)
             keyword3.setText(categoryArray[2].keyword)
-            count3.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
 
-        }else if(categoryArray.size == 2){
+        }else if(categoryArray.count() == 2){
             //챌린지 갯수가 2개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
@@ -301,10 +301,9 @@ class MyPageActivity  : AppCompatActivity() {
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count2.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
+            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
-
-        }else if(categoryArray.size == 1){
+        }else if(categoryArray.count() == 1){
             //챌린지 갯수가 1개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.GONE)
@@ -314,13 +313,15 @@ class MyPageActivity  : AppCompatActivity() {
             keyword1.setText(categoryArray[0].keyword)
             count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
-
-        }else
-            //챌린지 갯수가 0개일 때
+        }else{
+            //총 챌린지 갯수가 0개일 때
+            recomText.setVisibility(View.GONE)
             recom1.setVisibility(View.GONE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
+        }
     }
+
 
     private fun ingVisible(array: Array<Challenge>, User: Person) {
 

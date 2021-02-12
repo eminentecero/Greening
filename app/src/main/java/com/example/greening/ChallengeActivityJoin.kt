@@ -52,7 +52,6 @@ class ChallengeActivityJoin : AppCompatActivity() {
 
         var UserId: String? = intent.getStringExtra("id")
 
-        Toast.makeText(applicationContext, "${UserId}님 반갑습니다!", Toast.LENGTH_LONG).show()
 
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
         var User : Person = Person()

@@ -214,7 +214,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore1_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[0].id)
+            intent.putExtra("ChallengeId", array[0].id.toString())
             intent.putExtra("ChallengeName", array[0].name)
             intent.putExtra("ChallengeKeyWord", array[0].keyword)
             intent.putExtra("ChallengeDate", array[0].date.toString())
@@ -224,7 +224,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore2_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[1].id)
+            intent.putExtra("ChallengeId", array[1].id.toString())
             intent.putExtra("ChallengeName", array[1].name)
             intent.putExtra("ChallengeKeyWord", array[1].keyword)
             intent.putExtra("ChallengeDate", array[1].date.toString())
@@ -234,7 +234,7 @@ class HomeActivity  : AppCompatActivity() {
         ingmore3_Button.setOnClickListener  {
             var intent = Intent(this, ChallengeActivityJoin::class.java)
             intent.putExtra("id", User.id)
-            intent.putExtra("ChallengeId", array[2].id)
+            intent.putExtra("ChallengeId", array[2].id.toString())
             intent.putExtra("ChallengeName", array[2].name)
             intent.putExtra("ChallengeKeyWord", array[2].keyword)
             intent.putExtra("ChallengeDate", array[2].date.toString())
@@ -307,7 +307,6 @@ class HomeActivity  : AppCompatActivity() {
 
     //추천 챌린지
     private fun recomVisible(categoryArray: Array<Challenge>) {
-        Log.d("내용", categoryArray.size.toString())
         if(categoryArray.count() == 5)
         {
             //챌린지 갯수가 5개일 때
