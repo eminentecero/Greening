@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ProfileChangeActivity"
+    android:background="@color/gray_light">
+
+    <!-- 프로필 수정 -->
+    <!-- 프로필 사진 및 닉네임 수정 가능 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/btnBack2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="105dp"
+            android:text="프로필 수정"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/profile_image"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:text="닉네임"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/nicknameChange"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="75dp"
+        android:padding="14dp"
+        android:hint="현재 닉네임"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray_dark"
+        android:textSize="18dp"
+        android:background="@drawable/button_round"/>
+
+    <Button
+        android:id="@+id/btnComplete2"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:padding="15dp"
+        android:text="수        정"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#30DAA8"/>
+
+    <Button
+        android:id="@+id/btnCancel2"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:text="취        소"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#30DAA8"
+        android:textAlignment="center"
+        android:background="@drawable/stroke_button"/>
+</LinearLayout>

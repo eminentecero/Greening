@@ -156,6 +156,7 @@ class ChallengeActivityNatural : AppCompatActivity() {
         //var keyword = intent.getStringExtra("keyword").toString()
         var id = intent.getStringExtra("id").toString()
 
+
         var Array: Array<Challenge>
         Array = db.ChallengeList(keyword, id)
         isVisible(Array)

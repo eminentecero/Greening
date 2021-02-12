@@ -132,21 +132,19 @@ class ChallengeListDone : AppCompatActivity() {
         var id = intent.getStringExtra("id")
         var keyword = intent.getStringExtra("keyword")
 
-        //var keyword = intent.getStringExtra("keyword").toString()
-        //var id = intent.getStringExtra("id").toString()
-
         var Array: Array<Challenge>
         Array = db.ChallengeListDone(keyword.toString(), id.toString())
 
         isVisible(Array)
         imgBack.setOnClickListener {
-            var intent = Intent(this, ChallengeActivitySelect::class.java)
-            startActivity(intent)
+            finish()
         }
 
         challenge1.setOnClickListener {
-            //var intent = Intent(this, ChallengeActivityNojoin::class.java)
-            //startActivity(intent)
+            var intent = Intent(this, ChallengeActivityDone::class.java)
+            intent.putExtra("id", id)
+            intent.putExtra("ChallengeId", Array[0].id.toInt())
+            startActivity(intent)
         }
     }
 

@@ -154,9 +154,11 @@ class ChallengeActivityRecommand : AppCompatActivity() {
         var keyword = "추천"
         var id = "swim"
 
+        var User = db.DataIn(id)
+
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
         var Array: Array<Challenge>
-        Array = db.Challengecategory()
+        Array = db.Challengecategory(User)
 
         isVisible(Array)
 

@@ -10,7 +10,6 @@ import sun.bob.mcalendarview.MarkStyle
 import sun.bob.mcalendarview.listeners.OnDateClickListener
 import sun.bob.mcalendarview.vo.DateData
 
-//import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
 
 
 class ChallengeActivityJoin : AppCompatActivity() {

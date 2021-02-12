@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivitySettiings"
-
+    tools:context=".SettingActivity"
     android:background="@color/gray_light">
 
     <LinearLayout
@@ -60,13 +59,15 @@
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="2dp"
-            android:src="@drawable/ic_home_black_24dp"
+            android:src="@drawable/ic_baseline_home_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/nav_challenge"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark"/>
 
         <!-- 챌린지 -->
         <ImageView
@@ -79,7 +80,9 @@
             app:layout_constraintEnd_toStartOf="@+id/nav_my"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/nav_home"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark"/>
 
         <!-- 마이페이지 -->
         <ImageView
@@ -92,7 +95,9 @@
             app:layout_constraintEnd_toStartOf="@+id/nav_setting"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/nav_challenge"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/gray_dark"/>
 
         <!-- 설정 -->
         <ImageView
@@ -106,7 +111,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/nav_my"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="@color/green"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

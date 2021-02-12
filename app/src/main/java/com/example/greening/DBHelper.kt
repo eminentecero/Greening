@@ -199,6 +199,25 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
     //중복확인하기
     //전체 유저 DB에서 확인
+    fun checkReview(Id: String, challenge: Challenge) :String{
+        var db = this.readableDatabase
+
+        var cursor: Cursor
+        cursor =db.rawQuery("SELECT * FROM REVIEW"+challenge.id+" WHERE UserId = '" + Id + "';", null)
+
+        // 저장할 배열 설정
+        var strNickname = ""
+
+        while (cursor.moveToNext()) {
+            strNickname += cursor.getString(0)
+        }
+        // 디비 닫기
+        db.close()
+        return strNickname
+    }
+
+    //중복확인하기
+    //전체 유저 DB에서 확인
     fun checkID(editID: String) :String{
         var db = this.readableDatabase
 
@@ -240,6 +259,51 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         db.close()
 
         return strPassWord
+    }
+
+    //레벨 계산
+    fun Level(UserID: String):Int
+    {
+        //해당 회원의 ID를 전체 회원 테이블에 검색
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var EXP = 0
+        var Count = 0
+        //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+        cursor = db.rawQuery("SELECT * FROM "+UserID+" WHERE State = 1;", null)
+
+        while (cursor.moveToNext()) {
+            Count ++
+        }
+
+        EXP = Count*25
+        var Level = EXP/100
+
+        return Level
+    }
+
+    //다음 레벨 남은 거 계산
+    fun leftLevel(UserID: String):Int
+    {
+        //해당 회원의 ID를 전체 회원 테이블에 검색
+        var db = this.readableDatabase
+        var cursor: Cursor
+
+        var EXP:Int
+        var Count = 0
+        //개인 유저의 Table에서 챌린지 갯수 세어서 반환
+        cursor = db.rawQuery("SELECT * FROM "+UserID+" WHERE State = 1;", null)
+
+        while (cursor.moveToNext()) {
+            Count ++
+        }
+
+        EXP = Count*25
+        var leftLevel = EXP%100
+
+
+        return leftLevel
     }
 
     //유저의 정보를 반환하는 함수
@@ -354,69 +418,105 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         return anyArray
     }
 
-    //각 카테고리별 챌린지 가져오기 -
-    fun Challengecategory() : Array<Challenge>
+    // 회원 탈퇴하는 함 수: 매개변수로 아이디를 전달받아 탈퇴함.
+    fun deleteUser(UserID: String){
+        var db = this.writableDatabase
+
+        db.execSQL("DELETE FROM Person WHERE ID = '" + UserID +"';")
+        db.execSQL("DROP TABLE CHALLENGE" + UserID + ";")
+
+        db.close()
+    }
+
+    // 비밀번호를 변경하는 함수: 매개변수로 유저의 아이디와 새로운 비밀번호를 입력받음.
+    fun changePassword(UserID: String, UserNewPassWord:String){
+        var db = this.writableDatabase
+        var cursor: Cursor
+        var User : Person = Person()
+
+        db.execSQL("UPDATE Person SET PassWord = " + UserNewPassWord +" WHERE ID = '" + UserID + "';")
+
+        db.close()
+    }
+
+    // 닉네임을 변경하는 함수: 매개변수로 유저의 아이디와 새로운 닉네임를 입력받음.
+    fun changeNickname(UserID: String, UserNewNickname:String){
+        var db = this.writableDatabase
+
+        db.execSQL("UPDATE Person SET nickname = '" + UserNewNickname + "' WHERE ID = '" + UserID + "';")
+
+        db.close()
+    }
+
+    //각 카테고리별 챌린지 가져오기 - 추천 챌린지
+    fun Challengecategory(User:Person) : Array<Challenge>
     {
+        var Array = arrayOf<Challenge>()
+        Array =ChallengeIn(User)
+
+        var array = Array<Challenge>(4,{Challenge()})
+
         var db = this.readableDatabase
         var cursor: Cursor
 
         var KeyWord = arrayOf("플라스틱", "자원", "운동", "음식", "기타")
-        var anyArray = arrayOf<Challenge>()
-
         for (i in 0..4 step 1)
         {
             //각 카테고리의 첫번쨰 데이터 받아옴
             cursor = db.rawQuery("SELECT * FROM Challenge WHERE KeyWord = '${KeyWord[i]}' AND State = 0;", null)
+            if(cursor.count >0) {
+                while(cursor.moveToNext())
+                {
+                    var id = cursor.getString(0).toInt()
+                    var name = cursor.getString(1)
+                    var keyword = cursor.getString(2)
+                    var date = cursor.getString(3).toInt()
+                    var count = cursor.getString(4).toInt()
+                    var score = cursor.getString(5).toFloat()
+                    var bookmark = cursor.getString(6).toInt()
+                    var startdate = cursor.getString(7)
+                    var lastdate = cursor.getString(8)
+                    var summarylong = cursor.getString(9)
+                    var short1 = cursor.getString(10)
+                    var short2 = cursor.getString(11)
+                    var short3 = cursor.getString(12)
+                    var state = cursor.getInt(13)
 
-            if(cursor.count >0){
-                cursor.moveToFirst()
-                var id = cursor.getString(0).toInt()
-                var name = cursor.getString(1)
-                var keyword = cursor.getString(2)
-                var date = cursor.getString(3).toInt()
-                var count = cursor.getString(4).toInt()
-                var score = cursor.getString(5).toFloat()
-                var bookmark = cursor.getString(6).toInt()
-                var startdate = cursor.getString(7)
-                var lastdate = cursor.getString(8)
-                var summarylong = cursor.getString(9)
-                var short1 = cursor.getString(10)
-                var short2 = cursor.getString(11)
-                var short3 = cursor.getString(12)
-
-                var challenge = Challenge()
-                challenge.id = id
-                challenge.name = name
-                challenge.keyword = keyword
-                challenge.date = date
-                challenge.count = count
-                challenge.score = score
-                challenge.bookmark = bookmark
-                challenge.StartDate = startdate
-                challenge.LastDate = lastdate
-                challenge.Short1 = short1
-                if(short2 ==null){
-                    challenge.Short2 = ""
-                }else{
+                    var challenge = Challenge()
+                    challenge.id = id
+                    challenge.name = name
+                    challenge.keyword = keyword
+                    challenge.count = count
+                    challenge.score = score
+                    challenge.bookmark = bookmark
+                    challenge.StartDate = startdate
+                    challenge.LastDate = lastdate
+                    challenge.date = challenge.D_Day(lastdate).toInt()
+                    challenge.SummaryLong = summarylong
+                    challenge.Short1 = short1
                     challenge.Short2 = short2
-                }
-                if(short3 ==null){
-                    challenge.Short3 = ""
-                }else{
                     challenge.Short3 = short3
+                    challenge.State = state
+
+                    for(i in 0..Array.size-1){
+                        if(challenge.id == Array[i].id){
+                            continue
+                        }
+                        else{
+                            array += challenge
+                            break
+                        }
+                    }
+
                 }
-
-
-                anyArray += challenge
-            } else {
-                continue
-            }
         }
 
-        return anyArray
     }
+        // 디비 닫기
+        db.close()
 
-    //챌린지 즐겨찾기
+        return array
+    }
 
     //챌린지 수행완료 설정하기
     fun ChallengeCompelete(challenge: Challenge, id: String)
@@ -426,6 +526,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
         db.execSQL("UPDATE "+id+" SET State = 1 WHERE ChallengeID = '"+challenge.id.toString()+"';")
         db.execSQL("UPDATE Challenge SET State = 1 WHERE ID = '"+challenge.id.toString()+"';")
         db.execSQL("DROP TABLE CHALLENGE" + challenge.id.toString() + ";")
+        db.execSQL("CREATE TABLE REVIEW" + challenge.id + " (UserID CHAR(20), Score FLOAT(8));")
+
 
         db.close()
     }
@@ -472,7 +574,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
     }
 
     //전체 챌린지 리스트에서 객체 가져오기
-    fun Challengereturn(id: Int?):Challenge
+    fun Challengereturn(id: Int):Challenge
     {
         var db = this.readableDatabase
         var cursor: Cursor
@@ -635,7 +737,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         for(i in 0..anyArray.size-1)
         {
-            cursor = db.rawQuery("SELECT * FROM +id+ WHERE ChallengeID = '${anyArray[i].id}';", null)
+            cursor = db.rawQuery("SELECT * FROM "+id+" WHERE ChallengeID = '${anyArray[i].id}';", null)
 
             if(cursor.count >0){
                 cursor.moveToFirst()
@@ -648,6 +750,15 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "Greener", null, 1){
 
         db.close()
         return anyArray
+    }
+
+    fun ChallengeReview(challenge: Challenge, UserId: String)
+    {
+        var db = this.writableDatabase
+
+        db.execSQL("INSERT INTO REVIEW"+challenge.id+" VALUES('"+UserId+"',"+challenge.score+");")
+
+        db.close()
     }
 
     fun ChallengeMark(challenge:Challenge)

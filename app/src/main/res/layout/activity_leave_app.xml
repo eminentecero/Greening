@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".LeaveAppActivity"
+    android:background="@color/gray_light">
+
+    <!-- 탈퇴하기 -->
+    <!-- 마진 변경함 line:16, 92 -->
+    <!-- pwcheck textColor(White), textHintColor(darkGray) 변경함  -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:text="탈퇴하기"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:text="탈퇴 시 회원님의 레벨, 관심 챌린지, 완료한 챌린지 등이 모두 삭제되며, 모든 정보는 복구가 불가합니다."
+        android:textSize="18dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:text="등록한 챌린지에 대한 정보는 남아 있습니다."
+        android:textSize="18dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:text="탈퇴하시겠습니까?"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="40dp"
+        android:text="탈퇴하시려면 비밀번호를 입력해주세요."
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/pwcheck"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="30dp"
+        android:paddingLeft="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray_dark"
+        android:hint="비밀번호를 입력하세요."
+        android:background="@drawable/button_round"/>
+
+    <Button
+        android:id="@+id/appcontinue"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="계속 환경보호하기"
+        android:textSize="20dp"
+        android:background="@drawable/button_round"/>
+
+    <Button
+        android:id="@+id/appleave"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="탈퇴하기"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:background="@drawable/stroke_button"/>
+</LinearLayout>

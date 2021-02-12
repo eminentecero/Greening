@@ -67,6 +67,10 @@ class MyPageActivity  : AppCompatActivity() {
 
     lateinit var clgText:TextView
 
+    lateinit var LevelButton:Button
+    lateinit var LevelNotice:TextView
+    lateinit var LevelProgress:ProgressBar
+
     lateinit var finishAll:androidx.cardview.widget.CardView
     lateinit var finishFood:androidx.cardview.widget.CardView
     lateinit var finishResource:androidx.cardview.widget.CardView
@@ -91,7 +95,6 @@ class MyPageActivity  : AppCompatActivity() {
         //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
         //var name = intent.getStringExtra("id")
         var name = "swim"
-        UserName.setText(name + "님")
 
         //id를 인텐트로 받아서 DB에 검색해서 그 정보로 객체 생성
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
@@ -100,13 +103,23 @@ class MyPageActivity  : AppCompatActivity() {
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(name.toString())
 
+        UserName.setText(User.nickname + "님")
+
+        LevelButton = findViewById(R.id.LevelButton)
+        LevelNotice = findViewById(R.id.LevelNotice)
+        LevelProgress = findViewById(R.id.levelProgress)
+
+        LevelButton.setText("${db.Level(User.id)}")
+        LevelNotice.setText("다음 레벨까지 ${db.leftLevel(User.id)}% 남았습니다.")
+        LevelProgress.setProgress(db.leftLevel(User.id))
+
         //참여중인 챌린지
         ingChallenge1 = findViewById(R.id.ongoing1)
         ingChallenge2 = findViewById(R.id.ongoing2)
         ingChallenge3 = findViewById(R.id.ongoing3)
 
         ing1_TextView = findViewById(R.id.ing1_TextView)
-        ing1_Button = findViewById(R.id.ing1_TextView)
+        ing1_Button = findViewById(R.id.ing1_Button)
         ing1Count_TextView = findViewById(R.id.ing1Count_TextView)
         ing1Date_TextView = findViewById(R.id.ing1Date_TextView)
         ingmore1_Button = findViewById(R.id.ingmore1_Button)

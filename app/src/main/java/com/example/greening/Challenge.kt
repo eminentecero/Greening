@@ -27,7 +27,11 @@ class Challenge {
     var Short2 : String = ""
     var Short3 : String = ""
 
+    //사람들의 후기 - 후기를 총 더해서 challenge_count최종 별점 표시할 예정
+    var score : Float = 0.0F
+
     var State: Int = -1
+
     //공적 메소드
         //인원 설정하는 메소드
         var count : Int = 0
@@ -36,8 +40,6 @@ class Challenge {
          val MAXPER : Int = 200
          val MINPER : Int = 0
 
-        //사람들의 후기 - 후기를 총 더해서 challenge_count최종 별점 표시할 예정
-        var score : Float = 0.0F
 
         //최대 점수, 최소 점수 설정
          val MAXSCORE : Float = 5.0F

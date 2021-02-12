@@ -43,17 +43,18 @@
 
         <!-- 레벨 및 닉네임 -->
         <Button
+            android:id="@+id/LevelButton"
             android:layout_width="60dp"
             android:layout_height="33dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:background="@drawable/button_round_1"
+            android:backgroundTint="#30DAA8"
             android:padding="6dp"
             android:text="레벨"
-            android:textSize="15dp"
-            android:textColor="#ffffff"
             android:textAlignment="center"
-            android:background="@drawable/button_round_1"
-            android:backgroundTint="#30DAA8"></Button>
+            android:textColor="#ffffff"
+            android:textSize="15dp"></Button>
 
         <TextView
             android:id="@+id/UserName"
@@ -67,22 +68,27 @@
             android:textStyle="bold"></TextView>
 
         <TextView
+            android:id="@+id/LevelNotice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="다음 레벨까지 10% 남았습니다."
-            android:textSize="15dp"
-            android:textColor="@color/black"></TextView>
+            android:textColor="@color/black"
+            android:textSize="15dp"></TextView>
 
-        <ProgressBar android:id="@+id/levelProgress"
+        <ProgressBar
+            android:id="@+id/levelProgress"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/progressbar"
             android:layout_width="350dp"
             android:layout_height="15dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="30dp"/>
+            android:progressTint="@color/mint"
+            android:foregroundTint="@color/green"
+            android:progress="0"
+            />
 
         <!-- 참여중인 챌린지 -->
         <TextView
@@ -113,8 +119,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="0dp"
                     app:cardBackgroundColor="#FFFFFF"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="30dp">
@@ -123,37 +130,37 @@
                         android:id="@+id/ing1_TextView"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
                         android:text="No Plastic 챌린지"
+                        android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/ing1_TextView"
+                        android:id="@+id/ing1_Button"
                         android:layout_width="65dp"
                         android:layout_height="28dp"
-                        android:layout_marginTop="72dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="72dp"
+                        android:background="@drawable/category_stroke"
                         android:padding="6dp"
                         android:text="플라스틱"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:textColor="#30DAA8"
                         android:textAlignment="center"
-                        android:background="@drawable/category_stroke"/>
+                        android:textColor="#30DAA8"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="113dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="113dp">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_baseline_person_black_24"/>
+                            android:src="@drawable/ic_baseline_person_black_24" />
 
                         <TextView
                             android:id="@+id/ing1Count_TextView"
@@ -161,15 +168,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:text="50명 참가 중"
-                            android:textSize="15dp"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="134dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="134dp">
 
                         <ImageView
                             android:layout_width="20dp"
@@ -182,31 +189,32 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:text="10일 남음"
-                            android:textSize="15dp"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                     <Button
                         android:id="@+id/ingmore1_Button"
                         android:layout_width="130dp"
                         android:layout_height="39dp"
-                        android:layout_marginTop="165dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="165dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_round_1"
+                        android:backgroundTint="#30DAA8"
                         android:padding="9dp"
                         android:text="더보기   >"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"
                         android:textAlignment="center"
-                        android:background="@drawable/button_round_1"
-                        android:backgroundTint="#30DAA8"/>
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
 
                 <!-- 참여중인 챌린지 카드(2) -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ongoing2"
+                    android:elevation="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -307,8 +315,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="0dp"
                     app:cardBackgroundColor="#FFFFFF"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="30dp">
@@ -317,37 +326,37 @@
                         android:id="@+id/ing3_TextView"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
                         android:text="No Plastic 챌린지"
+                        android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/ing3_Button"
                         android:layout_width="65dp"
                         android:layout_height="28dp"
-                        android:layout_marginTop="72dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="72dp"
+                        android:background="@drawable/category_stroke"
                         android:padding="6dp"
                         android:text="플라스틱"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:textColor="#30DAA8"
                         android:textAlignment="center"
-                        android:background="@drawable/category_stroke"/>
+                        android:textColor="#30DAA8"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="113dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="113dp">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_baseline_person_black_24"/>
+                            android:src="@drawable/ic_baseline_person_black_24" />
 
                         <TextView
                             android:id="@+id/ing3Count_TextView"
@@ -355,15 +364,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:text="50명 참가 중"
-                            android:textSize="15dp"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="134dp"
-                        android:layout_marginLeft="15dp">
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="134dp">
 
                         <ImageView
                             android:layout_width="20dp"
@@ -376,26 +385,26 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:text="10일 남음"
-                            android:textSize="15dp"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                     <Button
                         android:id="@+id/ingmore3_Button"
                         android:layout_width="130dp"
                         android:layout_height="39dp"
-                        android:layout_marginTop="165dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="165dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_round_1"
+                        android:backgroundTint="#30DAA8"
                         android:padding="9dp"
                         android:text="더보기   >"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"
                         android:textAlignment="center"
-                        android:background="@drawable/button_round_1"
-                        android:backgroundTint="#30DAA8"/>
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>

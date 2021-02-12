@@ -67,12 +67,6 @@ class HomeActivity  : AppCompatActivity() {
     lateinit var recom4 : androidx.cardview.widget.CardView
     lateinit var recom5 : androidx.cardview.widget.CardView
 
-    lateinit var ImageView1 : ImageView
-    lateinit var ImageView2 : ImageView
-    lateinit var ImageView3 : ImageView
-    lateinit var ImageView4 : ImageView
-    lateinit var ImageView5 : ImageView
-
 
     lateinit var join1Btn : Button
     lateinit var join2Btn : Button
@@ -102,9 +96,6 @@ class HomeActivity  : AppCompatActivity() {
 
         //사용자 이름 띄우는 텍스트 뷰를 인텐트로 받은 사용자 이름을 반환
         var name = intent.getStringExtra("id")
-        UserName.setText(name + "님")
-
-
 
         //id를 인텐트로 받아서 DB에 검색해서 그 정보로 객체 생성
         //사용자 유저 객체 생성 - 로그인 했을 떄 DB에 저장된 해당 회원의 정보를 반환
@@ -112,6 +103,9 @@ class HomeActivity  : AppCompatActivity() {
 
         //Person Table에서 해당 id를 가지고 있는 사람 정보 받아오기
         User = db.DataIn(name.toString())
+
+
+        UserName.setText(User.nickname + "님")
 
         db.cleanChallenge(name.toString())
 
@@ -187,7 +181,35 @@ class HomeActivity  : AppCompatActivity() {
         var array = Array<Challenge>(4,{Challenge()})
         array = db.ChallengeIn(User)
 
-        ingVisible(array, User)
+        /*
+
+                ingVisible(array, User)
+        MarkButton1.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton1.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton3.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton4.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+        MarkButton5.setOnClickListener{
+            db.ChallengeMark(Array[0])
+            Array = db.ChallengeList(keyword, id)
+            isVisible(Array)
+        }
+         */
 
 
         //더보기 버튼을 클릭하면 해당 챌린지에 대한 설명이 나와 있는 페이지로 이동
@@ -223,7 +245,7 @@ class HomeActivity  : AppCompatActivity() {
 
         //추천하는 챌린지 - 각 카테고리 챌린지에서 가장 먼저 등록된 요소 가지고 오기
         var categoryArray: Array<Challenge>
-        categoryArray = db.Challengecategory()
+        categoryArray = db.Challengecategory(User)
 
         recomVisible(categoryArray)
 
@@ -373,6 +395,7 @@ class HomeActivity  : AppCompatActivity() {
 
         }else if(categoryArray.count() == 2){
             //챌린지 갯수가 2개일 때
+            recomText.setVisibility(View.VISIBLE)
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
             recom3.setVisibility(View.GONE)
@@ -390,6 +413,7 @@ class HomeActivity  : AppCompatActivity() {
             date2.setText("${categoryArray[1].date}일 남음")
         }else if(categoryArray.count() == 1){
             //챌린지 갯수가 1개일 때
+            recomText.setVisibility(View.VISIBLE)
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
@@ -402,7 +426,7 @@ class HomeActivity  : AppCompatActivity() {
             date1.setText("${categoryArray[0].date}일 남음")
         }else{
             //총 챌린지 갯수가 0개일 때
-            recomText.setVisibility(View.GONE)
+            recomText.setVisibility(View.VISIBLE)
             recom1.setVisibility(View.GONE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
