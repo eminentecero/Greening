@@ -1,22 +1,18 @@
 package com.example.greening
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
 
 class MyPageActivity  : AppCompatActivity() {
     //사용할 변수
     lateinit var UserName:TextView
 
-    //참여중인 챌린지에서 더보기 버튼
-    lateinit var ingChallenge1: FrameLayout
-    lateinit var ingChallenge2: FrameLayout
-    lateinit var ingChallenge3: FrameLayout
+    lateinit var ingChallenge1 : androidx.cardview.widget.CardView
+    lateinit var ingChallenge2 : androidx.cardview.widget.CardView
+    lateinit var ingChallenge3 : androidx.cardview.widget.CardView
 
     lateinit var ing1_TextView : TextView
     lateinit var ing1_Button : Button
@@ -36,7 +32,7 @@ class MyPageActivity  : AppCompatActivity() {
     lateinit var ing3Date_TextView : TextView
     lateinit var ingmore3_Button : Button
 
-    //추천하는 챌린지
+    //관심 챌린지
     lateinit var recomText : TextView
 
     lateinit var name1 : TextView
@@ -54,34 +50,13 @@ class MyPageActivity  : AppCompatActivity() {
     lateinit var count3 : TextView
     lateinit var date3 : TextView
 
-    lateinit var name4 : TextView
-    lateinit var keyword4 : Button
-    lateinit var count4 : TextView
-    lateinit var date4 : TextView
-
-    lateinit var name5 : TextView
-    lateinit var keyword5 : Button
-    lateinit var count5 : TextView
-    lateinit var date5 : TextView
-
-    lateinit var recom1 : FrameLayout
-    lateinit var recom2 : FrameLayout
-    lateinit var recom3 : FrameLayout
-    lateinit var recom4 : FrameLayout
-    lateinit var recom5 : FrameLayout
-
-    lateinit var ImageView1 : ImageView
-    lateinit var ImageView2 : ImageView
-    lateinit var ImageView3 : ImageView
-    lateinit var ImageView4 : ImageView
-    lateinit var ImageView5 : ImageView
-
+    lateinit var recom1 : androidx.cardview.widget.CardView
+    lateinit var recom2 : androidx.cardview.widget.CardView
+    lateinit var recom3 : androidx.cardview.widget.CardView
 
     lateinit var join1Btn : Button
     lateinit var join2Btn : Button
     lateinit var join3Btn : Button
-    lateinit var join4Btn : Button
-    lateinit var join5Btn : Button
 
     lateinit var allCount:TextView
     lateinit var exerciseCount: TextView
@@ -92,12 +67,12 @@ class MyPageActivity  : AppCompatActivity() {
 
     lateinit var clgText:TextView
 
-    lateinit var finishAll:ImageView
-    lateinit var finishFood:ImageView
-    lateinit var finishResource:ImageView
-    lateinit var finishPlastic:ImageView
-    lateinit var finishExercise:ImageView
-    lateinit var finishEtc:ImageView
+    lateinit var finishAll:androidx.cardview.widget.CardView
+    lateinit var finishFood:androidx.cardview.widget.CardView
+    lateinit var finishResource:androidx.cardview.widget.CardView
+    lateinit var finishPlastic:androidx.cardview.widget.CardView
+    lateinit var finishExercise:androidx.cardview.widget.CardView
+    lateinit var finishEtc:androidx.cardview.widget.CardView
 
     //데이터 베이스 변수
     internal lateinit var db:DBHelper
@@ -126,9 +101,9 @@ class MyPageActivity  : AppCompatActivity() {
         User = db.DataIn(name.toString())
 
         //참여중인 챌린지
-        ingChallenge1 = findViewById(R.id.ingChallenge1)
-        ingChallenge2 = findViewById(R.id.ingChallenge2)
-        ingChallenge3 = findViewById(R.id.ingChallenge3)
+        ingChallenge1 = findViewById(R.id.ongoing1)
+        ingChallenge2 = findViewById(R.id.ongoing2)
+        ingChallenge3 = findViewById(R.id.ongoing3)
 
         ing1_TextView = findViewById(R.id.ing1_TextView)
         ing1_Button = findViewById(R.id.ing1_Button)
@@ -156,20 +131,10 @@ class MyPageActivity  : AppCompatActivity() {
         join1Btn = findViewById(R.id.join1)
         join2Btn = findViewById(R.id.join2)
         join3Btn = findViewById(R.id.join3)
-        join4Btn = findViewById(R.id.join4)
-        join5Btn = findViewById(R.id.join5)
 
         recom1 = findViewById(R.id.recom1)
         recom2 = findViewById(R.id.recom2)
         recom3 = findViewById(R.id.recom3)
-        recom4 = findViewById(R.id.recom4)
-        recom5 = findViewById(R.id.recom5)
-
-        ImageView1 = findViewById(R.id.ImageView1)
-        ImageView2 = findViewById(R.id.ImageView2)
-        ImageView3 = findViewById(R.id.ImageView3)
-        ImageView4 = findViewById(R.id.ImageView4)
-        ImageView5 = findViewById(R.id.ImageView5)
 
         name1 = findViewById(R.id.name1)
         keyword1 = findViewById(R.id.keyword1)
@@ -185,16 +150,6 @@ class MyPageActivity  : AppCompatActivity() {
         keyword3 = findViewById(R.id.keyword3)
         count3 = findViewById(R.id.count3)
         date3 = findViewById(R.id.Date3)
-
-        name4 = findViewById(R.id.name4)
-        keyword4 = findViewById(R.id.keyword4)
-        count4 = findViewById(R.id.count4)
-        date4 = findViewById(R.id.Date4)
-
-        name5 = findViewById(R.id.name5)
-        keyword5 = findViewById(R.id.keyword5)
-        count5 = findViewById(R.id.count5)
-        date5 = findViewById(R.id.Date5)
 
         allCount = findViewById(R.id.allCount)
         plasticCount = findViewById(R.id.plasticCount)
@@ -294,100 +249,16 @@ class MyPageActivity  : AppCompatActivity() {
                 ingVisible(array, User)
             }
         }
-        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
-        join4Btn.setOnClickListener {
-            if(db.UserjoinCount(User)>=3){
-                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
-            }else {
-                categoryArray[3].joinUP()
-                db.join(categoryArray[3], User)
-                array = db.ChallengeIn(User)
-                ingVisible(array, User)
-            }
-        }
-        //신청하기 버튼을 누르면->사용자 DB에 진행하는 챌린지의 ID 입력
-        join5Btn.setOnClickListener {
-            if(db.UserjoinCount(User)>=3){
-                Toast.makeText(applicationContext, "참여 가능한 챌린지 갯수를 초과하였습니다.", Toast.LENGTH_LONG).show()
-            }else {
-                categoryArray[4].joinUP()
-                db.join(categoryArray[4], User)
-                array = db.ChallengeIn(User)
-                ingVisible(array, User)
-            }
-        }
     }
 
-    //추천 챌린지
+    //관심 챌린지
     private fun recomVisible(categoryArray: Array<Challenge>) {
-        if(categoryArray.count() == 5)
+        if(categoryArray.count() == 3)
         {
-            //챌린지 갯수가 5개일 때
-            recom1.setVisibility(View.VISIBLE)
-            recom2.setVisibility(View.VISIBLE)
-            recom3.setVisibility(View.VISIBLE)
-            recom4.setVisibility(View.VISIBLE)
-            recom5.setVisibility(View.VISIBLE)
-
-            name1.setText(categoryArray[0].name)
-            keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
-            date1.setText("${categoryArray[0].date}일 남음")
-
-            name2.setText(categoryArray[1].name)
-            keyword2.setText(categoryArray[1].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
-            date2.setText("${categoryArray[1].date}일 남음")
-
-            name3.setText(categoryArray[2].name)
-            keyword3.setText(categoryArray[2].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
-            date3.setText("${categoryArray[2].date}일 남음")
-
-            name4.setText(categoryArray[3].name)
-            keyword4.setText(categoryArray[3].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[3])}명 참여중")
-            date4.setText("${categoryArray[3].date}일 남음")
-
-            name5.setText(categoryArray[4].name)
-            keyword5.setText(categoryArray[4].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[4])}명 참여중")
-            date5.setText("${categoryArray[4].date}일 남음")
-        }else if(categoryArray.count() == 4){
-            //챌린지 갯수가 4개일 때
-            recom1.setVisibility(View.VISIBLE)
-            recom2.setVisibility(View.VISIBLE)
-            recom3.setVisibility(View.VISIBLE)
-            recom4.setVisibility(View.VISIBLE)
-            recom5.setVisibility(View.GONE)
-
-            name1.setText(categoryArray[0].name)
-            keyword1.setText(categoryArray[0].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
-            date1.setText("${categoryArray[0].date}일 남음")
-
-            name2.setText(categoryArray[1].name)
-            keyword2.setText(categoryArray[1].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
-            date2.setText("${categoryArray[1].date}일 남음")
-
-            name3.setText(categoryArray[2].name)
-            keyword3.setText(categoryArray[2].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
-            date3.setText("${categoryArray[2].date}일 남음")
-
-            name4.setText(categoryArray[3].name)
-            keyword4.setText(categoryArray[3].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[3])}명 참여중")
-            date4.setText("${categoryArray[3].date}일 남음")
-
-        }else if(categoryArray.count() == 3){
             //챌린지 갯수가 3개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
             recom3.setVisibility(View.VISIBLE)
-            recom4.setVisibility(View.GONE)
-            recom5.setVisibility(View.GONE)
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
@@ -396,12 +267,12 @@ class MyPageActivity  : AppCompatActivity() {
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
+            count2.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
 
             name3.setText(categoryArray[2].name)
             keyword3.setText(categoryArray[2].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
+            count3.setText("${db.ChallengeJoinCount(categoryArray[2])}명 참여중")
             date3.setText("${categoryArray[2].date}일 남음")
 
         }else if(categoryArray.count() == 2){
@@ -409,8 +280,6 @@ class MyPageActivity  : AppCompatActivity() {
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.VISIBLE)
             recom3.setVisibility(View.GONE)
-            recom4.setVisibility(View.GONE)
-            recom5.setVisibility(View.GONE)
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
@@ -419,29 +288,25 @@ class MyPageActivity  : AppCompatActivity() {
 
             name2.setText(categoryArray[1].name)
             keyword2.setText(categoryArray[1].keyword)
-            count1.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
+            count2.setText("${db.ChallengeJoinCount(categoryArray[1])}명 참여중")
             date2.setText("${categoryArray[1].date}일 남음")
+
         }else if(categoryArray.count() == 1){
             //챌린지 갯수가 1개일 때
             recom1.setVisibility(View.VISIBLE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
-            recom4.setVisibility(View.GONE)
-            recom5.setVisibility(View.GONE)
 
             name1.setText(categoryArray[0].name)
             keyword1.setText(categoryArray[0].keyword)
             count1.setText("${db.ChallengeJoinCount(categoryArray[0])}명 참여중")
             date1.setText("${categoryArray[0].date}일 남음")
-        }else{
-            //총 챌린지 갯수가 0개일 때
-            recomText.setVisibility(View.GONE)
+
+        }else
+            //챌린지 갯수가 0개일 때
             recom1.setVisibility(View.GONE)
             recom2.setVisibility(View.GONE)
             recom3.setVisibility(View.GONE)
-            recom4.setVisibility(View.GONE)
-            recom5.setVisibility(View.GONE)
-        }
     }
 
     private fun ingVisible(array: Array<Challenge>, User: Person) {

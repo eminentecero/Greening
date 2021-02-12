@@ -120,10 +120,10 @@ class HomeActivity  : AppCompatActivity() {
         ingChallenge2 = findViewById(R.id.ingChallenge2)
         ingChallenge3 = findViewById(R.id.ingChallenge3)
 
-        ing1_TextView = findViewById(R.id.ing1_TextView)
-        ing1_Button = findViewById(R.id.ing1_Button)
-        ing1Count_TextView = findViewById(R.id.ing1Count_TextView)
-        ing1Date_TextView = findViewById(R.id.ing1Date_TextView)
+        ing1_TextView = findViewById(R.id.ing2_TextView)
+        ing1_Button = findViewById(R.id.ing2_Button)
+        ing1Count_TextView = findViewById(R.id.ing2Count_TextView)
+        ing1Date_TextView = findViewById(R.id.ing2Date_TextView)
         ingmore1_Button = findViewById(R.id.ingmore1_Button)
 
         ing2_TextView = findViewById(R.id.ing2_TextView)
